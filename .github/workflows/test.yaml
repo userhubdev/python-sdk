@@ -29,8 +29,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          go-version: ${{ matrix.python-version }}
-          cache: 'poetry'
+          python-version: ${{ matrix.python-version }}
 
       - name: Install poetry
         run: pip install poetry==1.7.1
