@@ -1,0 +1,49 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - "**.md"
+
+env:
+  CI: "true"
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sdk:
+    name: SDK
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          go-version: ${{ matrix.python-version }}
+          cache: 'poetry'
+
+      - name: Install poetry
+        run: pip install poetry==1.7.1
+
+      - name: Install dependencies
+        run: poetry install --all-extras
+
+      - name: Run black
+        run: poetry run black --check src tests
+
+      - name: Run mypy
+        run: poetry run mypy src
+
+      - name: Run pytest
+        run: |
+          poetry run pytest tests
