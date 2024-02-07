@@ -27,7 +27,6 @@ class Invoices:
         organization_id: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
-        filter: Optional[str] = None,
         order_by: Optional[str] = None,
     ) -> userv1.ListInvoicesResponse:
         """
@@ -50,15 +49,6 @@ class Invoices:
 
             When paginating, all other parameters provided to list invoices must match
             the call that provided the page token.
-        :param filter:
-            The filter string. Supports filtering by state, due_time,
-            create_time, and update_time.
-
-            Some examples:
-            - By state:
-                  state = PAID
-            - By create_time:
-                  create_time > "2022-03-04T05:00:00Z"
         :param order_by:
             A comma-separated list of fields to order by, sorted in ascending order.
             Use `desc` after a field name for descending.
@@ -78,8 +68,6 @@ class Invoices:
             req.set_query("pageSize", page_size)
         if page_token:
             req.set_query("pageToken", page_token)
-        if filter:
-            req.set_query("filter", filter)
         if order_by:
             req.set_query("orderBy", order_by)
 
@@ -123,7 +111,6 @@ class AsyncInvoices:
         organization_id: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
-        filter: Optional[str] = None,
         order_by: Optional[str] = None,
     ) -> userv1.ListInvoicesResponse:
         """
@@ -146,15 +133,6 @@ class AsyncInvoices:
 
             When paginating, all other parameters provided to list invoices must match
             the call that provided the page token.
-        :param filter:
-            The filter string. Supports filtering by state, due_time,
-            create_time, and update_time.
-
-            Some examples:
-            - By state:
-                  state = PAID
-            - By create_time:
-                  create_time > "2022-03-04T05:00:00Z"
         :param order_by:
             A comma-separated list of fields to order by, sorted in ascending order.
             Use `desc` after a field name for descending.
@@ -174,8 +152,6 @@ class AsyncInvoices:
             req.set_query("pageSize", page_size)
         if page_token:
             req.set_query("pageToken", page_token)
-        if filter:
-            req.set_query("filter", filter)
         if order_by:
             req.set_query("orderBy", order_by)
 

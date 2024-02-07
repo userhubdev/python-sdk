@@ -28,7 +28,6 @@ class Flows:
         type: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
-        filter: Optional[str] = None,
         order_by: Optional[str] = None,
     ) -> userv1.ListFlowsResponse:
         """
@@ -55,16 +54,6 @@ class Flows:
 
             When paginating, all other parameters provided to list flows must match
             the call that provided the page token.
-        :param filter:
-            The filter string. Supports filtering by state, type, and create_time.
-
-            Some examples:
-            - By state:
-                  state = 'START_PENDING'
-            - By type:
-                  type = 'JOIN_ORGANIZATION'
-            - By create_time:
-                  create_time > "2022-03-04T05:00:00Z"
         :param order_by:
             A comma-separated list of fields to order by, sorted in ascending order.
             Use `desc` after a field name for descending.
@@ -84,8 +73,6 @@ class Flows:
             req.set_query("pageSize", page_size)
         if page_token:
             req.set_query("pageToken", page_token)
-        if filter:
-            req.set_query("filter", filter)
         if order_by:
             req.set_query("orderBy", order_by)
 
@@ -230,7 +217,6 @@ class AsyncFlows:
         type: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
-        filter: Optional[str] = None,
         order_by: Optional[str] = None,
     ) -> userv1.ListFlowsResponse:
         """
@@ -257,16 +243,6 @@ class AsyncFlows:
 
             When paginating, all other parameters provided to list flows must match
             the call that provided the page token.
-        :param filter:
-            The filter string. Supports filtering by state, type, and create_time.
-
-            Some examples:
-            - By state:
-                  state = 'START_PENDING'
-            - By type:
-                  type = 'JOIN_ORGANIZATION'
-            - By create_time:
-                  create_time > "2022-03-04T05:00:00Z"
         :param order_by:
             A comma-separated list of fields to order by, sorted in ascending order.
             Use `desc` after a field name for descending.
@@ -286,8 +262,6 @@ class AsyncFlows:
             req.set_query("pageSize", page_size)
         if page_token:
             req.set_query("pageToken", page_token)
-        if filter:
-            req.set_query("filter", filter)
         if order_by:
             req.set_query("orderBy", order_by)
 

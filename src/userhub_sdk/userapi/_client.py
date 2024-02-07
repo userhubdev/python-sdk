@@ -7,6 +7,7 @@ from .._internal.transport import AsyncTransport, Transport
 
 from ._flows import AsyncFlows, Flows
 from ._invoices import AsyncInvoices, Invoices
+from ._organizations import AsyncOrganizations, Organizations
 from ._session import AsyncSession, Session
 
 
@@ -31,6 +32,13 @@ class Client:
         The invoice methods.
         """
         return Invoices(self._transport)
+
+    @property
+    def organizations(self) -> Organizations:
+        """
+        The organization methods.
+        """
+        return Organizations(self._transport)
 
     @property
     def session(self) -> Session:
@@ -76,6 +84,13 @@ class AsyncClient:
         The invoice methods.
         """
         return AsyncInvoices(self._transport)
+
+    @property
+    def organizations(self) -> AsyncOrganizations:
+        """
+        The organization methods.
+        """
+        return AsyncOrganizations(self._transport)
 
     @property
     def session(self) -> AsyncSession:
