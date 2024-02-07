@@ -4,7 +4,7 @@ import datetime
 import sys
 
 API_BASE_URL = "https://api.userhub.com"
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 
 AUTH_HEADER = "Authorization"
 API_KEY_HEADER = "UserHub-Api-Key"
