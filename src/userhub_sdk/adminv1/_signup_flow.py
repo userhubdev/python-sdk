@@ -16,6 +16,8 @@ class SignupFlow:
     email: Optional[str] = None
     #: The display name of the invitee.
     display_name: Optional[str] = None
+    #: Whether to create an organization as part of the signup flow.
+    create_organization: Optional[bool] = None
 
     def __json_encode__(self):
         return dict(user.__dict__)
@@ -32,5 +34,8 @@ class SignupFlow:
 
         if data.get("displayName") is not None:
             kwargs["display_name"] = data["displayName"]
+
+        if data.get("createOrganization") is not None:
+            kwargs["create_organization"] = data["createOrganization"]
 
         return SignupFlow(**kwargs)
