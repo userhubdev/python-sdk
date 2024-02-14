@@ -34,6 +34,8 @@ class Flow:
     #:
     #: This will not be set if the invitation was created by an admin.
     creator: Optional[User] = None
+    #: The start time of the flow.
+    start_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The time the flow will expire.
     expire_time: Optional[datetime.datetime] = None
     #: The expire duration of the flow.
@@ -81,6 +83,9 @@ class Flow:
 
         if data.get("creator") is not None:
             kwargs["creator"] = User.__json_decode__(data["creator"])
+
+        if data.get("startTime") is not None:
+            kwargs["start_time"] = util.decode_datetime(data["startTime"])
 
         if data.get("expireTime") is not None:
             kwargs["expire_time"] = util.decode_datetime(data["expireTime"])

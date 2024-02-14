@@ -73,7 +73,8 @@ def test_create_join_organization():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -127,7 +128,8 @@ def test_get():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -181,7 +183,8 @@ def test_consume():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -235,7 +238,8 @@ def test_cancel():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -316,7 +320,8 @@ async def test_async_create_join_organization():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -371,7 +376,8 @@ async def test_async_get():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -426,7 +432,8 @@ async def test_async_consume():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -481,7 +488,8 @@ async def test_async_cancel():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 

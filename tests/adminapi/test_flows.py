@@ -15,6 +15,7 @@ def test_list():
       "state": "START_PENDING",
       "stateReason": "DELETED",
       "type": "JOIN_ORGANIZATION",
+      "startTime": "2024-02-05T23:07:46.483Z",
       "expireTime": "2024-02-05T23:07:46.483Z",
       "ttl": "string",
       "secret": "string",
@@ -142,6 +143,7 @@ def test_create_join_organization():
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
+  "startTime": "2024-02-05T23:07:46.483Z",
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
@@ -153,7 +155,8 @@ def test_create_join_organization():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -273,6 +276,7 @@ def test_get():
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
+  "startTime": "2024-02-05T23:07:46.483Z",
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
@@ -284,7 +288,8 @@ def test_get():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -404,6 +409,7 @@ def test_cancel():
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
+  "startTime": "2024-02-05T23:07:46.483Z",
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
@@ -415,7 +421,8 @@ def test_cancel():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -437,6 +444,7 @@ async def test_async_list():
       "state": "START_PENDING",
       "stateReason": "DELETED",
       "type": "JOIN_ORGANIZATION",
+      "startTime": "2024-02-05T23:07:46.483Z",
       "expireTime": "2024-02-05T23:07:46.483Z",
       "ttl": "string",
       "secret": "string",
@@ -565,6 +573,7 @@ async def test_async_create_join_organization():
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
+  "startTime": "2024-02-05T23:07:46.483Z",
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
@@ -576,7 +585,8 @@ async def test_async_create_join_organization():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -697,6 +707,7 @@ async def test_async_get():
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
+  "startTime": "2024-02-05T23:07:46.483Z",
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
@@ -708,7 +719,8 @@ async def test_async_get():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 
@@ -829,6 +841,7 @@ async def test_async_cancel():
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
+  "startTime": "2024-02-05T23:07:46.483Z",
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
@@ -840,7 +853,8 @@ async def test_async_cancel():
   },
   "signup": {
     "email": "test@example.com",
-    "displayName": "Test"
+    "displayName": "Test",
+    "createOrganization": true
   }
 }"""
 

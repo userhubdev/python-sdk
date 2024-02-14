@@ -28,6 +28,10 @@ class OrganizationInput:
     #:
     #: The maximum length is 320 characters.
     email: Optional[str] = None
+    #: The flow identifier associated with the creation of the organization.
+    #:
+    #: The flow type must be `SIGNUP` and associated with the user creating the organization.
+    flow_id: Optional[str] = None
 
     def __json_encode__(self):
         return dict(user.__dict__)
@@ -47,5 +51,8 @@ class OrganizationInput:
 
         if data.get("email") is not None:
             kwargs["email"] = data["email"]
+
+        if data.get("flowId") is not None:
+            kwargs["flow_id"] = data["flowId"]
 
         return OrganizationInput(**kwargs)

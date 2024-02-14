@@ -73,6 +73,7 @@ class Organizations:
         unique_id: Optional[str] = None,
         display_name: Optional[str] = None,
         email: Optional[str] = None,
+        flow_id: Optional[str] = None,
     ) -> userv1.Organization:
         """
         Creates a new organization.
@@ -93,6 +94,10 @@ class Organizations:
             The email address of the organization.
 
             The maximum length is 320 characters.
+        :param flow_id:
+            The flow identifier associated with the creation of the organization.
+
+            The flow type must be `SIGNUP` and associated with the user creating the organization.
         """
         req = Request("user.organizations.create", "POST", "/user/v1/organizations")
         body: Dict[str, Any] = {}
@@ -103,6 +108,8 @@ class Organizations:
             body["displayName"] = display_name
         if email:
             body["email"] = email
+        if flow_id:
+            body["flowId"] = flow_id
 
         req.set_body(body)
 
@@ -138,6 +145,7 @@ class Organizations:
         unique_id: Optional[str] = None,
         display_name: Optional[str] = None,
         email: Optional[str] = None,
+        flow_id: Optional[str] = None,
     ) -> userv1.Organization:
         """
         Updates specified organization.
@@ -160,6 +168,10 @@ class Organizations:
             The email address of the organization.
 
             The maximum length is 320 characters.
+        :param flow_id:
+            The flow identifier associated with the creation of the organization.
+
+            The flow type must be `SIGNUP` and associated with the user creating the organization.
         """
         req = Request(
             "user.organizations.update",
@@ -176,6 +188,8 @@ class Organizations:
             body["displayName"] = display_name
         if email is not dataclasses.MISSING:
             body["email"] = email
+        if flow_id is not dataclasses.MISSING:
+            body["flowId"] = flow_id
 
         req.set_body(body)
 
@@ -283,6 +297,7 @@ class AsyncOrganizations:
         unique_id: Optional[str] = None,
         display_name: Optional[str] = None,
         email: Optional[str] = None,
+        flow_id: Optional[str] = None,
     ) -> userv1.Organization:
         """
         Creates a new organization.
@@ -303,6 +318,10 @@ class AsyncOrganizations:
             The email address of the organization.
 
             The maximum length is 320 characters.
+        :param flow_id:
+            The flow identifier associated with the creation of the organization.
+
+            The flow type must be `SIGNUP` and associated with the user creating the organization.
         """
         req = Request("user.organizations.create", "POST", "/user/v1/organizations")
         body: Dict[str, Any] = {}
@@ -313,6 +332,8 @@ class AsyncOrganizations:
             body["displayName"] = display_name
         if email:
             body["email"] = email
+        if flow_id:
+            body["flowId"] = flow_id
 
         req.set_body(body)
 
@@ -348,6 +369,7 @@ class AsyncOrganizations:
         unique_id: Optional[str] = None,
         display_name: Optional[str] = None,
         email: Optional[str] = None,
+        flow_id: Optional[str] = None,
     ) -> userv1.Organization:
         """
         Updates specified organization.
@@ -370,6 +392,10 @@ class AsyncOrganizations:
             The email address of the organization.
 
             The maximum length is 320 characters.
+        :param flow_id:
+            The flow identifier associated with the creation of the organization.
+
+            The flow type must be `SIGNUP` and associated with the user creating the organization.
         """
         req = Request(
             "user.organizations.update",
@@ -386,6 +412,8 @@ class AsyncOrganizations:
             body["displayName"] = display_name
         if email is not dataclasses.MISSING:
             body["email"] = email
+        if flow_id is not dataclasses.MISSING:
+            body["flowId"] = flow_id
 
         req.set_body(body)
 
