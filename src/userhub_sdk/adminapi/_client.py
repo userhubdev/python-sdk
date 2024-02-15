@@ -1,9 +1,9 @@
 # Code generated. DO NOT EDIT.
 
 from types import TracebackType
-from typing import Dict, Optional, Type
+from typing import Optional, Type
 
-from .._internal.transport import AsyncTransport, Transport
+from userhub_sdk._internal.transport import AsyncTransport, Transport
 
 from ._flows import AsyncFlows, Flows
 from ._invoices import AsyncInvoices, Invoices

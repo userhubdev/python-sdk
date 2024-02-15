@@ -69,3 +69,28 @@ content-type = "text/markdown"
 
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "README.md"
+
+[tool.ruff]
+target-version = "py38"
+line-length = 88
+
+[tool.ruff.lint]
+ignore = [
+     "A",
+     "BLE001",
+     "E501",
+     "EM",
+     "FA100",
+     "PLR2004",
+     "SLF001",
+     "TID252",
+     "TRY003",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"example/*" = ["INP001", "T201"]
+"tests/*" = ["S101"]
+"src/userhub_sdk/apiv1/_empty_response.py" = ["RET504"]
+
+[tool.ruff.isort]
+combine-as-imports = true

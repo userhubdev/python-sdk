@@ -2,10 +2,10 @@
 
 import dataclasses
 import datetime
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
-from .._internal import util
+from userhub_sdk._internal import util
+
 from ._account_subscription import AccountSubscription
 from ._membership import Membership
 from ._user import User

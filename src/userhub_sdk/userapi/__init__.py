@@ -2,9 +2,10 @@
 
 from typing import Optional
 
-from .. import types
-from .._internal import constants
-from .._internal.http_transport import AsyncHttpTransport, HttpTransport
+from userhub_sdk import types
+from userhub_sdk._internal import constants
+from userhub_sdk._internal.http_transport import AsyncHttpTransport, HttpTransport
+
 from . import _client
 
 
@@ -31,12 +32,12 @@ class UserApi(_client.Client):
         user_key = (user_key or "").strip()
         if not user_key:
             raise types.UserHubError("user_key required")
-        elif not user_key.startswith(constants.USER_KEY_PREFIX):
+        if not user_key.startswith(constants.USER_KEY_PREFIX):
             raise types.UserHubError(
                 f"user_key must start with `{constants.USER_KEY_PREFIX}`"
             )
-        else:
-            headers[constants.API_KEY_HEADER] = user_key
+
+        headers[constants.API_KEY_HEADER] = user_key
 
         access_token = (access_token or "").strip()
         if access_token:
@@ -70,12 +71,12 @@ class AsyncUserApi(_client.AsyncClient):
         user_key = (user_key or "").strip()
         if not user_key:
             raise types.UserHubError("user_key required")
-        elif not user_key.startswith(constants.USER_KEY_PREFIX):
+        if not user_key.startswith(constants.USER_KEY_PREFIX):
             raise types.UserHubError(
                 f"user_key must start with `{constants.USER_KEY_PREFIX}`"
             )
-        else:
-            headers[constants.API_KEY_HEADER] = user_key
+
+        headers[constants.API_KEY_HEADER] = user_key
 
         access_token = (access_token or "").strip()
         if access_token:

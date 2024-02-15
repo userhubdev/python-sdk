@@ -3,8 +3,6 @@
 import dataclasses
 from typing import Optional
 
-from .._internal import util
-
 
 @dataclasses.dataclass
 class Product:

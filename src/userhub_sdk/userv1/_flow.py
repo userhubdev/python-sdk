@@ -4,8 +4,8 @@ import dataclasses
 import datetime
 from typing import Optional
 
-from .._internal import constants
-from .._internal import util
+from userhub_sdk._internal import constants, util
+
 from ._join_organization_flow import JoinOrganizationFlow
 from ._organization import Organization
 from ._signup_flow import SignupFlow

@@ -5,10 +5,10 @@ import os
 import pytest
 
 from userhub_sdk import AdminApi, AsyncAdminApi, AsyncUserApi, UserApi
-from userhub_sdk.adminv1 import AccountConnection, User
-from userhub_sdk.adminapi._users import Users
-from userhub_sdk._internal.util import encode_json
 from userhub_sdk._internal.test_transport import SyncTestTransport
+from userhub_sdk._internal.util import encode_json
+from userhub_sdk.adminapi._users import Users
+from userhub_sdk.adminv1 import AccountConnection, User
 
 
 def get_env(name: str) -> str:

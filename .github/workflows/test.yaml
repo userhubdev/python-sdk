@@ -34,6 +34,10 @@ jobs:
       - name: Install hatch
         run: pip install hatch==1.9.3
 
+      - name: Run fmt
+        run: |
+          hatch fmt --check
+
       - name: Run pytest
         run: |
           hatch run test:pytest

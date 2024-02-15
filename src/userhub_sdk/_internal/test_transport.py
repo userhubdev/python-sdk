@@ -1,10 +1,10 @@
 from types import TracebackType
-from typing import Dict, Optional, Type
+from typing import Optional, Type
 
 import httpcore
 
-from .response import Response
 from .request import Request
+from .response import Response
 from .transport import AsyncTransport, Transport
 
 

@@ -3,8 +3,8 @@
 import dataclasses
 from typing import Optional
 
-from .. import commonv1
-from .._internal import util
+from userhub_sdk import commonv1
+
 from ._price_fixed_price import PriceFixedPrice
 from ._price_tiered_price import PriceTieredPrice
 

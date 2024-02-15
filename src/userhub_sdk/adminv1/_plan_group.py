@@ -4,8 +4,8 @@ import dataclasses
 import datetime
 from typing import Optional
 
-from .._internal import constants
-from .._internal import util
+from userhub_sdk._internal import constants, util
+
 from ._plan_group_revision import PlanGroupRevision
 from ._plan_group_trial import PlanGroupTrial
 

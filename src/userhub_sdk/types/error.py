@@ -1,7 +1,6 @@
-from typing import Any, Dict, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict, Optional
 
-from .. import apiv1
-
+from userhub_sdk import apiv1
 
 if TYPE_CHECKING:
     from httpcore import Response as HttpCoreResponse

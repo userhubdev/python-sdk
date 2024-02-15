@@ -2,8 +2,8 @@
 
 import pytest
 
-from userhub_sdk.adminapi._users import AsyncUsers, Users
 from userhub_sdk._internal.test_transport import AsyncTestTransport, SyncTestTransport
+from userhub_sdk.adminapi._users import AsyncUsers, Users
 
 
 def test_list():

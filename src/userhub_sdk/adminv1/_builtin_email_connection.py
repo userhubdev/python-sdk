@@ -2,9 +2,6 @@
 
 import dataclasses
 from typing import List
-from typing import Optional
-
-from .._internal import util
 
 
 @dataclasses.dataclass

@@ -2,15 +2,15 @@
 
 import dataclasses
 import datetime
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
-from .. import commonv1
-from .._internal import constants
-from .._internal import util
+from userhub_sdk import commonv1
+from userhub_sdk._internal import constants, util
+
 from ._connection import Connection
 from ._invoice_account import InvoiceAccount
 from ._invoice_balance import InvoiceBalance
+from ._invoice_change import InvoiceChange
 from ._invoice_item import InvoiceItem
 from ._payment_intent import PaymentIntent
 
@@ -78,6 +78,8 @@ class Invoice:
     payment_intent: Optional[PaymentIntent] = None
     #: The line items for the invoice.
     items: Optional[List[InvoiceItem]] = dataclasses.field(default_factory=list)
+    #: The prorated changes that occurred mid-billing cycle.
+    changes: Optional[List[InvoiceChange]] = dataclasses.field(default_factory=list)
     #: The last time the invoice was pulled from the connection.
     pull_time: Optional[datetime.datetime] = None
     #: The creation time of the invoice.
@@ -159,6 +161,9 @@ class Invoice:
 
         if self.items is not None:
             data["items"] = [InvoiceItem.__json_encode__(v) for v in self.items]
+
+        if self.changes is not None:
+            data["changes"] = [InvoiceChange.__json_encode__(v) for v in self.changes]
 
         if self.pull_time is not None:
             data["pullTime"] = util.encode_datetime(self.pull_time)
@@ -251,6 +256,11 @@ class Invoice:
 
         if data.get("items") is not None:
             kwargs["items"] = [InvoiceItem.__json_decode__(v) for v in data["items"]]
+
+        if data.get("changes") is not None:
+            kwargs["changes"] = [
+                InvoiceChange.__json_decode__(v) for v in data["changes"]
+            ]
 
         if data.get("pullTime") is not None:
             kwargs["pull_time"] = util.decode_datetime(data["pullTime"])

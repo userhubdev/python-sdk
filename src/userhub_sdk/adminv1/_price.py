@@ -4,9 +4,9 @@ import dataclasses
 import datetime
 from typing import Optional
 
-from .. import commonv1
-from .._internal import constants
-from .._internal import util
+from userhub_sdk import commonv1
+from userhub_sdk._internal import constants, util
+
 from ._connection import Connection
 from ._price_fixed_price import PriceFixedPrice
 from ._price_tiered_price import PriceTieredPrice

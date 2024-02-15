@@ -6,11 +6,11 @@ from userhub_sdk import AdminApi, UserApi, UserHubError
 def main():
     admin_key = os.environ.get("ADMIN_KEY")
     if not admin_key:
-        raise Exception("ADMIN_KEY required")
+        raise RuntimeError("ADMIN_KEY required")
 
     user_key = os.environ.get("USER_KEY")
     if not user_key:
-        raise Exception("USER_KEY required")
+        raise RuntimeError("USER_KEY required")
 
     admin_api = AdminApi(admin_key)
 

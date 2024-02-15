@@ -61,7 +61,7 @@ def decode_int64(value: Union[int, str, None]) -> Optional[int]:
     if value is None or value == "":
         return None
 
-    if type(value) is int:
+    if isinstance(value, int):
         return value
 
     return int(value)

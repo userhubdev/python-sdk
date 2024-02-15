@@ -1,10 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Dict
-from typing import Optional
-
-from .._internal import util
+from typing import Dict, Optional
 
 
 @dataclasses.dataclass
