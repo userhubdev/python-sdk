@@ -1,10 +1,10 @@
 # Code generated. DO NOT EDIT.
 
-import dataclasses
 import datetime
 from typing import Any
 from typing import Dict
 from typing import Optional
+from typing import Union
 from urllib.parse import quote
 
 from .. import adminv1
@@ -15,6 +15,7 @@ from .._internal import util
 from .._internal.request import Request
 from .._internal.transport import AsyncTransport
 from .._internal.transport import Transport
+from ..types import UNDEFINED, Undefined
 
 
 class Organizations:
@@ -208,21 +209,21 @@ class Organizations:
         self,
         organization_id: str,
         *,
-        unique_id: Optional[str] = None,
-        display_name: Optional[str] = None,
-        email: Optional[str] = None,
-        email_verified: Optional[bool] = None,
-        phone_number: Optional[str] = None,
-        phone_number_verified: Optional[bool] = None,
-        image_url: Optional[str] = None,
-        currency_code: Optional[str] = None,
-        language_code: Optional[str] = None,
-        region_code: Optional[str] = None,
-        time_zone: Optional[str] = None,
-        address: Optional[commonv1.Address] = None,
-        signup_time: Optional[datetime.datetime] = None,
-        disabled: Optional[bool] = None,
-        allow_missing: Optional[bool] = None,
+        unique_id: Union[Optional[str], Undefined] = UNDEFINED,
+        display_name: Union[Optional[str], Undefined] = UNDEFINED,
+        email: Union[Optional[str], Undefined] = UNDEFINED,
+        email_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        phone_number: Union[Optional[str], Undefined] = UNDEFINED,
+        phone_number_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        image_url: Union[Optional[str], Undefined] = UNDEFINED,
+        currency_code: Union[Optional[str], Undefined] = UNDEFINED,
+        language_code: Union[Optional[str], Undefined] = UNDEFINED,
+        region_code: Union[Optional[str], Undefined] = UNDEFINED,
+        time_zone: Union[Optional[str], Undefined] = UNDEFINED,
+        address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
+        signup_time: Union[Optional[datetime.datetime], Undefined] = UNDEFINED,
+        disabled: Union[Optional[bool], Undefined] = UNDEFINED,
+        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
     ) -> adminv1.Organization:
         """
         Updates specified organization.
@@ -285,33 +286,33 @@ class Organizations:
 
         if allow_missing:
             req.set_query("allowMissing", allow_missing)
-        if unique_id is not dataclasses.MISSING:
+        if unique_id is not UNDEFINED:
             body["uniqueId"] = unique_id
-        if display_name is not dataclasses.MISSING:
+        if display_name is not UNDEFINED:
             body["displayName"] = display_name
-        if email is not dataclasses.MISSING:
+        if email is not UNDEFINED:
             body["email"] = email
-        if email_verified is not dataclasses.MISSING:
+        if email_verified is not UNDEFINED:
             body["emailVerified"] = email_verified
-        if phone_number is not dataclasses.MISSING:
+        if phone_number is not UNDEFINED:
             body["phoneNumber"] = phone_number
-        if phone_number_verified is not dataclasses.MISSING:
+        if phone_number_verified is not UNDEFINED:
             body["phoneNumberVerified"] = phone_number_verified
-        if image_url is not dataclasses.MISSING:
+        if image_url is not UNDEFINED:
             body["imageUrl"] = image_url
-        if currency_code is not dataclasses.MISSING:
+        if currency_code is not UNDEFINED:
             body["currencyCode"] = currency_code
-        if language_code is not dataclasses.MISSING:
+        if language_code is not UNDEFINED:
             body["languageCode"] = language_code
-        if region_code is not dataclasses.MISSING:
+        if region_code is not UNDEFINED:
             body["regionCode"] = region_code
-        if time_zone is not dataclasses.MISSING:
+        if time_zone is not UNDEFINED:
             body["timeZone"] = time_zone
-        if address is not dataclasses.MISSING:
+        if address is not UNDEFINED:
             body["address"] = address
-        if signup_time is not dataclasses.MISSING:
+        if signup_time is not UNDEFINED:
             body["signupTime"] = signup_time
-        if disabled is not dataclasses.MISSING:
+        if disabled is not UNDEFINED:
             body["disabled"] = disabled
 
         req.set_body(body)
@@ -566,8 +567,8 @@ class Organizations:
         organization_id: str,
         user_id: str,
         *,
-        role_id: Optional[str] = None,
-        allow_missing: Optional[bool] = None,
+        role_id: Union[Optional[str], Undefined] = UNDEFINED,
+        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
     ) -> adminv1.Member:
         """
         Updates specified organization member.
@@ -594,7 +595,7 @@ class Organizations:
 
         if allow_missing:
             req.set_query("allowMissing", allow_missing)
-        if role_id is not dataclasses.MISSING:
+        if role_id is not UNDEFINED:
             body["roleId"] = role_id
 
         req.set_body(body)
@@ -817,21 +818,21 @@ class AsyncOrganizations:
         self,
         organization_id: str,
         *,
-        unique_id: Optional[str] = None,
-        display_name: Optional[str] = None,
-        email: Optional[str] = None,
-        email_verified: Optional[bool] = None,
-        phone_number: Optional[str] = None,
-        phone_number_verified: Optional[bool] = None,
-        image_url: Optional[str] = None,
-        currency_code: Optional[str] = None,
-        language_code: Optional[str] = None,
-        region_code: Optional[str] = None,
-        time_zone: Optional[str] = None,
-        address: Optional[commonv1.Address] = None,
-        signup_time: Optional[datetime.datetime] = None,
-        disabled: Optional[bool] = None,
-        allow_missing: Optional[bool] = None,
+        unique_id: Union[Optional[str], Undefined] = UNDEFINED,
+        display_name: Union[Optional[str], Undefined] = UNDEFINED,
+        email: Union[Optional[str], Undefined] = UNDEFINED,
+        email_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        phone_number: Union[Optional[str], Undefined] = UNDEFINED,
+        phone_number_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        image_url: Union[Optional[str], Undefined] = UNDEFINED,
+        currency_code: Union[Optional[str], Undefined] = UNDEFINED,
+        language_code: Union[Optional[str], Undefined] = UNDEFINED,
+        region_code: Union[Optional[str], Undefined] = UNDEFINED,
+        time_zone: Union[Optional[str], Undefined] = UNDEFINED,
+        address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
+        signup_time: Union[Optional[datetime.datetime], Undefined] = UNDEFINED,
+        disabled: Union[Optional[bool], Undefined] = UNDEFINED,
+        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
     ) -> adminv1.Organization:
         """
         Updates specified organization.
@@ -894,33 +895,33 @@ class AsyncOrganizations:
 
         if allow_missing:
             req.set_query("allowMissing", allow_missing)
-        if unique_id is not dataclasses.MISSING:
+        if unique_id is not UNDEFINED:
             body["uniqueId"] = unique_id
-        if display_name is not dataclasses.MISSING:
+        if display_name is not UNDEFINED:
             body["displayName"] = display_name
-        if email is not dataclasses.MISSING:
+        if email is not UNDEFINED:
             body["email"] = email
-        if email_verified is not dataclasses.MISSING:
+        if email_verified is not UNDEFINED:
             body["emailVerified"] = email_verified
-        if phone_number is not dataclasses.MISSING:
+        if phone_number is not UNDEFINED:
             body["phoneNumber"] = phone_number
-        if phone_number_verified is not dataclasses.MISSING:
+        if phone_number_verified is not UNDEFINED:
             body["phoneNumberVerified"] = phone_number_verified
-        if image_url is not dataclasses.MISSING:
+        if image_url is not UNDEFINED:
             body["imageUrl"] = image_url
-        if currency_code is not dataclasses.MISSING:
+        if currency_code is not UNDEFINED:
             body["currencyCode"] = currency_code
-        if language_code is not dataclasses.MISSING:
+        if language_code is not UNDEFINED:
             body["languageCode"] = language_code
-        if region_code is not dataclasses.MISSING:
+        if region_code is not UNDEFINED:
             body["regionCode"] = region_code
-        if time_zone is not dataclasses.MISSING:
+        if time_zone is not UNDEFINED:
             body["timeZone"] = time_zone
-        if address is not dataclasses.MISSING:
+        if address is not UNDEFINED:
             body["address"] = address
-        if signup_time is not dataclasses.MISSING:
+        if signup_time is not UNDEFINED:
             body["signupTime"] = signup_time
-        if disabled is not dataclasses.MISSING:
+        if disabled is not UNDEFINED:
             body["disabled"] = disabled
 
         req.set_body(body)
@@ -1175,8 +1176,8 @@ class AsyncOrganizations:
         organization_id: str,
         user_id: str,
         *,
-        role_id: Optional[str] = None,
-        allow_missing: Optional[bool] = None,
+        role_id: Union[Optional[str], Undefined] = UNDEFINED,
+        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
     ) -> adminv1.Member:
         """
         Updates specified organization member.
@@ -1203,7 +1204,7 @@ class AsyncOrganizations:
 
         if allow_missing:
             req.set_query("allowMissing", allow_missing)
-        if role_id is not dataclasses.MISSING:
+        if role_id is not UNDEFINED:
             body["roleId"] = role_id
 
         req.set_body(body)

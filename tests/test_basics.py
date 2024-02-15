@@ -6,7 +6,9 @@ import pytest
 
 from userhub_sdk import AdminApi, AsyncAdminApi, AsyncUserApi, UserApi
 from userhub_sdk.adminv1 import AccountConnection, User
+from userhub_sdk.adminapi._users import Users
 from userhub_sdk._internal.util import encode_json
+from userhub_sdk._internal.test_transport import SyncTestTransport
 
 
 def get_env(name: str) -> str:
@@ -59,3 +61,71 @@ def test_model():
     encoded_json = encode_json(user)
     decoded_user = User.__json_decode__(json.loads(encoded_json))
     assert user == decoded_user
+
+
+def test_get():
+    tr = SyncTestTransport()
+    tr.body = '{"id": "usr_1", "displayName": "Jane Doe"}'
+
+    res = Users(tr).get(user_id="usr_1")
+    assert res is not None
+    assert res.display_name == "Jane Doe"
+    assert tr.request.method == "GET"
+    assert tr.request.path == "/admin/v1/users/usr_1"
+    assert tr.request.body is None
+
+
+def test_post():
+    tr = SyncTestTransport()
+    tr.body = '{"id": "usr_1", "displayName": "Jane Doe"}'
+
+    res = Users(tr).create(display_name="Jane Doe")
+    assert res is not None
+    assert res.display_name == "Jane Doe"
+    assert tr.request.method == "POST"
+    assert tr.request.path == "/admin/v1/users"
+    assert tr.request.body == {"displayName": "Jane Doe"}
+
+    tr = SyncTestTransport()
+    tr.body = '{"id": "usr_1", "displayName": null}'
+
+    res = Users(tr).create(display_name=None)
+    assert res is not None
+    assert res.display_name is None
+    assert tr.request.method == "POST"
+    assert tr.request.path == "/admin/v1/users"
+    assert tr.request.body == {}
+
+
+def test_patch():
+    tr = SyncTestTransport()
+    tr.body = '{"id": "usr_1", "displayName": "Jane Doe"}'
+
+    res = Users(tr).update(user_id="usr_1", display_name="Jane Doe")
+    assert res is not None
+    assert res.display_name == "Jane Doe"
+    assert tr.request.method == "PATCH"
+    assert tr.request.path == "/admin/v1/users/usr_1"
+    assert tr.request.body == {"displayName": "Jane Doe"}
+
+    tr = SyncTestTransport()
+    tr.body = '{"id": "usr_1", "displayName": null}'
+
+    res = Users(tr).update(user_id="usr_1", display_name=None)
+    assert res is not None
+    assert res.display_name is None
+    assert tr.request.method == "PATCH"
+    assert tr.request.path == "/admin/v1/users/usr_1"
+    assert tr.request.body == {"displayName": None}
+
+
+def test_delete():
+    tr = SyncTestTransport()
+    tr.body = '{"id": "usr_1"}'
+
+    res = Users(tr).delete(user_id="usr_1")
+    assert res is not None
+    assert res.id == "usr_1"
+    assert tr.request.method == "DELETE"
+    assert tr.request.path == "/admin/v1/users/usr_1"
+    assert tr.request.body is None

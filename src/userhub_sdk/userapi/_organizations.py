@@ -1,9 +1,9 @@
 # Code generated. DO NOT EDIT.
 
-import dataclasses
 from typing import Any
 from typing import Dict
 from typing import Optional
+from typing import Union
 from urllib.parse import quote
 
 from .. import apiv1
@@ -13,6 +13,7 @@ from .._internal import util
 from .._internal.request import Request
 from .._internal.transport import AsyncTransport
 from .._internal.transport import Transport
+from ..types import UNDEFINED, Undefined
 
 
 class Organizations:
@@ -142,10 +143,10 @@ class Organizations:
         self,
         organization_id: str,
         *,
-        unique_id: Optional[str] = None,
-        display_name: Optional[str] = None,
-        email: Optional[str] = None,
-        flow_id: Optional[str] = None,
+        unique_id: Union[Optional[str], Undefined] = UNDEFINED,
+        display_name: Union[Optional[str], Undefined] = UNDEFINED,
+        email: Union[Optional[str], Undefined] = UNDEFINED,
+        flow_id: Union[Optional[str], Undefined] = UNDEFINED,
     ) -> userv1.Organization:
         """
         Updates specified organization.
@@ -182,13 +183,13 @@ class Organizations:
 
         body: Dict[str, Any] = {}
 
-        if unique_id is not dataclasses.MISSING:
+        if unique_id is not UNDEFINED:
             body["uniqueId"] = unique_id
-        if display_name is not dataclasses.MISSING:
+        if display_name is not UNDEFINED:
             body["displayName"] = display_name
-        if email is not dataclasses.MISSING:
+        if email is not UNDEFINED:
             body["email"] = email
-        if flow_id is not dataclasses.MISSING:
+        if flow_id is not UNDEFINED:
             body["flowId"] = flow_id
 
         req.set_body(body)
@@ -366,10 +367,10 @@ class AsyncOrganizations:
         self,
         organization_id: str,
         *,
-        unique_id: Optional[str] = None,
-        display_name: Optional[str] = None,
-        email: Optional[str] = None,
-        flow_id: Optional[str] = None,
+        unique_id: Union[Optional[str], Undefined] = UNDEFINED,
+        display_name: Union[Optional[str], Undefined] = UNDEFINED,
+        email: Union[Optional[str], Undefined] = UNDEFINED,
+        flow_id: Union[Optional[str], Undefined] = UNDEFINED,
     ) -> userv1.Organization:
         """
         Updates specified organization.
@@ -406,13 +407,13 @@ class AsyncOrganizations:
 
         body: Dict[str, Any] = {}
 
-        if unique_id is not dataclasses.MISSING:
+        if unique_id is not UNDEFINED:
             body["uniqueId"] = unique_id
-        if display_name is not dataclasses.MISSING:
+        if display_name is not UNDEFINED:
             body["displayName"] = display_name
-        if email is not dataclasses.MISSING:
+        if email is not UNDEFINED:
             body["email"] = email
-        if flow_id is not dataclasses.MISSING:
+        if flow_id is not UNDEFINED:
             body["flowId"] = flow_id
 
         req.set_body(body)
