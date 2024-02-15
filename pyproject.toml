@@ -1,36 +1,71 @@
-[tool.poetry]
-name = "userhub-sdk"
-version = "0.2.0"
-description = "UserHub Python SDK"
-authors = ["UserHub <hello@userhub.com>"]
-license = "MIT"
-readme = "README.md"
-packages = [{ include = "userhub_sdk", from = "src" }]
-homepage = "https://userhub.com"
-repository = "https://github.com/userhubdev/python-sdk"
-keywords = ["api", "sdk", "userhub"]
-classifiers = ["License :: OSI Approved :: MIT License"]
-
-[tool.poetry.dependencies]
-python = "^3.8"
-httpcore = "^1"
-anyio = { version = "^4", optional = true }
-
-[tool.poetry.extras]
-asyncio = ["anyio"]
-
-[tool.poetry.group.dev.dependencies]
-"black" = "^24"
-"mypy" = "^1.8"
-
-[tool.poetry.group.test.dependencies]
-pytest = "^7.4"
-"pytest-asyncio" = "^0.23"
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
 
-[tool.black]
-target-version = ['py38']
-include = '\.pyi?$'
+[project]
+name = "userhub-sdk"
+dynamic = ["readme", "version"]
+description = "UserHub Python SDK"
+license = "MIT"
+requires-python = ">=3.8"
+authors = [
+    { name = "UserHub", email = "hello@userhub.com" },
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Web Environment",
+    "Framework :: AsyncIO",
+    "Framework :: Trio",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "httpcore>=1,<2",
+]
+
+[project.optional-dependencies]
+asyncio = [
+    "httpcore[asyncio]",
+]
+trio = [
+    "httpcore[trio]",
+]
+
+[tool.hatch.envs.test]
+dependencies = [
+    "pytest-asyncio>=0.23,<0.24",
+    "pytest>=7,<8",
+    "userhub-sdk[asyncio]",
+    "userhub-sdk[trio]",
+]
+
+[project.urls]
+Homepage = "https://userhub.com"
+Source = "https://github.com/userhubdev/python-sdk"
+
+[tool.hatch.version]
+path = "src/userhub_sdk/_internal/constants.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/LICENSE",
+    "/README.md",
+    "/src/userhub_sdk",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/userhub_sdk"]
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+
+[[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
+path = "README.md"
