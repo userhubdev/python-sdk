@@ -70,7 +70,81 @@ class User:
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.state_reason is not None:
+            data["stateReason"] = self.state_reason
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.email is not None:
+            data["email"] = self.email
+
+        if self.email_verified is not None:
+            data["emailVerified"] = self.email_verified
+
+        if self.phone_number is not None:
+            data["phoneNumber"] = self.phone_number
+
+        if self.phone_number_verified is not None:
+            data["phoneNumberVerified"] = self.phone_number_verified
+
+        if self.image_url is not None:
+            data["imageUrl"] = self.image_url
+
+        if self.currency_code is not None:
+            data["currencyCode"] = self.currency_code
+
+        if self.language_code is not None:
+            data["languageCode"] = self.language_code
+
+        if self.region_code is not None:
+            data["regionCode"] = self.region_code
+
+        if self.time_zone is not None:
+            data["timeZone"] = self.time_zone
+
+        if self.address is not None:
+            data["address"] = commonv1.Address.__json_encode__(self.address)
+
+        if self.account_connections is not None:
+            data["accountConnections"] = [
+                AccountConnection.__json_encode__(v) for v in self.account_connections
+            ]
+
+        if self.subscription is not None:
+            data["subscription"] = AccountSubscription.__json_encode__(
+                self.subscription
+            )
+
+        if self.memberships is not None:
+            data["memberships"] = [
+                Membership.__json_encode__(v) for v in self.memberships
+            ]
+
+        if self.signup_time is not None:
+            data["signupTime"] = util.encode_datetime(self.signup_time)
+
+        if self.disabled is not None:
+            data["disabled"] = self.disabled
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

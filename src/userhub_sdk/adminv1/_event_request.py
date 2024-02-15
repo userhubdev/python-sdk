@@ -21,7 +21,15 @@ class EventRequest:
     trace_id: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.ip_address is not None:
+            data["ipAddress"] = self.ip_address
+
+        if self.trace_id is not None:
+            data["traceId"] = self.trace_id
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

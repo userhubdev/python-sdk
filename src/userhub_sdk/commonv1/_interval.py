@@ -18,7 +18,15 @@ class Interval:
     unit: str = ""
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.quantity is not None:
+            data["quantity"] = self.quantity
+
+        if self.unit is not None:
+            data["unit"] = self.unit
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

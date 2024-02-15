@@ -16,7 +16,12 @@ class PlanGroupTrial:
     days: Optional[int] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.days is not None:
+            data["days"] = self.days
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

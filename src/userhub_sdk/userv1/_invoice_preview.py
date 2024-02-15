@@ -60,7 +60,42 @@ class InvoicePreview:
     items: Optional[List[InvoicePreviewItem]] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.currency_code is not None:
+            data["currencyCode"] = self.currency_code
+
+        if self.account is not None:
+            data["account"] = InvoiceAccount.__json_encode__(self.account)
+
+        if self.effective_time is not None:
+            data["effectiveTime"] = util.encode_datetime(self.effective_time)
+
+        if self.subtotal_amount is not None:
+            data["subtotalAmount"] = self.subtotal_amount
+
+        if self.discount_amount is not None:
+            data["discountAmount"] = self.discount_amount
+
+        if self.balance is not None:
+            data["balance"] = InvoiceBalance.__json_encode__(self.balance)
+
+        if self.tax_amount is not None:
+            data["taxAmount"] = self.tax_amount
+
+        if self.total_amount is not None:
+            data["totalAmount"] = self.total_amount
+
+        if self.due_amount is not None:
+            data["dueAmount"] = self.due_amount
+
+        if self.change_token is not None:
+            data["changeToken"] = self.change_token
+
+        if self.items is not None:
+            data["items"] = [InvoicePreviewItem.__json_encode__(v) for v in self.items]
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -29,7 +29,27 @@ class Price:
     tiered: Optional[PriceTieredPrice] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.currency_code is not None:
+            data["currencyCode"] = self.currency_code
+
+        if self.billing_mode is not None:
+            data["billingMode"] = self.billing_mode
+
+        if self.interval is not None:
+            data["interval"] = commonv1.Interval.__json_encode__(self.interval)
+
+        if self.fixed is not None:
+            data["fixed"] = PriceFixedPrice.__json_encode__(self.fixed)
+
+        if self.tiered is not None:
+            data["tiered"] = PriceTieredPrice.__json_encode__(self.tiered)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

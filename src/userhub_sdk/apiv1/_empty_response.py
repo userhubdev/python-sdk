@@ -13,7 +13,9 @@ class EmptyResponse:
     """
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

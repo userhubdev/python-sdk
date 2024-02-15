@@ -34,7 +34,21 @@ class OrganizationInput:
     flow_id: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.email is not None:
+            data["email"] = self.email
+
+        if self.flow_id is not None:
+            data["flowId"] = self.flow_id
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

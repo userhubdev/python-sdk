@@ -17,7 +17,12 @@ class FlowsChanged:
     flow: Optional[adminv1.Flow] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.flow is not None:
+            data["flow"] = adminv1.Flow.__json_encode__(self.flow)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

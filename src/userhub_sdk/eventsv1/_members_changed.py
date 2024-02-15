@@ -19,7 +19,17 @@ class MembersChanged:
     member: Optional[adminv1.Member] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.organization is not None:
+            data["organization"] = adminv1.Organization.__json_encode__(
+                self.organization
+            )
+
+        if self.member is not None:
+            data["member"] = adminv1.Member.__json_encode__(self.member)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

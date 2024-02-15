@@ -24,7 +24,18 @@ class InvoiceBalance:
     applied_amount: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.start_amount is not None:
+            data["startAmount"] = self.start_amount
+
+        if self.end_amount is not None:
+            data["endAmount"] = self.end_amount
+
+        if self.applied_amount is not None:
+            data["appliedAmount"] = self.applied_amount
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -23,7 +23,23 @@ class CardPaymentMethod:
     funding_type: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.brand is not None:
+            data["brand"] = self.brand
+
+        if self.expiration is not None:
+            data["expiration"] = CardPaymentMethodExpiration.__json_encode__(
+                self.expiration
+            )
+
+        if self.last4 is not None:
+            data["last4"] = self.last4
+
+        if self.funding_type is not None:
+            data["fundingType"] = self.funding_type
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

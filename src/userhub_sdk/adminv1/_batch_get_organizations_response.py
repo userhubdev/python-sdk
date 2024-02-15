@@ -20,7 +20,14 @@ class BatchGetOrganizationsResponse:
     )
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.organizations is not None:
+            data["organizations"] = [
+                OrganizationResult.__json_encode__(v) for v in self.organizations
+            ]
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

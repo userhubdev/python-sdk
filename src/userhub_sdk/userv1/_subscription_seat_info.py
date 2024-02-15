@@ -32,7 +32,27 @@ class SubscriptionSeatInfo:
     total_quantity: Optional[int] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.product is not None:
+            data["product"] = Product.__json_encode__(self.product)
+
+        if self.current_period_quantity is not None:
+            data["currentPeriodQuantity"] = self.current_period_quantity
+
+        if self.next_period_quantity is not None:
+            data["nextPeriodQuantity"] = self.next_period_quantity
+
+        if self.assigned_quantity is not None:
+            data["assignedQuantity"] = self.assigned_quantity
+
+        if self.unassigned_quantity is not None:
+            data["unassignedQuantity"] = self.unassigned_quantity
+
+        if self.total_quantity is not None:
+            data["totalQuantity"] = self.total_quantity
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -17,7 +17,14 @@ class OrganizationsChanged:
     organization: Optional[adminv1.Organization] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.organization is not None:
+            data["organization"] = adminv1.Organization.__json_encode__(
+                self.organization
+            )
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

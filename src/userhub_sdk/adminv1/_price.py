@@ -57,7 +57,60 @@ class Price:
     tiered: Optional[PriceTieredPrice] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.connection is not None:
+            data["connection"] = Connection.__json_encode__(self.connection)
+
+        if self.external_id is not None:
+            data["externalId"] = self.external_id
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.state_reason is not None:
+            data["stateReason"] = self.state_reason
+
+        if self.currency_code is not None:
+            data["currencyCode"] = self.currency_code
+
+        if self.billing_mode is not None:
+            data["billingMode"] = self.billing_mode
+
+        if self.interval is not None:
+            data["interval"] = commonv1.Interval.__json_encode__(self.interval)
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.product is not None:
+            data["product"] = Product.__json_encode__(self.product)
+
+        if self.archived is not None:
+            data["archived"] = self.archived
+
+        if self.pull_time is not None:
+            data["pullTime"] = util.encode_datetime(self.pull_time)
+
+        if self.push_time is not None:
+            data["pushTime"] = util.encode_datetime(self.push_time)
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        if self.fixed is not None:
+            data["fixed"] = PriceFixedPrice.__json_encode__(self.fixed)
+
+        if self.tiered is not None:
+            data["tiered"] = PriceTieredPrice.__json_encode__(self.tiered)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

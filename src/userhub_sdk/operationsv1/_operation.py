@@ -34,7 +34,30 @@ class Operation:
     delete_time: Optional[datetime.datetime] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.done is not None:
+            data["done"] = self.done
+
+        if self.error is not None:
+            data["error"] = OperationError.__json_encode__(self.error)
+
+        if self.response is not None:
+            data["response"] = commonv1.Any.__json_encode__(self.response)
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        if self.delete_time is not None:
+            data["deleteTime"] = util.encode_datetime(self.delete_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

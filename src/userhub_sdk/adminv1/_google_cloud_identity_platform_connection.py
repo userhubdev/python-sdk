@@ -21,7 +21,15 @@ class GoogleCloudIdentityPlatformConnection:
     project_id: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.credentials is not None:
+            data["credentials"] = self.credentials
+
+        if self.project_id is not None:
+            data["projectId"] = self.project_id
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

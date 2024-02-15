@@ -27,7 +27,20 @@ class ListOrganizationsResponse:
     previous_page_token: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.organizations is not None:
+            data["organizations"] = [
+                Organization.__json_encode__(v) for v in self.organizations
+            ]
+
+        if self.next_page_token is not None:
+            data["nextPageToken"] = self.next_page_token
+
+        if self.previous_page_token is not None:
+            data["previousPageToken"] = self.previous_page_token
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

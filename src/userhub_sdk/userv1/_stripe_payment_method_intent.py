@@ -20,7 +20,18 @@ class StripePaymentMethodIntent:
     client_secret: str = ""
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.account_id is not None:
+            data["accountId"] = self.account_id
+
+        if self.live is not None:
+            data["live"] = self.live
+
+        if self.client_secret is not None:
+            data["clientSecret"] = self.client_secret
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

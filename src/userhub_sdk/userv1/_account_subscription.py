@@ -30,7 +30,24 @@ class AccountSubscription:
     seat: Optional[AccountSubscriptionSeat] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.anchor_time is not None:
+            data["anchorTime"] = util.encode_datetime(self.anchor_time)
+
+        if self.plan is not None:
+            data["plan"] = AccountSubscriptionPlan.__json_encode__(self.plan)
+
+        if self.seat is not None:
+            data["seat"] = AccountSubscriptionSeat.__json_encode__(self.seat)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

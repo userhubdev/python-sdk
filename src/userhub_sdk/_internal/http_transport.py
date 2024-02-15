@@ -1,20 +1,18 @@
 import json
 import math
-import time
 import urllib.parse
 from types import TracebackType
 from typing import Dict, Optional, Type
 
 import httpcore
 
-from .. import apiv1
-from .. import types
 from . import constants
 from . import util
-from .response import Response
 from .request import Request
+from .response import Response
 from .transport import AsyncTransport, Transport
-from .util import JSONEncoder
+from .. import apiv1
+from .. import types
 
 
 class BaseHttpTransport:
@@ -61,7 +59,7 @@ class BaseHttpTransport:
         if req.body is not None:
             headers["content-type"] = "application/json"
             try:
-                body = json.dumps(req.body, cls=JSONEncoder).encode("utf-8")
+                body = util.encode_json(req.body)
             except Exception as ex:
                 raise types.UserHubError(
                     "Failed to encode request body",
@@ -70,8 +68,8 @@ class BaseHttpTransport:
 
         return url, headers, body
 
+    @staticmethod
     def _build_request(
-        self,
         req: Request,
         url: str,
         headers: Dict[str, str],
@@ -92,8 +90,8 @@ class BaseHttpTransport:
             },
         }
 
+    @staticmethod
     def _build_response(
-        self,
         req: Request,
         res: httpcore.Response,
     ) -> Response:

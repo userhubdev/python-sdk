@@ -17,7 +17,14 @@ class SubscriptionsChanged:
     subscription: Optional[adminv1.Subscription] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.subscription is not None:
+            data["subscription"] = adminv1.Subscription.__json_encode__(
+                self.subscription
+            )
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -35,7 +35,26 @@ class BillingAccount:
     subscription: Optional[Subscription] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.balance_amount is not None:
+            data["balanceAmount"] = self.balance_amount
+
+        if self.currency_code is not None:
+            data["currencyCode"] = self.currency_code
+
+        if self.payment_methods is not None:
+            data["paymentMethods"] = [
+                PaymentMethod.__json_encode__(v) for v in self.payment_methods
+            ]
+
+        if self.subscription is not None:
+            data["subscription"] = Subscription.__json_encode__(self.subscription)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -53,7 +53,38 @@ class Product:
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.description is not None:
+            data["description"] = self.description
+
+        if self.committed is not None:
+            data["committed"] = self.committed
+
+        if self.archived is not None:
+            data["archived"] = self.archived
+
+        if self.product_connections is not None:
+            data["productConnections"] = [
+                ProductConnection.__json_encode__(v) for v in self.product_connections
+            ]
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

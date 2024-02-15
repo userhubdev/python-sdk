@@ -24,7 +24,21 @@ class SubscriptionItem:
     quantity: int = 0
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.product is not None:
+            data["product"] = Product.__json_encode__(self.product)
+
+        if self.price is not None:
+            data["price"] = Price.__json_encode__(self.price)
+
+        if self.quantity is not None:
+            data["quantity"] = self.quantity
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

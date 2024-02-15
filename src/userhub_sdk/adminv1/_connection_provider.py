@@ -18,7 +18,15 @@ class ConnectionProvider:
     default: Optional[bool] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.type is not None:
+            data["type"] = self.type
+
+        if self.default is not None:
+            data["default"] = self.default
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

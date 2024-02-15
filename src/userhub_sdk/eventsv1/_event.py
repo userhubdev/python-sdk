@@ -37,7 +37,39 @@ class Event:
     users_changed: Optional[UsersChanged] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.time is not None:
+            data["time"] = util.encode_datetime(self.time)
+
+        if self.type is not None:
+            data["type"] = self.type
+
+        if self.flows_changed is not None:
+            data["flowsChanged"] = FlowsChanged.__json_encode__(self.flows_changed)
+
+        if self.members_changed is not None:
+            data["membersChanged"] = MembersChanged.__json_encode__(
+                self.members_changed
+            )
+
+        if self.organizations_changed is not None:
+            data["organizationsChanged"] = OrganizationsChanged.__json_encode__(
+                self.organizations_changed
+            )
+
+        if self.subscriptions_changed is not None:
+            data["subscriptionsChanged"] = SubscriptionsChanged.__json_encode__(
+                self.subscriptions_changed
+            )
+
+        if self.users_changed is not None:
+            data["usersChanged"] = UsersChanged.__json_encode__(self.users_changed)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

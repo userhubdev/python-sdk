@@ -57,7 +57,43 @@ class PlanGroupRevision:
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.default is not None:
+            data["default"] = self.default
+
+        if self.currency_codes is not None:
+            data["currencyCodes"] = self.currency_codes
+
+        if self.plans is not None:
+            data["plans"] = [
+                PlanGroupRevisionPlan.__json_encode__(v) for v in self.plans
+            ]
+
+        if self.items is not None:
+            data["items"] = [
+                PlanGroupRevisionItem.__json_encode__(v) for v in self.items
+            ]
+
+        if self.committed is not None:
+            data["committed"] = self.committed
+
+        if self.tags is not None:
+            data["tags"] = self.tags
+
+        if self.source_revision_id is not None:
+            data["sourceRevisionId"] = self.source_revision_id
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

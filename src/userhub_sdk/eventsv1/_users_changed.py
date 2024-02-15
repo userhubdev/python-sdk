@@ -17,7 +17,12 @@ class UsersChanged:
     user: Optional[adminv1.User] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.user is not None:
+            data["user"] = adminv1.User.__json_encode__(self.user)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

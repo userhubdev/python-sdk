@@ -17,7 +17,12 @@ class Challenge:
     challenge: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.challenge is not None:
+            data["challenge"] = self.challenge
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

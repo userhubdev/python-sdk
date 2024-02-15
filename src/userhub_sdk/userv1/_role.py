@@ -35,7 +35,27 @@ class Role:
     permission_sets: List[str] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.type is not None:
+            data["type"] = self.type
+
+        if self.description is not None:
+            data["description"] = self.description
+
+        if self.permission_sets is not None:
+            data["permissionSets"] = self.permission_sets
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -19,7 +19,15 @@ class SubscriptionCurrentPeriod:
     end_time: Optional[datetime.datetime] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.start_time is not None:
+            data["startTime"] = util.encode_datetime(self.start_time)
+
+        if self.end_time is not None:
+            data["endTime"] = util.encode_datetime(self.end_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

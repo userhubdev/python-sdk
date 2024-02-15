@@ -26,7 +26,18 @@ class UpdateSubscriptionItemsRequestItem:
     quantity: Optional[int] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.product_id is not None:
+            data["productId"] = self.product_id
+
+        if self.user_id is not None:
+            data["userId"] = self.user_id
+
+        if self.quantity is not None:
+            data["quantity"] = self.quantity
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

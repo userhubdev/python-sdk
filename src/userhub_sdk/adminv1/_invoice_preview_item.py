@@ -34,7 +34,33 @@ class InvoicePreviewItem:
     period: Optional[commonv1.Period] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.product is not None:
+            data["product"] = Product.__json_encode__(self.product)
+
+        if self.price is not None:
+            data["price"] = Price.__json_encode__(self.price)
+
+        if self.quantity is not None:
+            data["quantity"] = self.quantity
+
+        if self.subtotal_amount is not None:
+            data["subtotalAmount"] = self.subtotal_amount
+
+        if self.discount_amount is not None:
+            data["discountAmount"] = self.discount_amount
+
+        if self.description is not None:
+            data["description"] = self.description
+
+        if self.proration is not None:
+            data["proration"] = self.proration
+
+        if self.period is not None:
+            data["period"] = commonv1.Period.__json_encode__(self.period)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

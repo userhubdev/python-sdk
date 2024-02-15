@@ -20,7 +20,12 @@ class CreatePaymentMethodIntentResponse:
     token: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.token is not None:
+            data["token"] = self.token
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

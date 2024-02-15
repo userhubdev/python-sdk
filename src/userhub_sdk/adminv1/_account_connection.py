@@ -51,7 +51,47 @@ class AccountConnection:
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.connection is not None:
+            data["connection"] = Connection.__json_encode__(self.connection)
+
+        if self.external_id is not None:
+            data["externalId"] = self.external_id
+
+        if self.admin_url is not None:
+            data["adminUrl"] = self.admin_url
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.state_reason is not None:
+            data["stateReason"] = self.state_reason
+
+        if self.balance_amount is not None:
+            data["balanceAmount"] = self.balance_amount
+
+        if self.currency_code is not None:
+            data["currencyCode"] = self.currency_code
+
+        if self.payment_methods is not None:
+            data["paymentMethods"] = [
+                PaymentMethod.__json_encode__(v) for v in self.payment_methods
+            ]
+
+        if self.pull_time is not None:
+            data["pullTime"] = util.encode_datetime(self.pull_time)
+
+        if self.push_time is not None:
+            data["pushTime"] = util.encode_datetime(self.push_time)
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -86,7 +86,90 @@ class Invoice:
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.state_reason is not None:
+            data["stateReason"] = self.state_reason
+
+        if self.state_time is not None:
+            data["stateTime"] = util.encode_datetime(self.state_time)
+
+        if self.connection is not None:
+            data["connection"] = Connection.__json_encode__(self.connection)
+
+        if self.external_id is not None:
+            data["externalId"] = self.external_id
+
+        if self.number is not None:
+            data["number"] = self.number
+
+        if self.currency_code is not None:
+            data["currencyCode"] = self.currency_code
+
+        if self.description is not None:
+            data["description"] = self.description
+
+        if self.account is not None:
+            data["account"] = InvoiceAccount.__json_encode__(self.account)
+
+        if self.effective_time is not None:
+            data["effectiveTime"] = util.encode_datetime(self.effective_time)
+
+        if self.period is not None:
+            data["period"] = commonv1.Period.__json_encode__(self.period)
+
+        if self.subtotal_amount is not None:
+            data["subtotalAmount"] = self.subtotal_amount
+
+        if self.discount_amount is not None:
+            data["discountAmount"] = self.discount_amount
+
+        if self.balance is not None:
+            data["balance"] = InvoiceBalance.__json_encode__(self.balance)
+
+        if self.tax_amount is not None:
+            data["taxAmount"] = self.tax_amount
+
+        if self.total_amount is not None:
+            data["totalAmount"] = self.total_amount
+
+        if self.due_amount is not None:
+            data["dueAmount"] = self.due_amount
+
+        if self.remaining_due_amount is not None:
+            data["remainingDueAmount"] = self.remaining_due_amount
+
+        if self.due_time is not None:
+            data["dueTime"] = util.encode_datetime(self.due_time)
+
+        if self.paid_amount is not None:
+            data["paidAmount"] = self.paid_amount
+
+        if self.payment_state is not None:
+            data["paymentState"] = self.payment_state
+
+        if self.payment_intent is not None:
+            data["paymentIntent"] = PaymentIntent.__json_encode__(self.payment_intent)
+
+        if self.items is not None:
+            data["items"] = [InvoiceItem.__json_encode__(v) for v in self.items]
+
+        if self.pull_time is not None:
+            data["pullTime"] = util.encode_datetime(self.pull_time)
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

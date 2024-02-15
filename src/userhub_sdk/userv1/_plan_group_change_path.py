@@ -17,7 +17,12 @@ class PlanGroupChangePath:
     direction: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.direction is not None:
+            data["direction"] = self.direction
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

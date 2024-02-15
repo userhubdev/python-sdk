@@ -18,7 +18,15 @@ class PlanGroupTag:
     revision_id: str = ""
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.tag is not None:
+            data["tag"] = self.tag
+
+        if self.revision_id is not None:
+            data["revisionId"] = self.revision_id
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

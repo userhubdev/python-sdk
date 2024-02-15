@@ -17,7 +17,12 @@ class CreatePortalSessionResponse:
     redirect_url: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.redirect_url is not None:
+            data["redirectUrl"] = self.redirect_url
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

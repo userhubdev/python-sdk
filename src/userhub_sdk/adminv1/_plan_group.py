@@ -55,7 +55,42 @@ class PlanGroup:
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.description is not None:
+            data["description"] = self.description
+
+        if self.account_type is not None:
+            data["accountType"] = self.account_type
+
+        if self.trial is not None:
+            data["trial"] = PlanGroupTrial.__json_encode__(self.trial)
+
+        if self.visibility is not None:
+            data["visibility"] = self.visibility
+
+        if self.archived is not None:
+            data["archived"] = self.archived
+
+        if self.revision is not None:
+            data["revision"] = PlanGroupRevision.__json_encode__(self.revision)
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -31,7 +31,24 @@ class PostmarkConnection:
     allowed_emails: List[str] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.server_token is not None:
+            data["serverToken"] = self.server_token
+
+        if self.server_id is not None:
+            data["serverId"] = self.server_id
+
+        if self.from_ is not None:
+            data["from"] = commonv1.Email.__json_encode__(self.from_)
+
+        if self.reply_to is not None:
+            data["replyTo"] = commonv1.Email.__json_encode__(self.reply_to)
+
+        if self.allowed_emails is not None:
+            data["allowedEmails"] = self.allowed_emails
+
+        return data
 
     @staticmethod
     def __json_decode__(data):
