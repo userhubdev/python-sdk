@@ -20,7 +20,15 @@ class OrganizationResult:
     error: Optional[apiv1.Status] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.organization is not None:
+            data["organization"] = Organization.__json_encode__(self.organization)
+
+        if self.error is not None:
+            data["error"] = apiv1.Status.__json_encode__(self.error)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

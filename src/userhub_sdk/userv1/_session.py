@@ -34,7 +34,28 @@ class Session:
     scopes: List[str] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.user is not None:
+            data["user"] = User.__json_encode__(self.user)
+
+        if self.memberships is not None:
+            data["memberships"] = [
+                Membership.__json_encode__(v) for v in self.memberships
+            ]
+
+        if self.subscription is not None:
+            data["subscription"] = AccountSubscription.__json_encode__(
+                self.subscription
+            )
+
+        if self.expire_time is not None:
+            data["expireTime"] = util.encode_datetime(self.expire_time)
+
+        if self.scopes is not None:
+            data["scopes"] = self.scopes
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

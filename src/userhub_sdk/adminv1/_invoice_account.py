@@ -23,7 +23,21 @@ class InvoiceAccount:
     address: Optional[commonv1.Address] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.full_name is not None:
+            data["fullName"] = self.full_name
+
+        if self.email is not None:
+            data["email"] = self.email
+
+        if self.phone_number is not None:
+            data["phoneNumber"] = self.phone_number
+
+        if self.address is not None:
+            data["address"] = commonv1.Address.__json_encode__(self.address)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

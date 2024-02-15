@@ -18,7 +18,15 @@ class CardPaymentMethodExpiration:
     month: Optional[int] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.year is not None:
+            data["year"] = self.year
+
+        if self.month is not None:
+            data["month"] = self.month
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

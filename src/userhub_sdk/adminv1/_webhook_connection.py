@@ -25,7 +25,20 @@ class WebhookConnection:
     )
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.url is not None:
+            data["url"] = self.url
+
+        if self.headers is not None:
+            data["headers"] = self.headers
+
+        if self.signing_secrets is not None:
+            data["signingSecrets"] = [
+                SigningSecret.__json_encode__(v) for v in self.signing_secrets
+            ]
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

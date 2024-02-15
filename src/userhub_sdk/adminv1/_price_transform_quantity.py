@@ -18,7 +18,15 @@ class PriceTransformQuantity:
     round: str = ""
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.divisor is not None:
+            data["divisor"] = self.divisor
+
+        if self.round is not None:
+            data["round"] = self.round
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -20,7 +20,18 @@ class TieredPriceTier:
     flat_amount: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.upper is not None:
+            data["upper"] = self.upper
+
+        if self.unit_amount is not None:
+            data["unitAmount"] = self.unit_amount
+
+        if self.flat_amount is not None:
+            data["flatAmount"] = self.flat_amount
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

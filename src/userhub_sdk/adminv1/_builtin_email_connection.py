@@ -17,7 +17,12 @@ class BuiltinEmailConnection:
     allowed_emails: List[str] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.allowed_emails is not None:
+            data["allowedEmails"] = self.allowed_emails
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

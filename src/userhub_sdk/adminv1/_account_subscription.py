@@ -24,7 +24,21 @@ class AccountSubscription:
     plan: Optional[AccountSubscriptionPlan] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.anchor_time is not None:
+            data["anchorTime"] = util.encode_datetime(self.anchor_time)
+
+        if self.plan is not None:
+            data["plan"] = AccountSubscriptionPlan.__json_encode__(self.plan)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

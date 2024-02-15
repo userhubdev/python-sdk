@@ -20,7 +20,18 @@ class SignupFlow:
     create_organization: Optional[bool] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.email is not None:
+            data["email"] = self.email
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.create_organization is not None:
+            data["createOrganization"] = self.create_organization
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

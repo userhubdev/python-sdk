@@ -18,7 +18,12 @@ class BatchGetUsersResponse:
     users: Optional[List[UserResult]] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.users is not None:
+            data["users"] = [UserResult.__json_encode__(v) for v in self.users]
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

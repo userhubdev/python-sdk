@@ -27,7 +27,18 @@ class Member:
     seat: Optional[AccountSubscriptionSeat] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.user is not None:
+            data["user"] = User.__json_encode__(self.user)
+
+        if self.role is not None:
+            data["role"] = Role.__json_encode__(self.role)
+
+        if self.seat is not None:
+            data["seat"] = AccountSubscriptionSeat.__json_encode__(self.seat)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

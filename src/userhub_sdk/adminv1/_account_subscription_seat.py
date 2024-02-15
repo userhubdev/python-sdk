@@ -17,7 +17,12 @@ class AccountSubscriptionSeat:
     product: Optional[AccountSubscriptionProduct] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.product is not None:
+            data["product"] = AccountSubscriptionProduct.__json_encode__(self.product)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -20,7 +20,15 @@ class TriggerResult:
     error: Optional[apiv1.Status] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.trigger is not None:
+            data["trigger"] = Trigger.__json_encode__(self.trigger)
+
+        if self.error is not None:
+            data["error"] = apiv1.Status.__json_encode__(self.error)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

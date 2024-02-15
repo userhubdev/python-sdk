@@ -30,7 +30,21 @@ class SubscriptionTrial:
     remaining_days: Optional[int] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.start_time is not None:
+            data["startTime"] = util.encode_datetime(self.start_time)
+
+        if self.end_time is not None:
+            data["endTime"] = util.encode_datetime(self.end_time)
+
+        if self.days is not None:
+            data["days"] = self.days
+
+        if self.remaining_days is not None:
+            data["remainingDays"] = self.remaining_days
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -23,7 +23,15 @@ class CreateApiSessionResponse:
     expire_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.access_token is not None:
+            data["accessToken"] = self.access_token
+
+        if self.expire_time is not None:
+            data["expireTime"] = util.encode_datetime(self.expire_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

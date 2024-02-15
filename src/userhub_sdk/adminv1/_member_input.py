@@ -20,7 +20,15 @@ class MemberInput:
     role_id: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.user_id is not None:
+            data["userId"] = self.user_id
+
+        if self.role_id is not None:
+            data["roleId"] = self.role_id
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -25,7 +25,15 @@ class ListCustomUsersResponse:
     next_page_token: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.users is not None:
+            data["users"] = [CustomUser.__json_encode__(v) for v in self.users]
+
+        if self.next_page_token is not None:
+            data["nextPageToken"] = self.next_page_token
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

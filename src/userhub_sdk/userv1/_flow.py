@@ -42,7 +42,44 @@ class Flow:
     signup: Optional[SignupFlow] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.state_reason is not None:
+            data["stateReason"] = self.state_reason
+
+        if self.type is not None:
+            data["type"] = self.type
+
+        if self.organization is not None:
+            data["organization"] = Organization.__json_encode__(self.organization)
+
+        if self.user is not None:
+            data["user"] = User.__json_encode__(self.user)
+
+        if self.creator is not None:
+            data["creator"] = User.__json_encode__(self.creator)
+
+        if self.expire_time is not None:
+            data["expireTime"] = util.encode_datetime(self.expire_time)
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.join_organization is not None:
+            data["joinOrganization"] = JoinOrganizationFlow.__json_encode__(
+                self.join_organization
+            )
+
+        if self.signup is not None:
+            data["signup"] = SignupFlow.__json_encode__(self.signup)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

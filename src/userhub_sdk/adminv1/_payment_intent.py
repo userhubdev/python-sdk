@@ -17,7 +17,12 @@ class PaymentIntent:
     stripe: Optional[StripePaymentIntent] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.stripe is not None:
+            data["stripe"] = StripePaymentIntent.__json_encode__(self.stripe)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -71,7 +71,65 @@ class Connection:
     webhook: Optional[WebhookConnection] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.state_reason is not None:
+            data["stateReason"] = self.state_reason
+
+        if self.type is not None:
+            data["type"] = self.type
+
+        if self.delegate is not None:
+            data["delegate"] = ConnectionDelegate.__json_encode__(self.delegate)
+
+        if self.providers is not None:
+            data["providers"] = [
+                ConnectionProvider.__json_encode__(v) for v in self.providers
+            ]
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        if self.auth0 is not None:
+            data["auth0"] = Auth0Connection.__json_encode__(self.auth0)
+
+        if self.builtin_email is not None:
+            data["builtinEmail"] = BuiltinEmailConnection.__json_encode__(
+                self.builtin_email
+            )
+
+        if self.google_cloud_identity_platform is not None:
+            data["googleCloudIdentityPlatform"] = (
+                GoogleCloudIdentityPlatformConnection.__json_encode__(
+                    self.google_cloud_identity_platform
+                )
+            )
+
+        if self.postmark is not None:
+            data["postmark"] = PostmarkConnection.__json_encode__(self.postmark)
+
+        if self.stripe is not None:
+            data["stripe"] = StripeConnection.__json_encode__(self.stripe)
+
+        if self.webhook is not None:
+            data["webhook"] = WebhookConnection.__json_encode__(self.webhook)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -44,7 +44,39 @@ class Event:
     request: Optional[EventRequest] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.type is not None:
+            data["type"] = self.type
+
+        if self.time is not None:
+            data["time"] = util.encode_datetime(self.time)
+
+        if self.entity is not None:
+            data["entity"] = EventEntity.__json_encode__(self.entity)
+
+        if self.connection is not None:
+            data["connection"] = EventConnection.__json_encode__(self.connection)
+
+        if self.organization is not None:
+            data["organization"] = EventOrganization.__json_encode__(self.organization)
+
+        if self.user is not None:
+            data["user"] = EventUser.__json_encode__(self.user)
+
+        if self.api_key is not None:
+            data["apiKey"] = EventApiKey.__json_encode__(self.api_key)
+
+        if self.actor is not None:
+            data["actor"] = EventActor.__json_encode__(self.actor)
+
+        if self.request is not None:
+            data["request"] = EventRequest.__json_encode__(self.request)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -21,7 +21,15 @@ class PriceTieredPrice:
     tiers: Optional[List[TieredPriceTier]] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.mode is not None:
+            data["mode"] = self.mode
+
+        if self.tiers is not None:
+            data["tiers"] = [TieredPriceTier.__json_encode__(v) for v in self.tiers]
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

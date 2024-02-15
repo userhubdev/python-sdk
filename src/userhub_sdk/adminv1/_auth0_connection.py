@@ -20,7 +20,18 @@ class Auth0Connection:
     client_secret: str = ""
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.domain is not None:
+            data["domain"] = self.domain
+
+        if self.client_id is not None:
+            data["clientId"] = self.client_id
+
+        if self.client_secret is not None:
+            data["clientSecret"] = self.client_secret
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

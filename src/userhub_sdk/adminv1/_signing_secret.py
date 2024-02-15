@@ -19,7 +19,15 @@ class SigningSecret:
     expire_time: Optional[datetime.datetime] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.secret is not None:
+            data["secret"] = self.secret
+
+        if self.expire_time is not None:
+            data["expireTime"] = util.encode_datetime(self.expire_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -18,7 +18,12 @@ class BatchGetTriggersResponse:
     triggers: Optional[List[TriggerResult]] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.triggers is not None:
+            data["triggers"] = [TriggerResult.__json_encode__(v) for v in self.triggers]
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

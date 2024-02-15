@@ -41,7 +41,33 @@ class PlanGroup:
     plans: Optional[List[Plan]] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.description is not None:
+            data["description"] = self.description
+
+        if self.account_type is not None:
+            data["accountType"] = self.account_type
+
+        if self.trial is not None:
+            data["trial"] = PlanGroupTrial.__json_encode__(self.trial)
+
+        if self.change_path is not None:
+            data["changePath"] = PlanGroupChangePath.__json_encode__(self.change_path)
+
+        if self.plans is not None:
+            data["plans"] = [Plan.__json_encode__(v) for v in self.plans]
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

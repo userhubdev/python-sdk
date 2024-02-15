@@ -38,7 +38,30 @@ class PlanGroupRevisionPlan:
     visibility: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
+        if self.connection is not None:
+            data["connection"] = Connection.__json_encode__(self.connection)
+
+        if self.interval is not None:
+            data["interval"] = commonv1.Interval.__json_encode__(self.interval)
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.description is not None:
+            data["description"] = self.description
+
+        if self.prices is not None:
+            data["prices"] = [Price.__json_encode__(v) for v in self.prices]
+
+        if self.visibility is not None:
+            data["visibility"] = self.visibility
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

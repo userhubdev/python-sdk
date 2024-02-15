@@ -16,7 +16,12 @@ class OperationInfo:
     response_type: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.response_type is not None:
+            data["responseType"] = self.response_type
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

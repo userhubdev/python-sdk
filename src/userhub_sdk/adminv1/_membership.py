@@ -36,7 +36,24 @@ class Membership:
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.organization is not None:
+            data["organization"] = Organization.__json_encode__(self.organization)
+
+        if self.role is not None:
+            data["role"] = Role.__json_encode__(self.role)
+
+        if self.seat is not None:
+            data["seat"] = AccountSubscriptionSeat.__json_encode__(self.seat)
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

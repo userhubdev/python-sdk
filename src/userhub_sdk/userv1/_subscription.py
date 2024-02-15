@@ -55,7 +55,55 @@ class Subscription:
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.currency_code is not None:
+            data["currencyCode"] = self.currency_code
+
+        if self.plan is not None:
+            data["plan"] = Plan.__json_encode__(self.plan)
+
+        if self.payment_method is not None:
+            data["paymentMethod"] = PaymentMethod.__json_encode__(self.payment_method)
+
+        if self.cancel_period_end is not None:
+            data["cancelPeriodEnd"] = self.cancel_period_end
+
+        if self.start_time is not None:
+            data["startTime"] = util.encode_datetime(self.start_time)
+
+        if self.end_time is not None:
+            data["endTime"] = util.encode_datetime(self.end_time)
+
+        if self.trial is not None:
+            data["trial"] = SubscriptionTrial.__json_encode__(self.trial)
+
+        if self.current_period is not None:
+            data["currentPeriod"] = SubscriptionCurrentPeriod.__json_encode__(
+                self.current_period
+            )
+
+        if self.items is not None:
+            data["items"] = [SubscriptionItem.__json_encode__(v) for v in self.items]
+
+        if self.seats is not None:
+            data["seats"] = [
+                SubscriptionSeatInfo.__json_encode__(v) for v in self.seats
+            ]
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

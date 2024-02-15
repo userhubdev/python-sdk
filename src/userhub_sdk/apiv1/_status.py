@@ -25,7 +25,24 @@ class Status:
     metadata: Dict[str, str] = dataclasses.field(default_factory=dict)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.code is not None:
+            data["code"] = self.code
+
+        if self.message is not None:
+            data["message"] = self.message
+
+        if self.reason is not None:
+            data["reason"] = self.reason
+
+        if self.param is not None:
+            data["param"] = self.param
+
+        if self.metadata is not None:
+            data["metadata"] = self.metadata
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

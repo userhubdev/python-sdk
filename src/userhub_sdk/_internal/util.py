@@ -1,20 +1,26 @@
 import datetime
 import json
-import sys
 import urllib.parse
-from typing import Optional, Union
+from typing import Any, Optional, Union
 
 from . import constants
 
 
-class JSONEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if obj is not None:
-            if isinstance(obj, datetime.datetime):
-                obj = encode_datetime(obj)
-            elif hasattr(obj, "__json_encode__"):
-                obj = obj.__encode_json__()
-        return json.JSONEncoder.default(self, obj)
+def encode(obj: Any) -> Any:
+    if obj is not None:
+        if hasattr(obj, "__json_encode__"):
+            obj = obj.__json_encode__()
+        elif isinstance(obj, dict):
+            obj = {k: encode(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            obj = [encode(v) for v in obj]
+        elif isinstance(obj, datetime.datetime):
+            obj = encode_datetime(obj)
+    return obj
+
+
+def encode_json(obj: Any) -> bytes:
+    return json.dumps(encode(obj)).encode("utf-8")
 
 
 def decode_datetime(value: Optional[str]) -> Optional[datetime.datetime]:
@@ -59,6 +65,13 @@ def decode_int64(value: Union[int, str, None]) -> Optional[int]:
         return value
 
     return int(value)
+
+
+def encode_int64(value: Union[int, None]) -> Optional[str]:
+    if value is None:
+        return None
+
+    return str(value)
 
 
 def quote_path(value: str) -> str:

@@ -20,7 +20,17 @@ class PriceFixedPrice:
     transform_quantity: Optional[PriceTransformQuantity] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.amount is not None:
+            data["amount"] = self.amount
+
+        if self.transform_quantity is not None:
+            data["transformQuantity"] = PriceTransformQuantity.__json_encode__(
+                self.transform_quantity
+            )
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

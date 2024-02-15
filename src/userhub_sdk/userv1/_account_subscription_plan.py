@@ -21,7 +21,18 @@ class AccountSubscriptionPlan:
     product: Optional[Product] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.product is not None:
+            data["product"] = Product.__json_encode__(self.product)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

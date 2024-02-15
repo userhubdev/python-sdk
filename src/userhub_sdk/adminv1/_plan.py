@@ -31,7 +31,32 @@ class Plan:
     items: Optional[List[PlanItem]] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.description is not None:
+            data["description"] = self.description
+
+        if self.currency_code is not None:
+            data["currencyCode"] = self.currency_code
+
+        if self.billing_interval is not None:
+            data["billingInterval"] = commonv1.Interval.__json_encode__(
+                self.billing_interval
+            )
+
+        if self.tags is not None:
+            data["tags"] = self.tags
+
+        if self.items is not None:
+            data["items"] = [PlanItem.__json_encode__(v) for v in self.items]
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

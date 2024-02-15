@@ -25,7 +25,24 @@ class Address:
     country: Optional[str] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.lines is not None:
+            data["lines"] = self.lines
+
+        if self.city is not None:
+            data["city"] = self.city
+
+        if self.state is not None:
+            data["state"] = self.state
+
+        if self.postal_code is not None:
+            data["postalCode"] = self.postal_code
+
+        if self.country is not None:
+            data["country"] = self.country
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

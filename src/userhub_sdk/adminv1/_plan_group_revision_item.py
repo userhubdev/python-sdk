@@ -19,7 +19,15 @@ class PlanGroupRevisionItem:
     type: str = ""
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.product is not None:
+            data["product"] = Product.__json_encode__(self.product)
+
+        if self.type is not None:
+            data["type"] = self.type
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

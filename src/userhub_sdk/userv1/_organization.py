@@ -28,7 +28,30 @@ class Organization:
     disabled: Optional[bool] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.email is not None:
+            data["email"] = self.email
+
+        if self.email_verified is not None:
+            data["emailVerified"] = self.email_verified
+
+        if self.image_url is not None:
+            data["imageUrl"] = self.image_url
+
+        if self.disabled is not None:
+            data["disabled"] = self.disabled
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

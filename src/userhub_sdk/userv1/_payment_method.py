@@ -39,7 +39,36 @@ class PaymentMethod:
     card: Optional[CardPaymentMethod] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.id is not None:
+            data["id"] = self.id
+
+        if self.type is not None:
+            data["type"] = self.type
+
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.full_name is not None:
+            data["fullName"] = self.full_name
+
+        if self.address is not None:
+            data["address"] = commonv1.Address.__json_encode__(self.address)
+
+        if self.default is not None:
+            data["default"] = self.default
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
+
+        if self.card is not None:
+            data["card"] = CardPaymentMethod.__json_encode__(self.card)
+
+        return data
 
     @staticmethod
     def __json_decode__(data):

@@ -26,7 +26,20 @@ class Membership:
     subscription: Optional[AccountSubscription] = None
 
     def __json_encode__(self):
-        return dict(user.__dict__)
+        data = {}
+
+        if self.organization is not None:
+            data["organization"] = Organization.__json_encode__(self.organization)
+
+        if self.role is not None:
+            data["role"] = Role.__json_encode__(self.role)
+
+        if self.subscription is not None:
+            data["subscription"] = AccountSubscription.__json_encode__(
+                self.subscription
+            )
+
+        return data
 
     @staticmethod
     def __json_decode__(data):
