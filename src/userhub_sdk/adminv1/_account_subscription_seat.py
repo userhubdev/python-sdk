@@ -3,7 +3,6 @@
 import dataclasses
 from typing import Optional
 
-from .._internal import util
 from ._account_subscription_product import AccountSubscriptionProduct
 
 

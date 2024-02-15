@@ -4,7 +4,8 @@ from typing import Any, Callable, Optional, TypeVar
 
 import httpcore
 
-from .. import types
+from userhub_sdk import types
+
 from . import constants
 from .request import Request
 

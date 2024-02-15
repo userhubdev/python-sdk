@@ -1,20 +1,13 @@
 # Code generated. DO NOT EDIT.
 
 import datetime
-from typing import Any
-from typing import Dict
-from typing import Optional
-from typing import Union
-from urllib.parse import quote
+from typing import Any, Dict, Optional, Union
 
-from .. import adminv1
-from .. import commonv1
-from .._internal import constants
-from .._internal import util
-from .._internal.request import Request
-from .._internal.transport import AsyncTransport
-from .._internal.transport import Transport
-from ..types import UNDEFINED, Undefined
+from userhub_sdk import adminv1, commonv1
+from userhub_sdk._internal import util
+from userhub_sdk._internal.request import Request
+from userhub_sdk._internal.transport import AsyncTransport, Transport
+from userhub_sdk.types import UNDEFINED, Undefined
 
 
 class Users:
@@ -504,6 +497,7 @@ class Users:
         *,
         portal_url: Optional[str] = None,
         return_url: Optional[str] = None,
+        success_url: Optional[str] = None,
     ) -> adminv1.CreatePortalSessionResponse:
         """
         Create Portal session.
@@ -520,10 +514,15 @@ class Users:
 
             If not defined the root URL for the portal will be used.
         :param return_url:
-            The return URL, this is where the user should be sent after they
-            exit the Portal.
+            The URL the user should be sent to when they want to return to
+            the app (e.g. cancel checkout).
 
             If not defined the app URL will be used.
+        :param success_url:
+            The URl the user should be sent after they successfully complete
+            an action (e.g. checkout).
+
+            If not defined the return URL will be used.
         """
         req = Request(
             "admin.users.createPortalSession",
@@ -538,6 +537,8 @@ class Users:
             body["portalUrl"] = portal_url
         if return_url:
             body["returnUrl"] = return_url
+        if success_url:
+            body["successUrl"] = success_url
 
         req.set_body(body)
 
@@ -1033,6 +1034,7 @@ class AsyncUsers:
         *,
         portal_url: Optional[str] = None,
         return_url: Optional[str] = None,
+        success_url: Optional[str] = None,
     ) -> adminv1.CreatePortalSessionResponse:
         """
         Create Portal session.
@@ -1049,10 +1051,15 @@ class AsyncUsers:
 
             If not defined the root URL for the portal will be used.
         :param return_url:
-            The return URL, this is where the user should be sent after they
-            exit the Portal.
+            The URL the user should be sent to when they want to return to
+            the app (e.g. cancel checkout).
 
             If not defined the app URL will be used.
+        :param success_url:
+            The URl the user should be sent after they successfully complete
+            an action (e.g. checkout).
+
+            If not defined the return URL will be used.
         """
         req = Request(
             "admin.users.createPortalSession",
@@ -1067,6 +1074,8 @@ class AsyncUsers:
             body["portalUrl"] = portal_url
         if return_url:
             body["returnUrl"] = return_url
+        if success_url:
+            body["successUrl"] = success_url
 
         req.set_body(body)
 

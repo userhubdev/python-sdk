@@ -3,8 +3,8 @@
 import dataclasses
 from typing import Optional
 
-from .. import apiv1
-from .._internal import util
+from userhub_sdk import apiv1
+
 from ._organization import Organization
 
 

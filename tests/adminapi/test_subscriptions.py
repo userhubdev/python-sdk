@@ -2,8 +2,8 @@
 
 import pytest
 
-from userhub_sdk.adminapi._subscriptions import AsyncSubscriptions, Subscriptions
 from userhub_sdk._internal.test_transport import AsyncTestTransport, SyncTestTransport
+from userhub_sdk.adminapi._subscriptions import AsyncSubscriptions, Subscriptions
 
 
 def test_list():

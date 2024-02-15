@@ -3,8 +3,7 @@
 import dataclasses
 from typing import Optional
 
-from .. import adminv1
-from .._internal import util
+from userhub_sdk import adminv1
 
 
 @dataclasses.dataclass

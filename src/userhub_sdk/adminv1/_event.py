@@ -4,8 +4,8 @@ import dataclasses
 import datetime
 from typing import Optional
 
-from .._internal import constants
-from .._internal import util
+from userhub_sdk._internal import constants, util
+
 from ._event_actor import EventActor
 from ._event_api_key import EventApiKey
 from ._event_connection import EventConnection

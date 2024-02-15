@@ -4,8 +4,8 @@ import dataclasses
 import datetime
 from typing import Optional
 
-from .. import commonv1
-from .._internal import util
+from userhub_sdk import commonv1
+from userhub_sdk._internal import util
 
 
 @dataclasses.dataclass

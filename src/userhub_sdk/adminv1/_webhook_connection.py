@@ -1,11 +1,8 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Dict
-from typing import List
-from typing import Optional
+from typing import Dict, List, Optional
 
-from .._internal import util
 from ._signing_secret import SigningSecret
 
 

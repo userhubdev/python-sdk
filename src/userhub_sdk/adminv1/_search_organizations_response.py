@@ -1,10 +1,8 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
-from .._internal import util
 from ._organization import Organization
 
 

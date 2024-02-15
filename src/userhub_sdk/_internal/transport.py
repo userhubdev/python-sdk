@@ -1,9 +1,9 @@
 import abc
 from types import TracebackType
-from typing import Dict, Optional, Type
+from typing import Optional, Type
 
-from .response import Response
 from .request import Request
+from .response import Response
 
 
 class Transport(abc.ABC):

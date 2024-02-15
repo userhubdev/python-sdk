@@ -1,11 +1,9 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
-from .. import commonv1
-from .._internal import util
+from userhub_sdk import commonv1
 
 
 @dataclasses.dataclass

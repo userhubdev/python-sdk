@@ -6,13 +6,12 @@ from typing import Dict, Optional, Type
 
 import httpcore
 
-from . import constants
-from . import util
+from userhub_sdk import apiv1, types
+
+from . import constants, util
 from .request import Request
 from .response import Response
 from .transport import AsyncTransport, Transport
-from .. import apiv1
-from .. import types
 
 
 class BaseHttpTransport:
@@ -113,12 +112,12 @@ class BaseHttpTransport:
                     ) from ex
 
                 raise types.UserHubError(status=status, call=req.call, _res=res)
-            else:
-                raise types.UserHubError(
-                    f"API returned non-JSON error{Response.summarize_body(body)}",
-                    call=req.call,
-                    _res=res,
-                )
+
+            raise types.UserHubError(
+                f"API returned non-JSON error{Response.summarize_body(body)}",
+                call=req.call,
+                _res=res,
+            )
 
         return Response(req=req, res=res, body=body)
 
@@ -157,7 +156,7 @@ class HttpTransport(BaseHttpTransport, Transport):
                     self._pool._network_backend.sleep(timeout.total_seconds())
                     continue
 
-                raise ex
+                raise
 
     def close(self):
         self._pool.close()
@@ -209,7 +208,7 @@ class AsyncHttpTransport(BaseHttpTransport, AsyncTransport):
                     await self._pool._network_backend.sleep(timeout.total_seconds())
                     continue
 
-                raise ex
+                raise
 
     async def aclose(self) -> None:
         await self._pool.aclose()

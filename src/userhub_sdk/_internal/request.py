@@ -1,11 +1,11 @@
 import datetime
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, Optional
 
 import httpcore
 
-from .. import types
-from . import constants
-from . import util
+from userhub_sdk import types
+
+from . import constants, util
 
 _RETRY_EXCEPTIONS = (httpcore.ConnectError, httpcore.ConnectTimeout)
 
@@ -25,7 +25,7 @@ class Request:
         self.method = method
         self.path = path
 
-    def set_idempotent(self, idempotent: bool):
+    def set_idempotent(self, idempotent: bool):  # noqa: FBT001
         self.idempotent = idempotent
 
     def set_header(self, name: str, value: str):
@@ -39,7 +39,7 @@ class Request:
 
         if value is None:
             value = ""
-        elif type(value) is bool:
+        elif isinstance(value, bool):
             value = "true" if value else "false"
         elif isinstance(value, datetime.datetime):
             value = util.encode_datetime(value)
@@ -60,9 +60,8 @@ class Request:
                 if res.status == 429:
                     return True, res
 
-                if self.idempotent:
-                    if 500 <= res.status <= 599:
-                        return True, res
+                if self.idempotent and 500 <= res.status <= 599:
+                    return True, res
 
         if self.idempotent and isinstance(ex, _RETRY_EXCEPTIONS):
             return True, res

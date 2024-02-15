@@ -1,6 +1,6 @@
 from .adminapi import AdminApi, AsyncAdminApi
-from .userapi import UserApi, AsyncUserApi
 from .types import UserHubError
+from .userapi import AsyncUserApi, UserApi
 
 __all__ = [
     "AdminApi",

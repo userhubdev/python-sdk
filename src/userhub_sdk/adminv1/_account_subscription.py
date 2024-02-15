@@ -4,7 +4,8 @@ import dataclasses
 import datetime
 from typing import Optional
 
-from .._internal import util
+from userhub_sdk._internal import util
+
 from ._account_subscription_plan import AccountSubscriptionPlan
 
 

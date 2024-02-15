@@ -2,11 +2,10 @@
 
 import dataclasses
 import datetime
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
-from .._internal import constants
-from .._internal import util
+from userhub_sdk._internal import constants, util
+
 from ._auth0_connection import Auth0Connection
 from ._builtin_email_connection import BuiltinEmailConnection
 from ._connection_delegate import ConnectionDelegate
@@ -60,9 +59,9 @@ class Connection:
     #: The builtin email configuration data.
     builtin_email: Optional[BuiltinEmailConnection] = None
     #: The Google Cloud Identity Platform (Firebase Auth) connection.
-    google_cloud_identity_platform: Optional[GoogleCloudIdentityPlatformConnection] = (
-        None
-    )
+    google_cloud_identity_platform: Optional[
+        GoogleCloudIdentityPlatformConnection
+    ] = None
     #: The Postmark configuration data.
     postmark: Optional[PostmarkConnection] = None
     #: The Stripe billing configuration data.
@@ -114,10 +113,10 @@ class Connection:
             )
 
         if self.google_cloud_identity_platform is not None:
-            data["googleCloudIdentityPlatform"] = (
-                GoogleCloudIdentityPlatformConnection.__json_encode__(
-                    self.google_cloud_identity_platform
-                )
+            data[
+                "googleCloudIdentityPlatform"
+            ] = GoogleCloudIdentityPlatformConnection.__json_encode__(
+                self.google_cloud_identity_platform
             )
 
         if self.postmark is not None:
@@ -179,10 +178,10 @@ class Connection:
             )
 
         if data.get("googleCloudIdentityPlatform") is not None:
-            kwargs["google_cloud_identity_platform"] = (
-                GoogleCloudIdentityPlatformConnection.__json_decode__(
-                    data["googleCloudIdentityPlatform"]
-                )
+            kwargs[
+                "google_cloud_identity_platform"
+            ] = GoogleCloudIdentityPlatformConnection.__json_decode__(
+                data["googleCloudIdentityPlatform"]
             )
 
         if data.get("postmark") is not None:

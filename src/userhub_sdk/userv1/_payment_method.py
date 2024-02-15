@@ -4,9 +4,9 @@ import dataclasses
 import datetime
 from typing import Optional
 
-from .. import commonv1
-from .._internal import constants
-from .._internal import util
+from userhub_sdk import commonv1
+from userhub_sdk._internal import constants, util
+
 from ._card_payment_method import CardPaymentMethod
 
 

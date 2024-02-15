@@ -2,12 +2,11 @@
 
 import dataclasses
 import datetime
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
-from .. import commonv1
-from .._internal import constants
-from .._internal import util
+from userhub_sdk import commonv1
+from userhub_sdk._internal import constants, util
+
 from ._account_connection import AccountConnection
 from ._account_subscription import AccountSubscription
 

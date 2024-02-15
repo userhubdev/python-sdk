@@ -2,8 +2,8 @@
 
 import pytest
 
-from userhub_sdk.adminapi._invoices import AsyncInvoices, Invoices
 from userhub_sdk._internal.test_transport import AsyncTestTransport, SyncTestTransport
+from userhub_sdk.adminapi._invoices import AsyncInvoices, Invoices
 
 
 def test_list():
@@ -148,6 +148,18 @@ def test_get():
       "description": "string",
       "externalId": "string",
       "proration": true
+    }
+  ],
+  "changes": [
+    {
+      "time": "2024-02-05T23:07:46.483Z",
+      "description": "string",
+      "subtotalAmount": "string",
+      "discountAmount": "string",
+      "startQuantity": 1,
+      "endQuantity": 1,
+      "startItemIds": [],
+      "endItemIds": []
     }
   ],
   "pullTime": "2024-02-05T23:07:46.483Z",
@@ -307,6 +319,18 @@ async def test_async_get():
       "description": "string",
       "externalId": "string",
       "proration": true
+    }
+  ],
+  "changes": [
+    {
+      "time": "2024-02-05T23:07:46.483Z",
+      "description": "string",
+      "subtotalAmount": "string",
+      "discountAmount": "string",
+      "startQuantity": 1,
+      "endQuantity": 1,
+      "startItemIds": [],
+      "endItemIds": []
     }
   ],
   "pullTime": "2024-02-05T23:07:46.483Z",

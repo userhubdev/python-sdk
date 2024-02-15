@@ -2,11 +2,9 @@
 
 import dataclasses
 import datetime
-from typing import List
-from typing import Optional
+from typing import List, Optional
 
-from .._internal import constants
-from .._internal import util
+from userhub_sdk._internal import constants, util
 
 
 @dataclasses.dataclass

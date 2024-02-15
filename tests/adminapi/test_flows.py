@@ -2,8 +2,8 @@
 
 import pytest
 
-from userhub_sdk.adminapi._flows import AsyncFlows, Flows
 from userhub_sdk._internal.test_transport import AsyncTestTransport, SyncTestTransport
+from userhub_sdk.adminapi._flows import AsyncFlows, Flows
 
 
 def test_list():

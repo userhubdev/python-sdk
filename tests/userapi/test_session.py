@@ -2,8 +2,8 @@
 
 import pytest
 
-from userhub_sdk.userapi._session import AsyncSession, Session
 from userhub_sdk._internal.test_transport import AsyncTestTransport, SyncTestTransport
+from userhub_sdk.userapi._session import AsyncSession, Session
 
 
 def test_get():

@@ -4,3 +4,10 @@ from ._challenge import Challenge
 from ._custom_user import CustomUser
 from ._error_response import ErrorResponse
 from ._list_custom_users_response import ListCustomUsersResponse
+
+__all__ = [
+    "Challenge",
+    "CustomUser",
+    "ErrorResponse",
+    "ListCustomUsersResponse",
+]
