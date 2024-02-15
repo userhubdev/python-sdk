@@ -41,7 +41,7 @@ jobs:
         run: poetry run black --check src tests
 
       - name: Run mypy
-        run: poetry run mypy src
+        run: poetry run mypy src tests
 
       - name: Run pytest
         run: |
