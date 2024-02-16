@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from ._card_payment_method_expiration import CardPaymentMethodExpiration
 
@@ -21,8 +21,8 @@ class CardPaymentMethod:
     #: The funding method for the card (e.g. `DEBIT`)
     funding_type: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.brand is not None:
             data["brand"] = self.brand
@@ -41,11 +41,11 @@ class CardPaymentMethod:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "CardPaymentMethod":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("brand") is not None:
             kwargs["brand"] = data["brand"]

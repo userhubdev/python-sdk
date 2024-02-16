@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk._internal import util
 
@@ -29,8 +29,8 @@ class SubscriptionTrial:
     #: of the trial and null when the trial expires.
     remaining_days: Optional[int] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.start_time is not None:
             data["startTime"] = util.encode_datetime(self.start_time)
@@ -47,11 +47,11 @@ class SubscriptionTrial:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "SubscriptionTrial":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("startTime") is not None:
             kwargs["start_time"] = util.decode_datetime(data["startTime"])

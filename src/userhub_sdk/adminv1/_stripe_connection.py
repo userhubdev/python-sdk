@@ -1,6 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -14,8 +15,8 @@ class StripeConnection:
     #: The live vs test status for the Stripe account.
     live: bool = False
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.account_id is not None:
             data["accountId"] = self.account_id
@@ -26,11 +27,11 @@ class StripeConnection:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "StripeConnection":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("accountId") is not None:
             kwargs["account_id"] = data["accountId"]

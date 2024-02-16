@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -14,8 +14,8 @@ class PlanGroupChangePath:
     #: a downgrade.
     direction: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.direction is not None:
             data["direction"] = self.direction
@@ -23,11 +23,11 @@ class PlanGroupChangePath:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "PlanGroupChangePath":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("direction") is not None:
             kwargs["direction"] = data["direction"]

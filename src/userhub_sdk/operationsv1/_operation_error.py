@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -15,8 +15,8 @@ class OperationError:
     #: The error message.
     message: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.code is not None:
             data["code"] = self.code
@@ -27,11 +27,11 @@ class OperationError:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "OperationError":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("code") is not None:
             kwargs["code"] = data["code"]

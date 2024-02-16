@@ -12,7 +12,7 @@ class Transport(abc.ABC):
         pass
 
     @abc.abstractmethod
-    def close(self):
+    def close(self) -> None:
         pass
 
     @abc.abstractmethod

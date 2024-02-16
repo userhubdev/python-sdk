@@ -1,7 +1,5 @@
-# Code generated. DO NOT EDIT.
-
 import dataclasses
-from typing import Optional
+from typing import Any as TypingAny, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -13,8 +11,8 @@ class Any:
     #: The type of the serialized message.
     object_type: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, TypingAny]:
+        data: Dict[str, TypingAny] = {}
 
         if self.object_type is not None:
             data["@type"] = self.object_type
@@ -22,9 +20,9 @@ class Any:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, TypingAny]) -> Optional["TypingAny"]:
         if data is None:
-            return None
+            data = {}
 
         kwargs = {}
 

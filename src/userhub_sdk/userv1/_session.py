@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from userhub_sdk._internal import util
 
@@ -33,8 +33,8 @@ class Session:
     #: The scopes available in the current session.
     scopes: List[str] = dataclasses.field(default_factory=list)
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.user is not None:
             data["user"] = User.__json_encode__(self.user)
@@ -58,11 +58,11 @@ class Session:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Session":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("user") is not None:
             kwargs["user"] = User.__json_decode__(data["user"])

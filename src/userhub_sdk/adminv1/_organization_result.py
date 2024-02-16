@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk import apiv1
 
@@ -19,8 +19,8 @@ class OrganizationResult:
     #: The organization error.
     error: Optional[apiv1.Status] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.organization is not None:
             data["organization"] = Organization.__json_encode__(self.organization)
@@ -31,11 +31,11 @@ class OrganizationResult:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "OrganizationResult":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("organization") is not None:
             kwargs["organization"] = Organization.__json_decode__(data["organization"])

@@ -41,7 +41,7 @@ async def main():
         print(ex)
         print()
         print("UserHub error:")
-        print(" - ApiCode:", ex.api_code)
+        print(" - ApiCode:", ex.api_code.value)
         print(" - Message:", ex.message)
         print(" - Reason:", ex.reason)
         print(" - Param:", ex.param)

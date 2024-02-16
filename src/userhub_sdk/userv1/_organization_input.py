@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -31,8 +31,8 @@ class OrganizationInput:
     #: The flow type must be `SIGNUP` and associated with the user creating the organization.
     flow_id: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.unique_id is not None:
             data["uniqueId"] = self.unique_id
@@ -49,11 +49,11 @@ class OrganizationInput:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "OrganizationInput":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("uniqueId") is not None:
             kwargs["unique_id"] = data["uniqueId"]

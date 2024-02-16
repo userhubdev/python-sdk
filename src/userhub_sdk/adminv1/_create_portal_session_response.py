@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -14,8 +14,8 @@ class CreatePortalSessionResponse:
     #: session.
     redirect_url: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.redirect_url is not None:
             data["redirectUrl"] = self.redirect_url
@@ -23,11 +23,11 @@ class CreatePortalSessionResponse:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "CreatePortalSessionResponse":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("redirectUrl") is not None:
             kwargs["redirect_url"] = data["redirectUrl"]

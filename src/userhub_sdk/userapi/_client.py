@@ -47,7 +47,7 @@ class Client:
         """
         return Session(self._transport)
 
-    def close(self):
+    def close(self) -> None:
         self._transport.close()
 
     def __enter__(self) -> "Client":

@@ -1,6 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -16,8 +17,8 @@ class StripePaymentMethodIntent:
     #: The Stripe Setup Intent client secret.
     client_secret: str = ""
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.account_id is not None:
             data["accountId"] = self.account_id
@@ -31,11 +32,11 @@ class StripePaymentMethodIntent:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "StripePaymentMethodIntent":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("accountId") is not None:
             kwargs["account_id"] = data["accountId"]

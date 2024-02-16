@@ -1,6 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -16,8 +17,8 @@ class Auth0Connection:
     #: The Auth0 client secret.
     client_secret: str = ""
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.domain is not None:
             data["domain"] = self.domain
@@ -31,11 +32,11 @@ class Auth0Connection:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Auth0Connection":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("domain") is not None:
             kwargs["domain"] = data["domain"]

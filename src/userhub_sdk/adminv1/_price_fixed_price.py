@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from ._price_transform_quantity import PriceTransformQuantity
 
@@ -18,8 +18,8 @@ class PriceFixedPrice:
     #: Whether to transform the quantity before multiplying amount.
     transform_quantity: Optional[PriceTransformQuantity] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.amount is not None:
             data["amount"] = self.amount
@@ -32,11 +32,11 @@ class PriceFixedPrice:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "PriceFixedPrice":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("amount") is not None:
             kwargs["amount"] = data["amount"]

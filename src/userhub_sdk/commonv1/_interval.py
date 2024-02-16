@@ -1,6 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -14,8 +15,8 @@ class Interval:
     #: The interval unit.
     unit: str = ""
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.quantity is not None:
             data["quantity"] = self.quantity
@@ -26,11 +27,11 @@ class Interval:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Interval":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("quantity") is not None:
             kwargs["quantity"] = data["quantity"]

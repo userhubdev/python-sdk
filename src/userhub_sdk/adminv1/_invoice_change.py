@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from userhub_sdk._internal import util
 
@@ -31,8 +31,8 @@ class InvoiceChange:
     #: The ending (charged) item identifiers.
     end_item_ids: List[str] = dataclasses.field(default_factory=list)
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.time is not None:
             data["time"] = util.encode_datetime(self.time)
@@ -61,11 +61,11 @@ class InvoiceChange:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "InvoiceChange":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("time") is not None:
             kwargs["time"] = util.decode_datetime(data["time"])

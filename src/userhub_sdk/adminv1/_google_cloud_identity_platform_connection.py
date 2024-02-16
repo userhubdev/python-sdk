@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -18,8 +18,8 @@ class GoogleCloudIdentityPlatformConnection:
     #: not specified.
     project_id: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.credentials is not None:
             data["credentials"] = self.credentials
@@ -30,11 +30,13 @@ class GoogleCloudIdentityPlatformConnection:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(
+        data: Dict[str, Any],
+    ) -> "GoogleCloudIdentityPlatformConnection":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("credentials") is not None:
             kwargs["credentials"] = data["credentials"]

@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -17,8 +17,8 @@ class CreatePaymentMethodIntentResponse:
     #: process.
     token: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.token is not None:
             data["token"] = self.token
@@ -26,11 +26,11 @@ class CreatePaymentMethodIntentResponse:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "CreatePaymentMethodIntentResponse":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("token") is not None:
             kwargs["token"] = data["token"]

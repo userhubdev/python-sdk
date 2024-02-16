@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from ._payment_method import PaymentMethod
 from ._subscription import Subscription
@@ -32,8 +32,8 @@ class BillingAccount:
     #: The subscription for the account.
     subscription: Optional[Subscription] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.state is not None:
             data["state"] = self.state
@@ -55,11 +55,11 @@ class BillingAccount:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "BillingAccount":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("state") is not None:
             kwargs["state"] = data["state"]

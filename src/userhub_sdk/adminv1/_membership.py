@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk._internal import constants, util
 
@@ -35,8 +35,8 @@ class Membership:
     #: The last update time of the membership.
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.organization is not None:
             data["organization"] = Organization.__json_encode__(self.organization)
@@ -56,11 +56,11 @@ class Membership:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Membership":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("organization") is not None:
             kwargs["organization"] = Organization.__json_decode__(data["organization"])

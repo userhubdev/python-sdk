@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -23,8 +23,8 @@ class UpdateSubscriptionItemsRequestItem:
     #: If this is `0` the item will be removed.
     quantity: Optional[int] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.product_id is not None:
             data["productId"] = self.product_id
@@ -38,11 +38,11 @@ class UpdateSubscriptionItemsRequestItem:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "UpdateSubscriptionItemsRequestItem":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("productId") is not None:
             kwargs["product_id"] = data["productId"]

@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from userhub_sdk import commonv1
 
@@ -27,8 +27,8 @@ class Plan:
     #: The items associated with plan.
     items: Optional[List[PlanItem]] = dataclasses.field(default_factory=list)
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.id is not None:
             data["id"] = self.id
@@ -53,11 +53,11 @@ class Plan:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Plan":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("id") is not None:
             kwargs["id"] = data["id"]

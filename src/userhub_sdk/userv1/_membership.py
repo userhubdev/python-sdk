@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from ._account_subscription import AccountSubscription
 from ._organization import Organization
@@ -24,8 +24,8 @@ class Membership:
     #: The subscription associated with the organization.
     subscription: Optional[AccountSubscription] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.organization is not None:
             data["organization"] = Organization.__json_encode__(self.organization)
@@ -41,11 +41,11 @@ class Membership:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Membership":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("organization") is not None:
             kwargs["organization"] = Organization.__json_decode__(data["organization"])

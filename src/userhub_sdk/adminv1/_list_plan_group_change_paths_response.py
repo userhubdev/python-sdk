@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from ._plan_group_change_path import PlanGroupChangePath
 
@@ -24,8 +24,8 @@ class ListPlanGroupChangePathsResponse:
     #: an empty string then the previous page is the first result.
     previous_page_token: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.plan_group_change_paths is not None:
             data["planGroupChangePaths"] = [
@@ -42,11 +42,11 @@ class ListPlanGroupChangePathsResponse:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "ListPlanGroupChangePathsResponse":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("planGroupChangePaths") is not None:
             kwargs["plan_group_change_paths"] = [

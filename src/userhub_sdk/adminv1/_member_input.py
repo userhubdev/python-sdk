@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -17,8 +17,8 @@ class MemberInput:
     #: This is currently limited to `member`, `admin`, and `owner`.
     role_id: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.user_id is not None:
             data["userId"] = self.user_id
@@ -29,11 +29,11 @@ class MemberInput:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "MemberInput":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("userId") is not None:
             kwargs["user_id"] = data["userId"]

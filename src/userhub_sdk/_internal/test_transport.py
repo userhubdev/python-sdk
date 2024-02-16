@@ -13,7 +13,7 @@ class BaseTestTransport:
     request: Optional[Request] = None
     body: str = "{}"
 
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     def _execute(self, req: Request) -> Response:
@@ -33,7 +33,7 @@ class SyncTestTransport(BaseTestTransport, Transport):
     def execute(self, req: Request) -> Response:
         return super()._execute(req)
 
-    def close(self):
+    def close(self) -> None:
         pass
 
     def __enter__(self) -> "SyncTestTransport":

@@ -4,12 +4,21 @@ import datetime
 import sys
 
 API_BASE_URL = "https://api.userhub.com"
-VERSION = "0.2.0"
+USER_AGENT = "UserHub-Python/0.3.0"
+VERSION = "0.3.0"
 
 AUTH_HEADER = "Authorization"
 API_KEY_HEADER = "UserHub-Api-Key"
 ADMIN_KEY_PREFIX = "sk_"
 USER_KEY_PREFIX = "pk_"
+
+WEBHOOK_ACTION_HEADER = "UserHub-Action"
+WEBHOOK_AGENT_HEADER = "Webhook-Agent"
+WEBHOOK_MAX_REQUEST_SIZE_BYTES = 5242880
+WEBHOOK_MAX_TIMESTAMP_DIFF = datetime.timedelta(milliseconds=300000)
+WEBHOOK_SIGNATURE_HEADER = "UserHub-Signature"
+WEBHOOK_TIMESTAMP_HEADER = "UserHub-Timestamp"
+WEBHOOK_SERVER_ERROR_JSON = b"""{"message":"Webhook server error","code":"INTERNAL"}"""
 
 SUMMARIZE_BODY_LENGTH = 20
 

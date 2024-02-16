@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk import commonv1
 from userhub_sdk._internal import constants, util
@@ -33,8 +33,8 @@ class Operation:
     #: The deletion time of the operation.
     delete_time: Optional[datetime.datetime] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.id is not None:
             data["id"] = self.id
@@ -60,11 +60,11 @@ class Operation:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Operation":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("id") is not None:
             kwargs["id"] = data["id"]

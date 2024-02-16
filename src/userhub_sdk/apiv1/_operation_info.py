@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -13,8 +13,8 @@ class OperationInfo:
     #: The message name of the primary return type for this operation.
     response_type: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.response_type is not None:
             data["responseType"] = self.response_type
@@ -22,11 +22,11 @@ class OperationInfo:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "OperationInfo":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("responseType") is not None:
             kwargs["response_type"] = data["responseType"]

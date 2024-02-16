@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from userhub_sdk import commonv1
 
@@ -36,8 +36,8 @@ class PlanGroupRevisionPlan:
     #: The visibility of the plan.
     visibility: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.unique_id is not None:
             data["uniqueId"] = self.unique_id
@@ -63,11 +63,11 @@ class PlanGroupRevisionPlan:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "PlanGroupRevisionPlan":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("uniqueId") is not None:
             kwargs["unique_id"] = data["uniqueId"]

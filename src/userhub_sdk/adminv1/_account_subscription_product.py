@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -17,8 +17,8 @@ class AccountSubscriptionProduct:
     #: The human-readable display name of the product.
     display_name: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.id is not None:
             data["id"] = self.id
@@ -32,11 +32,11 @@ class AccountSubscriptionProduct:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "AccountSubscriptionProduct":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("id") is not None:
             kwargs["id"] = data["id"]

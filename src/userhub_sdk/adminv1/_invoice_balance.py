@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -21,8 +21,8 @@ class InvoiceBalance:
     #: A positive amount means a credit to the account balance.
     applied_amount: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.start_amount is not None:
             data["startAmount"] = self.start_amount
@@ -36,11 +36,11 @@ class InvoiceBalance:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "InvoiceBalance":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("startAmount") is not None:
             kwargs["start_amount"] = data["startAmount"]
