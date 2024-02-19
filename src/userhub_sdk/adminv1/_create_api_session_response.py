@@ -2,6 +2,7 @@
 
 import dataclasses
 import datetime
+from typing import Any, Dict
 
 from userhub_sdk._internal import constants, util
 
@@ -20,8 +21,8 @@ class CreateApiSessionResponse:
     #: The expiration time for the session.
     expire_time: datetime.datetime = constants.EMPTY_DATETIME
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.access_token is not None:
             data["accessToken"] = self.access_token
@@ -32,11 +33,11 @@ class CreateApiSessionResponse:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "CreateApiSessionResponse":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("accessToken") is not None:
             kwargs["access_token"] = data["accessToken"]

@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk._internal import constants, util
 
@@ -36,8 +36,8 @@ class Event:
     #: The `users.changed` data.
     users_changed: Optional[UsersChanged] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.id is not None:
             data["id"] = self.id
@@ -72,11 +72,11 @@ class Event:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Event":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("id") is not None:
             kwargs["id"] = data["id"]

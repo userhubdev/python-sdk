@@ -1,9 +1,13 @@
 import datetime
+import enum
 import json
+import re
 import urllib.parse
 from typing import Any, Optional, Union
 
 from . import constants
+
+_WHITESPACE_RE = re.compile(r"\s+", re.MULTILINE)
 
 
 def encode(obj: Any) -> Any:
@@ -16,6 +20,8 @@ def encode(obj: Any) -> Any:
             obj = [encode(v) for v in obj]
         elif isinstance(obj, datetime.datetime):
             obj = encode_datetime(obj)
+        elif isinstance(obj, enum.Enum):
+            obj = obj.value
     return obj
 
 
@@ -76,3 +82,14 @@ def encode_int64(value: Union[int, None]) -> Optional[str]:
 
 def quote_path(value: str) -> str:
     return urllib.parse.quote(value, safe=constants.QUOTE_PATH_SAFE)
+
+
+def summarize_body(body: Optional[Union[bytes, str]]) -> str:
+    if not body:
+        return ""
+    if isinstance(body, bytes):
+        body = body.decode("utf-8")
+    body = _WHITESPACE_RE.sub(" ", body).strip()
+    if not body:
+        return ""
+    return f": {body[:constants.SUMMARIZE_BODY_LENGTH*2]}..."

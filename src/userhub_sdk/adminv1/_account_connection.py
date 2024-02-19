@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from userhub_sdk._internal import constants, util
 
@@ -49,8 +49,8 @@ class AccountConnection:
     #: The last update time of the account connection.
     update_time: datetime.datetime = constants.EMPTY_DATETIME
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.connection is not None:
             data["connection"] = Connection.__json_encode__(self.connection)
@@ -93,11 +93,11 @@ class AccountConnection:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "AccountConnection":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("connection") is not None:
             kwargs["connection"] = Connection.__json_decode__(data["connection"])

@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -18,8 +18,8 @@ class EventRequest:
     #: The trace ID associated with the request.
     trace_id: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.ip_address is not None:
             data["ipAddress"] = self.ip_address
@@ -30,11 +30,11 @@ class EventRequest:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "EventRequest":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("ipAddress") is not None:
             kwargs["ip_address"] = data["ipAddress"]

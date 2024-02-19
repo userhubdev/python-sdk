@@ -1,6 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -14,8 +15,8 @@ class PlanGroupTag:
     #: The system-assigned identifier of the plan group revision.
     revision_id: str = ""
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.tag is not None:
             data["tag"] = self.tag
@@ -26,11 +27,11 @@ class PlanGroupTag:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "PlanGroupTag":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("tag") is not None:
             kwargs["tag"] = data["tag"]

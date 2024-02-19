@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from ._product import Product
 
@@ -30,8 +30,8 @@ class SubscriptionSeatInfo:
     #: The sum of the assigned and unassigned quantities.
     total_quantity: Optional[int] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.product is not None:
             data["product"] = Product.__json_encode__(self.product)
@@ -54,11 +54,11 @@ class SubscriptionSeatInfo:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "SubscriptionSeatInfo":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("product") is not None:
             kwargs["product"] = Product.__json_decode__(data["product"])

@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from ._signing_secret import SigningSecret
 
@@ -21,8 +21,8 @@ class WebhookConnection:
         default_factory=list
     )
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.url is not None:
             data["url"] = self.url
@@ -38,11 +38,11 @@ class WebhookConnection:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "WebhookConnection":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("url") is not None:
             kwargs["url"] = data["url"]

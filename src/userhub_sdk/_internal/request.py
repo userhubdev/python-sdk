@@ -1,5 +1,5 @@
 import datetime
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Tuple
 
 import httpcore
 
@@ -25,15 +25,15 @@ class Request:
         self.method = method
         self.path = path
 
-    def set_idempotent(self, idempotent: bool):  # noqa: FBT001
+    def set_idempotent(self, idempotent: bool) -> None:  # noqa: FBT001
         self.idempotent = idempotent
 
-    def set_header(self, name: str, value: str):
+    def set_header(self, name: str, value: str) -> None:
         if self.headers is None:
             self.headers = {}
         self.headers[name] = value
 
-    def set_query(self, name: str, value: Any):
+    def set_query(self, name: str, value: Any) -> None:
         if self.query is None:
             self.query = {}
 
@@ -49,10 +49,12 @@ class Request:
         if value:
             self.query[name] = str(value)
 
-    def set_body(self, body: Any):
+    def set_body(self, body: Any) -> None:
         self.body = body
 
-    def should_retry(self, ex: BaseException, res: Optional[httpcore.Response] = None):
+    def should_retry(
+        self, ex: BaseException, res: Optional[httpcore.Response] = None
+    ) -> Tuple[bool, Optional[httpcore.Response]]:
         if isinstance(ex, types.UserHubError):
             res = ex._res
 
@@ -79,7 +81,9 @@ class Request:
         if not should_retry:
             return None
 
-        timeout = 2 ** (self.attempt - 1) * constants.RETRY_MULTIPLIER
+        timeout: datetime.timedelta = (
+            2 ** (self.attempt - 1) * constants.RETRY_MULTIPLIER
+        )
         if timeout > constants.RETRY_MAX_SLEEP:
             timeout = constants.RETRY_MAX_SLEEP
 

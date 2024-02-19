@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Dict, Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -21,8 +21,8 @@ class Status:
     #: Additional metadata related to the error.
     metadata: Dict[str, str] = dataclasses.field(default_factory=dict)
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.code is not None:
             data["code"] = self.code
@@ -42,11 +42,11 @@ class Status:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Status":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("code") is not None:
             kwargs["code"] = data["code"]

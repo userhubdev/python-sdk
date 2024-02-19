@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from ._member import Member
 
@@ -27,8 +27,8 @@ class SearchMembersResponse:
     #: is not empty.
     total_size: Optional[int] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.members is not None:
             data["members"] = [Member.__json_encode__(v) for v in self.members]
@@ -45,11 +45,11 @@ class SearchMembersResponse:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "SearchMembersResponse":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("members") is not None:
             kwargs["members"] = [Member.__json_decode__(v) for v in data["members"]]

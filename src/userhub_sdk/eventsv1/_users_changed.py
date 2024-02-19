@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk import adminv1
 
@@ -15,8 +15,8 @@ class UsersChanged:
     #: The user.
     user: Optional[adminv1.User] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.user is not None:
             data["user"] = adminv1.User.__json_encode__(self.user)
@@ -24,11 +24,11 @@ class UsersChanged:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "UsersChanged":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("user") is not None:
             kwargs["user"] = adminv1.User.__json_decode__(data["user"])

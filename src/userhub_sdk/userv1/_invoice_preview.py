@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from userhub_sdk._internal import util
 
@@ -59,8 +59,8 @@ class InvoicePreview:
     #: The line items for the invoice.
     items: Optional[List[InvoicePreviewItem]] = dataclasses.field(default_factory=list)
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.currency_code is not None:
             data["currencyCode"] = self.currency_code
@@ -98,11 +98,11 @@ class InvoicePreview:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "InvoicePreview":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("currencyCode") is not None:
             kwargs["currency_code"] = data["currencyCode"]

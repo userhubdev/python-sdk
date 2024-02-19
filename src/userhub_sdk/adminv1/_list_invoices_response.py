@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from ._invoice import Invoice
 
@@ -22,8 +22,8 @@ class ListInvoicesResponse:
     #: an empty string then the previous page is the first result.
     previous_page_token: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.invoices is not None:
             data["invoices"] = [Invoice.__json_encode__(v) for v in self.invoices]
@@ -37,11 +37,11 @@ class ListInvoicesResponse:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "ListInvoicesResponse":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("invoices") is not None:
             kwargs["invoices"] = [Invoice.__json_decode__(v) for v in data["invoices"]]

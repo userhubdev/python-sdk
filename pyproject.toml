@@ -41,7 +41,9 @@ trio = [
 
 [tool.hatch.envs.test]
 dependencies = [
+    "mypy>=1,<2",
     "pytest-asyncio>=0.23,<0.24",
+    "pytest-httpserver>=1,<2",
     "pytest>=7,<8",
     "userhub-sdk[asyncio]",
     "userhub-sdk[trio]",
@@ -70,9 +72,13 @@ content-type = "text/markdown"
 [[tool.hatch.metadata.hooks.fancy-pypi-readme.fragments]]
 path = "README.md"
 
+[tool.mypy]
+strict = true
+
 [tool.ruff]
 target-version = "py38"
 line-length = 88
+extend-exclude = ["src/userhub_sdk/types/_str_enum.py"]
 
 [tool.ruff.lint]
 ignore = [
@@ -88,9 +94,9 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"example/*" = ["INP001", "T201"]
-"tests/*" = ["S101"]
-"src/userhub_sdk/apiv1/_empty_response.py" = ["RET504"]
+"examples/*" = ["INP001", "T201"]
+"examples/webhook/main.py" = ["N802"]
+"tests/*" = ["S101", "S106"]
 
 [tool.ruff.isort]
 combine-as-imports = true

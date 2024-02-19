@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk import adminv1
 
@@ -15,8 +15,8 @@ class SubscriptionsChanged:
     #: The subscription.
     subscription: Optional[adminv1.Subscription] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.subscription is not None:
             data["subscription"] = adminv1.Subscription.__json_encode__(
@@ -26,11 +26,11 @@ class SubscriptionsChanged:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "SubscriptionsChanged":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("subscription") is not None:
             kwargs["subscription"] = adminv1.Subscription.__json_decode__(

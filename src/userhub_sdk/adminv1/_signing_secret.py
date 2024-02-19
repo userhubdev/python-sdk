@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk._internal import util
 
@@ -18,8 +18,8 @@ class SigningSecret:
     #: The time the signing secret is set to expire.
     expire_time: Optional[datetime.datetime] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.secret is not None:
             data["secret"] = self.secret
@@ -30,11 +30,11 @@ class SigningSecret:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "SigningSecret":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("secret") is not None:
             kwargs["secret"] = data["secret"]

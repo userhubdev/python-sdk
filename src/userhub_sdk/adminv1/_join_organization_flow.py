@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -15,8 +15,8 @@ class JoinOrganizationFlow:
     #: The email address of the invitee.
     email: Optional[str] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.display_name is not None:
             data["displayName"] = self.display_name
@@ -27,11 +27,11 @@ class JoinOrganizationFlow:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "JoinOrganizationFlow":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("displayName") is not None:
             kwargs["display_name"] = data["displayName"]

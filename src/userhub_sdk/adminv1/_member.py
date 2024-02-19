@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk._internal import util
 
@@ -34,8 +34,8 @@ class Member:
     #: The last update time of the membership.
     update_time: Optional[datetime.datetime] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.state is not None:
             data["state"] = self.state
@@ -58,11 +58,11 @@ class Member:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "Member":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("state") is not None:
             kwargs["state"] = data["state"]

@@ -2,7 +2,7 @@ import json
 import math
 import urllib.parse
 from types import TracebackType
-from typing import Dict, Optional, Type
+from typing import Any, Dict, Generic, Optional, Tuple, Type, TypeVar
 
 import httpcore
 
@@ -13,13 +13,19 @@ from .request import Request
 from .response import Response
 from .transport import AsyncTransport, Transport
 
+T = TypeVar("T", httpcore.ConnectionPool, httpcore.AsyncConnectionPool)
 
-class BaseHttpTransport:
+
+class BaseHttpTransport(Generic[T]):
     _base_url: str
     _headers: Dict[str, str]
+    _pool: T
 
     def __init__(
-        self, pool_class, base_url: str, headers: Optional[Dict[str, str]] = None
+        self,
+        pool_class: Type[T],
+        base_url: str,
+        headers: Optional[Dict[str, str]] = None,
     ):
         super().__init__()
 
@@ -30,7 +36,7 @@ class BaseHttpTransport:
         else:
             self._headers = {k.lower(): v for k, v in headers.items()}
 
-        self._headers["user-agent"] = f"UserHub-Python/{constants.VERSION}"
+        self._headers["user-agent"] = constants.USER_AGENT
 
         self._pool = pool_class(
             max_connections=constants.MAX_CONNECTIONS,
@@ -43,7 +49,7 @@ class BaseHttpTransport:
             retries=0,
         )
 
-    def _setup_execute(self, req: Request):
+    def _setup_execute(self, req: Request) -> Tuple[str, Dict[str, str], bytes]:
         url = self._base_url + req.path
         headers = dict(self._headers)
         body = None
@@ -65,7 +71,7 @@ class BaseHttpTransport:
                     call=req.call,
                 ) from ex
 
-        return url, headers, body
+        return url, headers, body or b""
 
     @staticmethod
     def _build_request(
@@ -73,7 +79,7 @@ class BaseHttpTransport:
         url: str,
         headers: Dict[str, str],
         body: Optional[bytes],
-    ):
+    ) -> Any:
         return {
             "method": req.method,
             "url": url,
@@ -106,15 +112,22 @@ class BaseHttpTransport:
                     status = apiv1.Status.__json_decode__(json.loads(body))
                 except Exception as ex:
                     raise types.UserHubError(
-                        f"Failed to decode error response{Response.summarize_body(body)}",
+                        f"Failed to decode error response{util.summarize_body(body)}",
                         call=req.call,
                         _res=res,
                     ) from ex
 
                 raise types.UserHubError(status=status, call=req.call, _res=res)
+            if res.status == 429:
+                raise types.UserHubError(
+                    "API call rate limited",
+                    call=req.call,
+                    api_code=types.Code.RESOURCE_EXHAUSTED,
+                    _res=res,
+                )
 
             raise types.UserHubError(
-                f"API returned non-JSON error{Response.summarize_body(body)}",
+                f"API returned non-JSON error{util.summarize_body(body)}",
                 call=req.call,
                 _res=res,
             )
@@ -122,9 +135,7 @@ class BaseHttpTransport:
         return Response(req=req, res=res, body=body)
 
 
-class HttpTransport(BaseHttpTransport, Transport):
-    _pool: httpcore.ConnectionPool
-
+class HttpTransport(BaseHttpTransport[httpcore.ConnectionPool], Transport):
     def __init__(self, base_url: str, headers: Optional[Dict[str, str]] = None):
         super().__init__(
             pool_class=httpcore.ConnectionPool,
@@ -158,7 +169,7 @@ class HttpTransport(BaseHttpTransport, Transport):
 
                 raise
 
-    def close(self):
+    def close(self) -> None:
         self._pool.close()
 
     def __enter__(self) -> "HttpTransport":
@@ -174,9 +185,9 @@ class HttpTransport(BaseHttpTransport, Transport):
         self._pool.__exit__(exc_type, exc_value, exc_tb)
 
 
-class AsyncHttpTransport(BaseHttpTransport, AsyncTransport):
-    _pool: httpcore.AsyncConnectionPool
-
+class AsyncHttpTransport(
+    BaseHttpTransport[httpcore.AsyncConnectionPool], AsyncTransport
+):
     def __init__(self, base_url: str, headers: Optional[Dict[str, str]] = None):
         super().__init__(
             pool_class=httpcore.AsyncConnectionPool,
@@ -196,6 +207,17 @@ class AsyncHttpTransport(BaseHttpTransport, AsyncTransport):
                         **self._build_request(req, url, headers, body)
                     )
                 except Exception as ex:
+                    if isinstance(ex, RuntimeError):
+                        runtime_msg = str(ex)
+                        if "httpcore[asyncio]" in runtime_msg:
+                            raise RuntimeError(
+                                "Running with asyncio requires installation of 'userhub-sdk[asyncio]'."
+                            ) from None
+                        if "httpcore[trio]" in runtime_msg:
+                            raise RuntimeError(
+                                "Running with trio requires installation of 'userhub-sdk[trio]'."
+                            ) from None
+
                     raise types.UserHubError(
                         "Failed to execute request",
                         call=req.call,

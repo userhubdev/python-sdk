@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from ._user_result import UserResult
 
@@ -15,8 +15,8 @@ class BatchGetUsersResponse:
     #: The user results.
     users: Optional[List[UserResult]] = dataclasses.field(default_factory=list)
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.users is not None:
             data["users"] = [UserResult.__json_encode__(v) for v in self.users]
@@ -24,11 +24,11 @@ class BatchGetUsersResponse:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "BatchGetUsersResponse":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("users") is not None:
             kwargs["users"] = [UserResult.__json_decode__(v) for v in data["users"]]

@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from ._trigger_result import TriggerResult
 
@@ -15,8 +15,8 @@ class BatchCreateTriggersResponse:
     #: The triggers.
     triggers: Optional[List[TriggerResult]] = dataclasses.field(default_factory=list)
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.triggers is not None:
             data["triggers"] = [TriggerResult.__json_encode__(v) for v in self.triggers]
@@ -24,11 +24,11 @@ class BatchCreateTriggersResponse:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "BatchCreateTriggersResponse":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("triggers") is not None:
             kwargs["triggers"] = [

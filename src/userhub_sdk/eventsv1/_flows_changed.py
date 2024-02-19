@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk import adminv1
 
@@ -15,8 +15,8 @@ class FlowsChanged:
     #: The flow.
     flow: Optional[adminv1.Flow] = None
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.flow is not None:
             data["flow"] = adminv1.Flow.__json_encode__(self.flow)
@@ -24,11 +24,11 @@ class FlowsChanged:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "FlowsChanged":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("flow") is not None:
             kwargs["flow"] = adminv1.Flow.__json_decode__(data["flow"])

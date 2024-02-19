@@ -1,6 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -14,8 +15,8 @@ class PriceTransformQuantity:
     #: Whether to round the result up or down.
     round: str = ""
 
-    def __json_encode__(self):
-        data = {}
+    def __json_encode__(self) -> Dict[str, Any]:
+        data: Dict[str, Any] = {}
 
         if self.divisor is not None:
             data["divisor"] = self.divisor
@@ -26,11 +27,11 @@ class PriceTransformQuantity:
         return data
 
     @staticmethod
-    def __json_decode__(data):
+    def __json_decode__(data: Dict[str, Any]) -> "PriceTransformQuantity":
         if data is None:
-            return None
+            data = {}
 
-        kwargs = {}
+        kwargs: Dict[str, Any] = {}
 
         if data.get("divisor") is not None:
             kwargs["divisor"] = data["divisor"]
