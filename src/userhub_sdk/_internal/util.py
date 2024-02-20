@@ -89,7 +89,9 @@ def summarize_body(body: Optional[Union[bytes, str]]) -> str:
         return ""
     if isinstance(body, bytes):
         body = body.decode("utf-8")
-    body = _WHITESPACE_RE.sub(" ", body).strip()
+    body = _WHITESPACE_RE.sub(" ", body[: constants.SUMMARIZE_BODY_LENGTH * 2]).strip()
     if not body:
         return ""
-    return f": {body[:constants.SUMMARIZE_BODY_LENGTH*2]}..."
+    if len(body) <= constants.SUMMARIZE_BODY_LENGTH:
+        return f": {body}"
+    return f": {body[:constants.SUMMARIZE_BODY_LENGTH]}..."
