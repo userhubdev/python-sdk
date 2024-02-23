@@ -11,11 +11,11 @@ class AccountSubscriptionProduct:
     """
 
     #: The system-assigned identifier of the product.
-    id: Optional[str] = None
+    id: str = ""
     #: The client defined unique identifier of the product.
     unique_id: Optional[str] = None
     #: The human-readable display name of the product.
-    display_name: Optional[str] = None
+    display_name: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

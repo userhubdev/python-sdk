@@ -18,17 +18,17 @@ class SubscriptionSeatInfo:
     #:
     #: This might be less than the total quantity while a subscription change
     #: is pending or if the subscription is over-provisioned.
-    current_period_quantity: Optional[int] = None
+    current_period_quantity: int = 0
     #: The quantity scheduled to appear on the next invoice.
     #:
     #: This will only be set when different from current period quantity.
     next_period_quantity: Optional[int] = None
     #: The quantity currently in use.
-    assigned_quantity: Optional[int] = None
+    assigned_quantity: int = 0
     #: The quantity available for use.
-    unassigned_quantity: Optional[int] = None
+    unassigned_quantity: int = 0
     #: The sum of the assigned and unassigned quantities.
-    total_quantity: Optional[int] = None
+    total_quantity: int = 0
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

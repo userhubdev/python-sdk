@@ -19,9 +19,9 @@ class PlanGroupChangePath:
     target: Optional[PlanGroup] = None
     #: Whether the change is considered an upgrade or
     #: a downgrade.
-    direction: Optional[str] = None
+    direction: str = ""
     #: The visibility of the change path.
-    visibility: Optional[str] = None
+    visibility: str = ""
     #: The creation time of the plan group change path.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the plan group change path.

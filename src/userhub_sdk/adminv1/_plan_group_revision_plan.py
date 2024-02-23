@@ -17,11 +17,11 @@ class PlanGroupRevisionPlan:
     """
 
     #: The client defined unique identifier for the plan (e.g. `monthly`).
-    unique_id: Optional[str] = None
+    unique_id: str = ""
     #: The details of the associated connection.
     connection: Optional[Connection] = None
     #: The billing interval for the plan.
-    interval: Optional[commonv1.Interval] = None
+    interval: commonv1.Interval = dataclasses.field(default_factory=commonv1.Interval)
     #: The customer facing human-readable display name for the plan.
     display_name: Optional[str] = None
     #: The admin facing description of the plan.
@@ -34,7 +34,7 @@ class PlanGroupRevisionPlan:
     #: combination.
     prices: Optional[List[Price]] = dataclasses.field(default_factory=list)
     #: The visibility of the plan.
-    visibility: Optional[str] = None
+    visibility: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

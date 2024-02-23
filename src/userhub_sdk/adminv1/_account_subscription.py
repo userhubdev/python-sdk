@@ -16,9 +16,9 @@ class AccountSubscription:
     """
 
     #: The system-assigned identifier of the subscription.
-    id: Optional[str] = None
+    id: str = ""
     #: The state of the subscription.
-    state: Optional[str] = None
+    state: str = ""
     #: The anchor time of the billing cycle.
     anchor_time: Optional[datetime.datetime] = None
     #: The plan.

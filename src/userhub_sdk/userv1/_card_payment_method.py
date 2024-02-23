@@ -13,13 +13,13 @@ class CardPaymentMethod:
     """
 
     #: The brand of the card (e.g. `VISA`).
-    brand: Optional[str] = None
+    brand: str = ""
     #: The expiration date of the card.
     expiration: Optional[CardPaymentMethodExpiration] = None
     #: The last for digits of the card.
-    last4: Optional[str] = None
+    last4: str = ""
     #: The funding method for the card (e.g. `DEBIT`)
-    funding_type: Optional[str] = None
+    funding_type: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

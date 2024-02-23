@@ -16,7 +16,7 @@ class SubscriptionItem:
     #: The identifier of the item.
     id: str = ""
     #: The item product.
-    product: Optional[Product] = None
+    product: Product = dataclasses.field(default_factory=Product)
     #: The item price.
     price: Optional[Price] = None
     #: The quantity of products.

@@ -29,7 +29,7 @@ class Invoice:
     #: The invoice number.
     number: Optional[str] = None
     #: The currency code for the invoice (e.g. `USD`).
-    currency_code: Optional[str] = None
+    currency_code: str = ""
     #: The user facing description for the invoice.
     description: Optional[str] = None
     #: The contact information associated with the invoice.

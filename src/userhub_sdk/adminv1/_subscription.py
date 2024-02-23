@@ -69,7 +69,7 @@ class Subscription:
     #: if organization isn't specified.
     user: Optional[User] = None
     #: Whether the subscription is the default for the account.
-    default: Optional[bool] = None
+    default: bool = False
     #: The last time the subscription was pulled from the connection.
     pull_time: Optional[datetime.datetime] = None
     #: The last time the subscription was pushed to the connection.

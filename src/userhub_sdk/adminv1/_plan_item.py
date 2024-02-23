@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from ._price import Price
 from ._product import Product
@@ -14,9 +14,9 @@ class PlanItem:
     """
 
     #: The product associated with the item.
-    product: Optional[Product] = None
+    product: Product = dataclasses.field(default_factory=Product)
     #: The price associated with them item.
-    price: Optional[Price] = None
+    price: Price = dataclasses.field(default_factory=Price)
     #: The plan item type.
     type: str = ""
 

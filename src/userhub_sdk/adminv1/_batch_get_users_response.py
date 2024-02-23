@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from ._user_result import UserResult
 
@@ -13,7 +13,7 @@ class BatchGetUsersResponse:
     """
 
     #: The user results.
-    users: Optional[List[UserResult]] = dataclasses.field(default_factory=list)
+    users: List[UserResult] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

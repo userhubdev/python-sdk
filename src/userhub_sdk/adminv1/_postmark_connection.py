@@ -17,7 +17,7 @@ class PostmarkConnection:
     #: The Postmark server ID.
     #:
     #: This is automatically populated when the server token is updated.
-    server_id: Optional[str] = None
+    server_id: str = ""
     #: The from email address.
     #:
     #: The Postmark account must be allowed to send from this email

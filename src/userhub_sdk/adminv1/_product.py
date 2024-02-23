@@ -37,11 +37,11 @@ class Product:
     #:
     #: This is automatically set the first time the product is used
     #: in a plan.
-    committed: Optional[bool] = None
+    committed: bool = False
     #: The archived status of the product.
     #:
     #: It determines if the product can be activated by self-serve plans.
-    archived: Optional[bool] = None
+    archived: bool = False
     #: The connected products.
     product_connections: Optional[List[ProductConnection]] = dataclasses.field(
         default_factory=list

@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -11,9 +11,9 @@ class OperationError:
     """
 
     #: The error code.
-    code: Optional[str] = None
+    code: str = ""
     #: The error message.
-    message: Optional[str] = None
+    message: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

@@ -18,9 +18,9 @@ class Price:
     #: The system-assigned identifier of the price.
     id: str = ""
     #: The currency for the price.
-    currency_code: Optional[str] = None
+    currency_code: str = ""
     #: The billing mode for the price.
-    billing_mode: Optional[str] = None
+    billing_mode: str = ""
     #: The billing interval for the price.
     interval: Optional[commonv1.Interval] = None
     #: The price is fixed per quantity.

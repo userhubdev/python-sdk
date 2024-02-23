@@ -19,7 +19,7 @@ class AccountConnection:
     #: The tenant connection.
     connection: Optional[Connection] = None
     #: The external identifier of the connected account.
-    external_id: Optional[str] = None
+    external_id: str = ""
     #: The external admin URL for the connected account.
     admin_url: Optional[str] = None
     #: The status of the connected account.

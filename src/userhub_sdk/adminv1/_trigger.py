@@ -2,7 +2,7 @@
 
 import dataclasses
 import datetime
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from userhub_sdk._internal import constants, util
 
@@ -17,7 +17,7 @@ class Trigger:
     """
 
     #: The connection.
-    connection: Optional[Connection] = None
+    connection: Connection = dataclasses.field(default_factory=Connection)
     #: The event type.
     event_type: str = ""
     #: The creation time of the trigger.

@@ -11,15 +11,15 @@ class Status:
     """
 
     #: The general error code (e.g. `INVALID_ARGUMENT`).
-    code: Optional[str] = None
+    code: str = ""
     #: A developer-facing error message.
-    message: Optional[str] = None
+    message: str = ""
     #: A reason code for the error (e.g. `USER_PENDING_DELETION`).
     reason: Optional[str] = None
     #: The parameter path related to the error (e.g. `member.userId`).
     param: Optional[str] = None
     #: Additional metadata related to the error.
-    metadata: Dict[str, str] = dataclasses.field(default_factory=dict)
+    metadata: Optional[Dict[str, str]] = dataclasses.field(default_factory=dict)
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

@@ -34,9 +34,9 @@ class Role:
     #: The additional permissions allowed by the role.
     permission_sets: List[str] = dataclasses.field(default_factory=list)
     #: Whether the role is the default for the tenant.
-    default: Optional[bool] = None
+    default: bool = False
     #: The archived status of the role.
-    archived: Optional[bool] = None
+    archived: bool = False
     #: The creation time of the role.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the role.

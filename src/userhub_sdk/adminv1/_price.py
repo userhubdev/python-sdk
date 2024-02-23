@@ -24,9 +24,9 @@ class Price:
     #: The connection.
     connection: Optional[Connection] = None
     #: The external identifier of the connected price.
-    external_id: Optional[str] = None
+    external_id: str = ""
     #: The status of the connected price.
-    state: Optional[str] = None
+    state: str = ""
     #: The code that best describes the reason for the state.
     state_reason: Optional[str] = None
     #: The currency for the price.
@@ -42,7 +42,7 @@ class Price:
     #: The archived status of the price.
     #:
     #: It determines if the price can be used.
-    archived: Optional[bool] = None
+    archived: bool = False
     #: The last time the price was pulled from the connection.
     pull_time: Optional[datetime.datetime] = None
     #: The last time the price was pushed to the connection.

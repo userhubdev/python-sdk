@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from ._tiered_price_tier import TieredPriceTier
 
@@ -16,7 +16,7 @@ class PriceTieredPrice:
     #: The strategy for evaluating the tiers.
     mode: str = ""
     #: The tiers for the price.
-    tiers: Optional[List[TieredPriceTier]] = dataclasses.field(default_factory=list)
+    tiers: List[TieredPriceTier] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

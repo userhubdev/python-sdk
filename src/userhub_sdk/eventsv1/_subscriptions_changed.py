@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from userhub_sdk import adminv1
 
@@ -13,7 +13,9 @@ class SubscriptionsChanged:
     """
 
     #: The subscription.
-    subscription: Optional[adminv1.Subscription] = None
+    subscription: adminv1.Subscription = dataclasses.field(
+        default_factory=adminv1.Subscription
+    )
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

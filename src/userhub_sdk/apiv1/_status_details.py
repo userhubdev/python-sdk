@@ -16,7 +16,7 @@ class StatusDetails:
     #: The parameter path related to the error (e.g. `member.userId`).
     param: Optional[str] = None
     #: Additional metadata related to the error.
-    metadata: Dict[str, str] = dataclasses.field(default_factory=dict)
+    metadata: Optional[Dict[str, str]] = dataclasses.field(default_factory=dict)
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -11,7 +11,7 @@ class GetCustomUserRequest:
     """
 
     #: The external identifier for the user.
-    id: Optional[str] = None
+    id: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

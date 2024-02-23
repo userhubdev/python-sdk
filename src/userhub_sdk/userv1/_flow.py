@@ -32,7 +32,7 @@ class Flow:
     user: Optional[User] = None
     #: The user who created the flow.
     creator: Optional[User] = None
-    #: The time the flow will expires.
+    #: The time the flow will expire.
     expire_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The creation time of the flow.
     create_time: datetime.datetime = constants.EMPTY_DATETIME

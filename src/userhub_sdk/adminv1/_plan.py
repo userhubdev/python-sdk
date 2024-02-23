@@ -21,9 +21,11 @@ class Plan:
     #: The description of the plan.
     description: Optional[str] = None
     #: The currency code for the plan (e.g. `USD`).
-    currency_code: Optional[str] = None
+    currency_code: str = ""
     #: The billing interval for the plan.
-    billing_interval: Optional[commonv1.Interval] = None
+    billing_interval: commonv1.Interval = dataclasses.field(
+        default_factory=commonv1.Interval
+    )
     #: The tags associated with the revision.
     tags: List[str] = dataclasses.field(default_factory=list)
     #: The items associated with plan.

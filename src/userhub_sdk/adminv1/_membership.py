@@ -21,9 +21,9 @@ class Membership:
     """
 
     #: The organization.
-    organization: Optional[Organization] = None
+    organization: Organization = dataclasses.field(default_factory=Organization)
     #: The user's role within the organization.
-    role: Optional[Role] = None
+    role: Role = dataclasses.field(default_factory=Role)
     #: The seat associated with the membership.
     #:
     #: This will be absent if there is no active default

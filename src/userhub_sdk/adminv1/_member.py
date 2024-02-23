@@ -4,7 +4,7 @@ import dataclasses
 import datetime
 from typing import Any, Dict, Optional
 
-from userhub_sdk._internal import util
+from userhub_sdk._internal import constants, util
 
 from ._account_subscription_seat import AccountSubscriptionSeat
 from ._role import Role
@@ -20,9 +20,9 @@ class Member:
     #: Whether the membership is active.
     state: str = ""
     #: The user.
-    user: Optional[User] = None
+    user: User = dataclasses.field(default_factory=User)
     #: The user's role within the organization.
-    role: Optional[Role] = None
+    role: Role = dataclasses.field(default_factory=Role)
     #: The seat associated with the member.
     #:
     #: This will be absent if there is no active
@@ -30,9 +30,9 @@ class Member:
     #: has not been assigned a seat.
     seat: Optional[AccountSubscriptionSeat] = None
     #: The creation time of the membership.
-    create_time: Optional[datetime.datetime] = None
+    create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the membership.
-    update_time: Optional[datetime.datetime] = None
+    update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

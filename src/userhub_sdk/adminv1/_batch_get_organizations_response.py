@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from ._organization_result import OrganizationResult
 
@@ -13,9 +13,7 @@ class BatchGetOrganizationsResponse:
     """
 
     #: The organizations.
-    organizations: Optional[List[OrganizationResult]] = dataclasses.field(
-        default_factory=list
-    )
+    organizations: List[OrganizationResult] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

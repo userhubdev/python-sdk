@@ -213,7 +213,7 @@ class Users:
         address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
         signup_time: Union[Optional[datetime.datetime], Undefined] = UNDEFINED,
         disabled: Union[Optional[bool], Undefined] = UNDEFINED,
-        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
+        allow_missing: Optional[bool] = None,
     ) -> adminv1.User:
         """
         Updates specified user.
@@ -750,7 +750,7 @@ class AsyncUsers:
         address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
         signup_time: Union[Optional[datetime.datetime], Undefined] = UNDEFINED,
         disabled: Union[Optional[bool], Undefined] = UNDEFINED,
-        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
+        allow_missing: Optional[bool] = None,
     ) -> adminv1.User:
         """
         Updates specified user.

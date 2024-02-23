@@ -15,9 +15,9 @@ class Member:
     """
 
     #: The user.
-    user: Optional[User] = None
+    user: User = dataclasses.field(default_factory=User)
     #: The user's role within the organization.
-    role: Optional[Role] = None
+    role: Role = dataclasses.field(default_factory=Role)
     #: The seat assigned to the member.
     #:
     #: This will be absent if there is no active
