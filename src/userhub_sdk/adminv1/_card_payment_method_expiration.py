@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -11,9 +11,9 @@ class CardPaymentMethodExpiration:
     """
 
     #: The expiration year.
-    year: Optional[int] = None
+    year: int = 0
     #: The expiration month.
-    month: Optional[int] = None
+    month: int = 0
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

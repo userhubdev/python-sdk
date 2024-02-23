@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -13,7 +13,7 @@ class ErrorResponse:
     #: The error code (e.g. `INVALID_ARGUMENT`).
     code: str = ""
     #: A user-facing error message.
-    message: Optional[str] = None
+    message: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

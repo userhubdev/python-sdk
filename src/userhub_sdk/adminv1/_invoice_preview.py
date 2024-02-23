@@ -18,7 +18,7 @@ class InvoicePreview:
     """
 
     #: The currency code for the preview (e.g. `USD`).
-    currency_code: Optional[str] = None
+    currency_code: str = ""
     #: The bill to contact information.
     account: Optional[InvoiceAccount] = None
     #: The time the upcoming invoice will be finalized.

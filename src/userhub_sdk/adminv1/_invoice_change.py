@@ -4,7 +4,7 @@ import dataclasses
 import datetime
 from typing import Any, Dict, List, Optional
 
-from userhub_sdk._internal import util
+from userhub_sdk._internal import constants, util
 
 
 @dataclasses.dataclass
@@ -14,18 +14,18 @@ class InvoiceChange:
     """
 
     #: The time the change occurred.
-    time: Optional[datetime.datetime] = None
+    time: datetime.datetime = constants.EMPTY_DATETIME
     #: The user-facing description for the change.
-    description: Optional[str] = None
+    description: str = ""
     #: The total amount for the change excluding
     #: taxes and discounts.
-    subtotal_amount: Optional[str] = None
+    subtotal_amount: str = ""
     #: The change discount amount.
     discount_amount: Optional[str] = None
     #: The starting quantity of the change.
-    start_quantity: Optional[int] = None
+    start_quantity: int = 0
     #: The ending quantity of the change.
-    end_quantity: Optional[int] = None
+    end_quantity: int = 0
     #: The starting (credited) item identifiers.
     start_item_ids: List[str] = dataclasses.field(default_factory=list)
     #: The ending (charged) item identifiers.

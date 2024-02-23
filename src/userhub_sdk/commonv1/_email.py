@@ -11,7 +11,7 @@ class Email:
     """
 
     #: The email address (e.g. `jane@example.com`).
-    address: Optional[str] = None
+    address: str = ""
     #: The email name (e.g. `Jane Doe`).
     display_name: Optional[str] = None
 

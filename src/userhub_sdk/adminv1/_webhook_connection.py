@@ -15,11 +15,9 @@ class WebhookConnection:
     #: The URL of the events webhook.
     url: str = ""
     #: The headers sent with requests to the connection URL.
-    headers: Dict[str, str] = dataclasses.field(default_factory=dict)
+    headers: Optional[Dict[str, str]] = dataclasses.field(default_factory=dict)
     #: The webhook secrets
-    signing_secrets: Optional[List[SigningSecret]] = dataclasses.field(
-        default_factory=list
-    )
+    signing_secrets: List[SigningSecret] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

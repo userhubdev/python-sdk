@@ -12,7 +12,7 @@ class ListCustomUsersRequest:
 
     #: The maximum number of users to return. The webhook is allowed to
     #: return fewer than this value, but it should never return more.
-    page_size: Optional[int] = None
+    page_size: int = 0
     #: A page token, this is from the response of the previous list
     #: request.
     #:

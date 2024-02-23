@@ -15,7 +15,7 @@ class UserInput:
     """
 
     #: The system-assigned identifier of the user.
-    id: Optional[str] = None
+    id: str = ""
     #: The client defined unique identifier of the user account.
     #:
     #: It is restricted to letters, numbers, underscores, and hyphens,

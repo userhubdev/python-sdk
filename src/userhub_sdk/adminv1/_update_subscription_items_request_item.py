@@ -14,7 +14,7 @@ class UpdateSubscriptionItemsRequestItem:
     #:
     #: If this is empty and the user ID is set, the default
     #: seat will be used.
-    product_id: Optional[str] = None
+    product_id: str = ""
     #: The member user ID of the organization member. This can
     #: only be specified for seat items.
     user_id: Optional[str] = None

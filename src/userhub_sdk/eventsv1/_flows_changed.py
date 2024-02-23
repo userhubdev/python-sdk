@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from userhub_sdk import adminv1
 
@@ -13,7 +13,7 @@ class FlowsChanged:
     """
 
     #: The flow.
-    flow: Optional[adminv1.Flow] = None
+    flow: adminv1.Flow = dataclasses.field(default_factory=adminv1.Flow)
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

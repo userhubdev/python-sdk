@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -11,11 +11,11 @@ class MemberInput:
     """
 
     #: The identifier of the user.
-    user_id: Optional[str] = None
+    user_id: str = ""
     #: The identifier of the role.
     #:
     #: This is currently limited to `member`, `admin`, and `owner`.
-    role_id: Optional[str] = None
+    role_id: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

@@ -44,9 +44,9 @@ class PlanGroup:
     #: The trial settings.
     trial: Optional[PlanGroupTrial] = None
     #: The visibility of the plan group.
-    visibility: Optional[str] = None
+    visibility: str = ""
     #: The archived status of the plan group.
-    archived: Optional[bool] = None
+    archived: bool = False
     #: The current revision for the plan group.
     revision: Optional[PlanGroupRevision] = None
     #: The creation time of the plan group.

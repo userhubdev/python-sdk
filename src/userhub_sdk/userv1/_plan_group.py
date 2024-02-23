@@ -27,13 +27,13 @@ class PlanGroup:
     #: The user facing description of the plan group.
     description: Optional[str] = None
     #: Whether the plans are for organizations or users.
-    account_type: Optional[str] = None
+    account_type: str = ""
     #: The trial settings.
     #:
     #: For authenticated requests, this will not be set when the account
     #: isn't eligible for a trial.
     trial: Optional[PlanGroupTrial] = None
-    #: Whether the plan is consider an downgrade/upgrade.
+    #: Whether the plan is considered an downgrade or upgrade.
     change_path: Optional[PlanGroupChangePath] = None
     #: The plans associated with plan group.
     plans: Optional[List[Plan]] = dataclasses.field(default_factory=list)

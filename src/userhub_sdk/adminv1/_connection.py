@@ -47,9 +47,7 @@ class Connection:
     #: The delegated connection.
     delegate: Optional[ConnectionDelegate] = None
     #: The connection providers.
-    providers: Optional[List[ConnectionProvider]] = dataclasses.field(
-        default_factory=list
-    )
+    providers: List[ConnectionProvider] = dataclasses.field(default_factory=list)
     #: The creation time of the connection.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the connection.

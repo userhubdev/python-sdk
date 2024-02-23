@@ -13,9 +13,9 @@ class AccountSubscriptionPlan:
     """
 
     #: The identifier of the plan.
-    id: Optional[str] = None
+    id: str = ""
     #: The human-readable display name of the plan.
-    display_name: Optional[str] = None
+    display_name: str = ""
     #: The plan product.
     product: Optional[AccountSubscriptionProduct] = None
 

@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from ._product import Product
 
@@ -13,7 +13,7 @@ class PlanGroupRevisionItem:
     """
 
     #: The product associated with the item.
-    product: Optional[Product] = None
+    product: Product = dataclasses.field(default_factory=Product)
     #: The plan item type.
     type: str = ""
 

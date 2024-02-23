@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -12,7 +12,7 @@ class PlanGroupChangePath:
 
     #: Whether the change is considered an upgrade or
     #: a downgrade.
-    direction: Optional[str] = None
+    direction: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

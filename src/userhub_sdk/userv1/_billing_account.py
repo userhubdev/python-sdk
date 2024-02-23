@@ -14,7 +14,7 @@ class BillingAccount:
     """
 
     #: The status of the billing account.
-    state: Optional[str] = None
+    state: str = ""
     #: The balance amount for the account.
     #:
     #: A negative value indicates an amount which will be subtracted from the next

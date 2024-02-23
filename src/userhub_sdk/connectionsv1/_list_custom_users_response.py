@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from ._custom_user import CustomUser
 
@@ -13,14 +13,14 @@ class ListCustomUsersResponse:
     """
 
     #: The list of users.
-    users: Optional[List[CustomUser]] = dataclasses.field(default_factory=list)
+    users: List[CustomUser] = dataclasses.field(default_factory=list)
     #: A token the webhook can set to indicate it has more results.
     #:
     #: This can be a page number, offset number, timestamp, or any value
     #: the webhook handler wants to use for pagination.
     #:
     #: It must be encoded as a string.
-    next_page_token: Optional[str] = None
+    next_page_token: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

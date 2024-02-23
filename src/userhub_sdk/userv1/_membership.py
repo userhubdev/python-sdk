@@ -18,9 +18,9 @@ class Membership:
     """
 
     #: The organization.
-    organization: Optional[Organization] = None
+    organization: Organization = dataclasses.field(default_factory=Organization)
     #: The user's role within the organization.
-    role: Optional[Role] = None
+    role: Role = dataclasses.field(default_factory=Role)
     #: The subscription associated with the organization.
     subscription: Optional[AccountSubscription] = None
 

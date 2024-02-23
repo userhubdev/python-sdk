@@ -11,7 +11,7 @@ class SignupFlow:
     """
 
     #: The email address of the invitee.
-    email: Optional[str] = None
+    email: str = ""
     #: The display name of the invitee.
     display_name: Optional[str] = None
     #: Whether to create an organization as part of the signup flow.

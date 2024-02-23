@@ -21,7 +21,7 @@ class SubscriptionTrial:
     #:
     #: This number is rounded to the nearest whole number
     #: of days.
-    days: Optional[int] = None
+    days: int = 0
     #: The number of days remaining in the trial.
     #:
     #: This number is rounded down, so will generally be

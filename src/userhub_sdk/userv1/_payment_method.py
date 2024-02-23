@@ -17,20 +17,20 @@ class PaymentMethod:
     """
 
     #: The system-assigned identifier of the payment method.
-    id: Optional[str] = None
+    id: str = ""
     #: The payment method type.
     type: str = ""
-    #: A human readable description of the payment method.
+    #: A human-readable description of the payment method.
     #:
     #: This can be used to show a description of the payment method
     #: when the type is UNKNOWN or not explicitly handled.
-    display_name: Optional[str] = None
+    display_name: str = ""
     #: The full name of the owner of the payment method.
     full_name: Optional[str] = None
     #: The address for the payment method.
     address: Optional[commonv1.Address] = None
     #: Whether the payment method is the default for the account.
-    default: Optional[bool] = None
+    default: bool = False
     #: The creation time of the payment method connection.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the payment method connection.

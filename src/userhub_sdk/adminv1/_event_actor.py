@@ -11,7 +11,7 @@ class EventActor:
     """
 
     #: The system-assigned identifier of the actor.
-    id: Optional[str] = None
+    id: str = ""
     #: The human-readable display name of the actor.
     #:
     #: NOTE: this is the current display name and not
@@ -23,7 +23,7 @@ class EventActor:
     #: the one as of the time of the event.
     email: Optional[str] = None
     #: Whether the actor is a tenant admin.
-    admin: Optional[bool] = None
+    admin: bool = False
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

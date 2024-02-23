@@ -37,7 +37,7 @@ class PlanGroupRevision:
     #:
     #: After the revision has been committed, it is available for use, but
     #: can no longer be edited.
-    committed: Optional[bool] = None
+    committed: bool = False
     #: The tags associated with the revision.
     #:
     #: Tags are restricted to letters, numbers, underscores, and hyphens,

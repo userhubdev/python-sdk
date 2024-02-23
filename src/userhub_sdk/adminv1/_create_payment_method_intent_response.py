@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -12,10 +12,10 @@ class CreatePaymentMethodIntentResponse:
 
     #: The setup token for the billing system (e.g. Stripe SetupIntent
     #: Client Secret). This is generally used by a frontend
-    #: client to securely setup a payment method, the result of which
+    #: client to securely set up a payment method, the result of which
     #: can be passed to CreatePaymentMethod to complete the setup
     #: process.
-    token: Optional[str] = None
+    token: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

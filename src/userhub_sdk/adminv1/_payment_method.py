@@ -17,20 +17,20 @@ class PaymentMethod:
     """
 
     #: The system-assigned identifier of the payment method.
-    id: Optional[str] = None
+    id: str = ""
     #: The external identifier of the connected payment method.
-    external_id: Optional[str] = None
+    external_id: str = ""
     #: The status of the connected payment method.
     state: str = ""
     #: The code that best describes the reason for the state.
     state_reason: Optional[str] = None
     #: The payment method type.
     type: str = ""
-    #: A human readable description of the payment method.
+    #: A human-readable description of the payment method.
     #:
     #: This can be used to show a description of the payment method
     #: when the type is UNKNOWN or not explicitly handled.
-    display_name: Optional[str] = None
+    display_name: str = ""
     #: The full name of the owner of the payment method.
     full_name: Optional[str] = None
     #: The address for the payment method.

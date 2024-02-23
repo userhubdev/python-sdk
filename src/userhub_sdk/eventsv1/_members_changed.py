@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from userhub_sdk import adminv1
 
@@ -13,9 +13,11 @@ class MembersChanged:
     """
 
     #: The organization.
-    organization: Optional[adminv1.Organization] = None
+    organization: adminv1.Organization = dataclasses.field(
+        default_factory=adminv1.Organization
+    )
     #: The member.
-    member: Optional[adminv1.Member] = None
+    member: adminv1.Member = dataclasses.field(default_factory=adminv1.Member)
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

@@ -215,7 +215,7 @@ class Organizations:
         address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
         signup_time: Union[Optional[datetime.datetime], Undefined] = UNDEFINED,
         disabled: Union[Optional[bool], Undefined] = UNDEFINED,
-        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
+        allow_missing: Optional[bool] = None,
     ) -> adminv1.Organization:
         """
         Updates specified organization.
@@ -559,8 +559,8 @@ class Organizations:
         organization_id: str,
         user_id: str,
         *,
-        role_id: Union[Optional[str], Undefined] = UNDEFINED,
-        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
+        role_id: Union[str, Undefined] = UNDEFINED,
+        allow_missing: Optional[bool] = None,
     ) -> adminv1.Member:
         """
         Updates specified organization member.
@@ -824,7 +824,7 @@ class AsyncOrganizations:
         address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
         signup_time: Union[Optional[datetime.datetime], Undefined] = UNDEFINED,
         disabled: Union[Optional[bool], Undefined] = UNDEFINED,
-        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
+        allow_missing: Optional[bool] = None,
     ) -> adminv1.Organization:
         """
         Updates specified organization.
@@ -1168,8 +1168,8 @@ class AsyncOrganizations:
         organization_id: str,
         user_id: str,
         *,
-        role_id: Union[Optional[str], Undefined] = UNDEFINED,
-        allow_missing: Union[Optional[bool], Undefined] = UNDEFINED,
+        role_id: Union[str, Undefined] = UNDEFINED,
+        allow_missing: Optional[bool] = None,
     ) -> adminv1.Member:
         """
         Updates specified organization member.

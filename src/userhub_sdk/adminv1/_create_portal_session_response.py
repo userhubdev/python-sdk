@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -12,7 +12,7 @@ class CreatePortalSessionResponse:
 
     #: The URL you should redirect the user to after calling create portal
     #: session.
-    redirect_url: Optional[str] = None
+    redirect_url: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}

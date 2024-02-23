@@ -15,7 +15,7 @@ class OrganizationInput:
     """
 
     #: The system-assigned identifier of the organization.
-    id: Optional[str] = None
+    id: str = ""
     #: The client defined unique identifier of the organization account.
     #:
     #: It is restricted to letters, numbers, underscores, and hyphens,
