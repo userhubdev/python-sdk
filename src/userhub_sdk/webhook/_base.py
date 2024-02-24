@@ -63,11 +63,11 @@ class BaseWebhook(Generic[T]):
         except Exception as ex:
             raise UserHubError(f"Timestamp is invalid: {timestamp}") from ex
 
-        diff = dt - datetime.datetime.now(datetime.timezone.utc)
+        diff = datetime.datetime.now(datetime.timezone.utc) - dt
         if diff > constants.WEBHOOK_MAX_TIMESTAMP_DIFF:
-            raise UserHubError(f"Timestamp is too far in the future: {timestamp}")
-        if diff < -constants.WEBHOOK_MAX_TIMESTAMP_DIFF:
             raise UserHubError(f"Timestamp is too far in the past: {timestamp}")
+        if diff < -constants.WEBHOOK_MAX_TIMESTAMP_DIFF:
+            raise UserHubError(f"Timestamp is too far in the future: {timestamp}")
 
         h = hmac.new(
             self._signing_secret,
