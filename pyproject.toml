@@ -95,7 +95,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "examples/*" = ["INP001", "T201"]
-"examples/webhook/main.py" = ["N802"]
+"examples/http-server-webhook/main.py" = ["N802"]
 "tests/*" = ["S101", "S106"]
 
 [tool.ruff.isort]
