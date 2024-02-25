@@ -124,6 +124,41 @@ class Flows:
 
         return res.decode_body(userv1.Flow.__json_decode__)
 
+    def create_signup(
+        self,
+        *,
+        email: str,
+        display_name: Optional[str] = None,
+        create_organization: Optional[bool] = None,
+    ) -> userv1.Flow:
+        """
+        Creates a signup flow.
+
+        This invites a person to join the app.
+
+        :param email:
+            The email address of the person to invite.
+        :param display_name:
+            The display name of the person to invite.
+        :param create_organization:
+            Whether to create an organization as part of the signup flow.
+        """
+        req = Request("user.flows.createSignup", "POST", "/user/v1/flows:createSignup")
+        body: Dict[str, Any] = {}
+
+        if email:
+            body["email"] = email
+        if display_name:
+            body["displayName"] = display_name
+        if create_organization:
+            body["createOrganization"] = create_organization
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(userv1.Flow.__json_decode__)
+
     def get(
         self,
         flow_id: str,
@@ -138,6 +173,35 @@ class Flows:
             "user.flows.get", "GET", f"/user/v1/flows/{util.quote_path(flow_id)}"
         )
         req.set_idempotent(True)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(userv1.Flow.__json_decode__)
+
+    def approve(
+        self,
+        flow_id: str,
+    ) -> userv1.Flow:
+        """
+        Approve a flow.
+
+        This will approve the specified flow and start the next step
+        in the flow (e.g. for a join organization flow it will send the
+        invitee an email with a link to join the organization).
+
+        :param flow_id:
+            The identifier of the flow.
+        """
+        req = Request(
+            "user.flows.approve",
+            "POST",
+            f"/user/v1/flows/{util.quote_path(flow_id)}:approve",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
 
         res = self._transport.execute(req)
 
@@ -313,6 +377,41 @@ class AsyncFlows:
 
         return res.decode_body(userv1.Flow.__json_decode__)
 
+    async def create_signup(
+        self,
+        *,
+        email: str,
+        display_name: Optional[str] = None,
+        create_organization: Optional[bool] = None,
+    ) -> userv1.Flow:
+        """
+        Creates a signup flow.
+
+        This invites a person to join the app.
+
+        :param email:
+            The email address of the person to invite.
+        :param display_name:
+            The display name of the person to invite.
+        :param create_organization:
+            Whether to create an organization as part of the signup flow.
+        """
+        req = Request("user.flows.createSignup", "POST", "/user/v1/flows:createSignup")
+        body: Dict[str, Any] = {}
+
+        if email:
+            body["email"] = email
+        if display_name:
+            body["displayName"] = display_name
+        if create_organization:
+            body["createOrganization"] = create_organization
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(userv1.Flow.__json_decode__)
+
     async def get(
         self,
         flow_id: str,
@@ -327,6 +426,35 @@ class AsyncFlows:
             "user.flows.get", "GET", f"/user/v1/flows/{util.quote_path(flow_id)}"
         )
         req.set_idempotent(True)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(userv1.Flow.__json_decode__)
+
+    async def approve(
+        self,
+        flow_id: str,
+    ) -> userv1.Flow:
+        """
+        Approve a flow.
+
+        This will approve the specified flow and start the next step
+        in the flow (e.g. for a join organization flow it will send the
+        invitee an email with a link to join the organization).
+
+        :param flow_id:
+            The identifier of the flow.
+        """
+        req = Request(
+            "user.flows.approve",
+            "POST",
+            f"/user/v1/flows/{util.quote_path(flow_id)}:approve",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
 
         res = await self._transport.execute(req)
 
