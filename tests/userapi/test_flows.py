@@ -86,6 +86,61 @@ def test_create_join_organization():
     assert tr.request.path == "/user/v1/flows:createJoinOrganization"
 
 
+def test_create_signup():
+    tr = SyncTestTransport()
+    tr.body = """{
+  "id": "string",
+  "state": "START_PENDING",
+  "stateReason": "DELETED",
+  "type": "JOIN_ORGANIZATION",
+  "organization": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "user": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "creator": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z",
+  "joinOrganization": {
+    "displayName": "Test",
+    "email": "test@example.com"
+  },
+  "signup": {
+    "email": "test@example.com",
+    "displayName": "Test",
+    "createOrganization": true
+  }
+}"""
+
+    n = Flows(tr)
+
+    res = n.create_signup(email="")
+    assert res is not None
+    assert tr.request.method == "POST"
+    assert tr.request.path == "/user/v1/flows:createSignup"
+
+
 def test_get():
     tr = SyncTestTransport()
     tr.body = """{
@@ -139,6 +194,61 @@ def test_get():
     assert res is not None
     assert tr.request.method == "GET"
     assert tr.request.path == "/user/v1/flows/flowId"
+
+
+def test_approve():
+    tr = SyncTestTransport()
+    tr.body = """{
+  "id": "string",
+  "state": "START_PENDING",
+  "stateReason": "DELETED",
+  "type": "JOIN_ORGANIZATION",
+  "organization": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "user": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "creator": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z",
+  "joinOrganization": {
+    "displayName": "Test",
+    "email": "test@example.com"
+  },
+  "signup": {
+    "email": "test@example.com",
+    "displayName": "Test",
+    "createOrganization": true
+  }
+}"""
+
+    n = Flows(tr)
+
+    res = n.approve(flow_id="flowId")
+    assert res is not None
+    assert tr.request.method == "POST"
+    assert tr.request.path == "/user/v1/flows/flowId:approve"
 
 
 def test_consume():
@@ -334,6 +444,62 @@ async def test_async_create_join_organization():
 
 
 @pytest.mark.asyncio
+async def test_async_create_signup():
+    tr = AsyncTestTransport()
+    tr.body = """{
+  "id": "string",
+  "state": "START_PENDING",
+  "stateReason": "DELETED",
+  "type": "JOIN_ORGANIZATION",
+  "organization": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "user": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "creator": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z",
+  "joinOrganization": {
+    "displayName": "Test",
+    "email": "test@example.com"
+  },
+  "signup": {
+    "email": "test@example.com",
+    "displayName": "Test",
+    "createOrganization": true
+  }
+}"""
+
+    n = AsyncFlows(tr)
+
+    res = await n.create_signup(email="")
+    assert res is not None
+    assert tr.request.method == "POST"
+    assert tr.request.path == "/user/v1/flows:createSignup"
+
+
+@pytest.mark.asyncio
 async def test_async_get():
     tr = AsyncTestTransport()
     tr.body = """{
@@ -387,6 +553,62 @@ async def test_async_get():
     assert res is not None
     assert tr.request.method == "GET"
     assert tr.request.path == "/user/v1/flows/flowId"
+
+
+@pytest.mark.asyncio
+async def test_async_approve():
+    tr = AsyncTestTransport()
+    tr.body = """{
+  "id": "string",
+  "state": "START_PENDING",
+  "stateReason": "DELETED",
+  "type": "JOIN_ORGANIZATION",
+  "organization": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "user": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "creator": {
+    "id": "string",
+    "uniqueId": "test",
+    "displayName": "Test",
+    "email": "test@example.com",
+    "emailVerified": true,
+    "imageUrl": "https://example.com/test.png",
+    "disabled": true
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z",
+  "joinOrganization": {
+    "displayName": "Test",
+    "email": "test@example.com"
+  },
+  "signup": {
+    "email": "test@example.com",
+    "displayName": "Test",
+    "createOrganization": true
+  }
+}"""
+
+    n = AsyncFlows(tr)
+
+    res = await n.approve(flow_id="flowId")
+    assert res is not None
+    assert tr.request.method == "POST"
+    assert tr.request.path == "/user/v1/flows/flowId:approve"
 
 
 @pytest.mark.asyncio

@@ -154,6 +154,65 @@ class Flows:
 
         return res.decode_body(adminv1.Flow.__json_decode__)
 
+    def create_signup(
+        self,
+        *,
+        email: str,
+        display_name: Optional[str] = None,
+        create_organization: Optional[bool] = None,
+        creator_user_id: Optional[str] = None,
+        expire_time: Optional[datetime.datetime] = None,
+        ttl: Optional[str] = None,
+    ) -> adminv1.Flow:
+        """
+        Create a signup flow.
+
+        This invites a person to join the app.
+
+        :param email:
+            The email address of the person to invite.
+        :param display_name:
+            The display name of the person to invite.
+        :param create_organization:
+            Whether to create an organization as part of the signup flow.
+        :param creator_user_id:
+            The identifier of the user sending the invite.
+        :param expire_time:
+            The time the flow will expire.
+
+            This field is not allowed if `ttl` is specified.
+        :param ttl:
+            The amount of time a flow will be available (e.g. `86400s`).
+
+            This must be a string with the number of seconds followed by a
+            trailing `s`.
+
+            This field is not allowed if `expireTime` is specified.
+        """
+        req = Request(
+            "admin.flows.createSignup", "POST", "/admin/v1/flows:createSignup"
+        )
+        body: Dict[str, Any] = {}
+
+        if email:
+            body["email"] = email
+        if display_name:
+            body["displayName"] = display_name
+        if create_organization:
+            body["createOrganization"] = create_organization
+        if creator_user_id:
+            body["creatorUserId"] = creator_user_id
+        if expire_time:
+            body["expireTime"] = expire_time
+        if ttl:
+            body["ttl"] = ttl
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(adminv1.Flow.__json_decode__)
+
     def get(
         self,
         flow_id: str,
@@ -331,6 +390,65 @@ class AsyncFlows:
             body["email"] = email
         if display_name:
             body["displayName"] = display_name
+        if creator_user_id:
+            body["creatorUserId"] = creator_user_id
+        if expire_time:
+            body["expireTime"] = expire_time
+        if ttl:
+            body["ttl"] = ttl
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(adminv1.Flow.__json_decode__)
+
+    async def create_signup(
+        self,
+        *,
+        email: str,
+        display_name: Optional[str] = None,
+        create_organization: Optional[bool] = None,
+        creator_user_id: Optional[str] = None,
+        expire_time: Optional[datetime.datetime] = None,
+        ttl: Optional[str] = None,
+    ) -> adminv1.Flow:
+        """
+        Create a signup flow.
+
+        This invites a person to join the app.
+
+        :param email:
+            The email address of the person to invite.
+        :param display_name:
+            The display name of the person to invite.
+        :param create_organization:
+            Whether to create an organization as part of the signup flow.
+        :param creator_user_id:
+            The identifier of the user sending the invite.
+        :param expire_time:
+            The time the flow will expire.
+
+            This field is not allowed if `ttl` is specified.
+        :param ttl:
+            The amount of time a flow will be available (e.g. `86400s`).
+
+            This must be a string with the number of seconds followed by a
+            trailing `s`.
+
+            This field is not allowed if `expireTime` is specified.
+        """
+        req = Request(
+            "admin.flows.createSignup", "POST", "/admin/v1/flows:createSignup"
+        )
+        body: Dict[str, Any] = {}
+
+        if email:
+            body["email"] = email
+        if display_name:
+            body["displayName"] = display_name
+        if create_organization:
+            body["createOrganization"] = create_organization
         if creator_user_id:
             body["creatorUserId"] = creator_user_id
         if expire_time:
