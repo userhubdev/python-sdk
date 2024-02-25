@@ -1,9 +1,9 @@
 from ._actions import AsyncWebhook, Webhook
-from ._http import Request, Response
+from ._http import WebhookRequest, WebhookResponse
 
 __all__ = [
     "AsyncWebhook",
-    "Response",
-    "Request",
     "Webhook",
+    "WebhookResponse",
+    "WebhookRequest",
 ]

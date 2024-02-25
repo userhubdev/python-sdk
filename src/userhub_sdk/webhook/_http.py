@@ -6,7 +6,7 @@ from userhub_sdk.types import UserHubError
 
 
 @dataclasses.dataclass
-class Request:
+class WebhookRequest:
     headers: Dict[str, Union[str, List[str]]] = dataclasses.field(default_factory=dict)
     body: bytes = b""
 
@@ -59,18 +59,20 @@ class Request:
 
 
 @dataclasses.dataclass
-class Response:
+class WebhookResponse:
     status_code: int = 200
     headers: Dict[str, str] = dataclasses.field(default_factory=dict)
     body: bytes = b""
 
 
-def get_header(r: Union[Request, Response], name: str) -> Optional[str]:
+def get_header(r: Union[WebhookRequest, WebhookResponse], name: str) -> Optional[str]:
     headers = get_headers(r, name)
     return headers[0] if headers else None
 
 
-def get_headers(r: Union[Request, Response], name: str) -> Optional[List[str]]:
+def get_headers(
+    r: Union[WebhookRequest, WebhookResponse], name: str
+) -> Optional[List[str]]:
     name = name.lower()
 
     for n, v in r.headers.items():
@@ -80,7 +82,7 @@ def get_headers(r: Union[Request, Response], name: str) -> Optional[List[str]]:
     return []
 
 
-def add_header(r: Request, name: str, value: str) -> None:
+def add_header(r: WebhookRequest, name: str, value: str) -> None:
     name = name.lower()
 
     for n, v in r.headers.items():

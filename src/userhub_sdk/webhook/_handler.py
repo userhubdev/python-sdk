@@ -4,20 +4,20 @@ from typing import Any, Awaitable, Callable, Generic, TypeVar
 from userhub_sdk._internal.util import summarize_body
 from userhub_sdk.types import Code, UserHubError
 
-from ._http import Request, Response
+from ._http import WebhookRequest, WebhookResponse
 from ._util import create_response
 
 InputType = TypeVar("InputType")
 OutputType = TypeVar("OutputType")
-Handler = Callable[[Request], Response]
-AsyncHandler = Callable[[Request], Awaitable[Response]]
+Handler = Callable[[WebhookRequest], WebhookResponse]
+AsyncHandler = Callable[[WebhookRequest], Awaitable[WebhookResponse]]
 
 
-def challenge_handler(req: Request) -> Response:
+def challenge_handler(req: WebhookRequest) -> WebhookResponse:
     return create_response(req.body)
 
 
-def unimplemented_handler(req: Request) -> Response:
+def unimplemented_handler(req: WebhookRequest) -> WebhookResponse:
     name = req.get_action()
     raise UserHubError(f"Handler not implemented: {name}", api_code=Code.UNIMPLEMENTED)
 
@@ -31,7 +31,7 @@ class DecodeHandler(Generic[InputType, OutputType]):
         self._handler = handler
         self._decoder = decoder
 
-    def __call__(self, req: Request, /) -> Response:
+    def __call__(self, req: WebhookRequest, /) -> WebhookResponse:
         try:
             handler_input = self._decoder(json.loads(req.body.decode("utf-8")))
         except Exception as ex:
@@ -53,7 +53,7 @@ class AsyncDecodeHandler(Generic[InputType, OutputType]):
         self._handler = handler
         self._decoder = decoder
 
-    async def __call__(self, req: Request, /) -> Response:
+    async def __call__(self, req: WebhookRequest, /) -> WebhookResponse:
         try:
             handler_input = self._decoder(json.loads(req.body.decode("utf-8")))
         except Exception as ex:

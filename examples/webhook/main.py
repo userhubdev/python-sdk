@@ -2,7 +2,8 @@ import os
 from contextlib import suppress
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-from userhub_sdk import eventsv1, webhook
+from userhub_sdk import eventsv1
+from userhub_sdk.webhook import Webhook, WebhookRequest
 
 
 def main():
@@ -22,17 +23,17 @@ def main():
             user = event.users_changed.user
             print(" - User:", user.id, user.display_name)
 
-    wh = webhook.Webhook(signing_secret)
-    wh.on_event(handle_event)
+    webhook = Webhook(signing_secret)
+    webhook.on_event(handle_event)
 
     class Handler(BaseHTTPRequestHandler):
         protocol_version = "HTTP/1.1"
 
         def do_POST(self):
-            req = webhook.Request(headers=dict(self.headers))
+            req = WebhookRequest(headers=dict(self.headers))
             req.body = self.rfile.read(int(self.headers.get("Content-Length")))
 
-            res = wh(req)
+            res = webhook(req)
 
             self.send_response(res.status_code)
 
