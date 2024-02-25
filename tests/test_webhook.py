@@ -12,7 +12,7 @@ from userhub_sdk import Code
 from userhub_sdk._internal import constants
 from userhub_sdk.eventsv1 import Event
 from userhub_sdk.types import UserHubError
-from userhub_sdk.webhook import Request, Response, Webhook
+from userhub_sdk.webhook import Webhook, WebhookRequest, WebhookResponse
 from userhub_sdk.webhook._http import add_header, get_header
 
 
@@ -20,8 +20,8 @@ from userhub_sdk.webhook._http import add_header, get_header
 class WebhookTest:
     name: str
     secret: str
-    request: Request
-    response: Response
+    request: WebhookRequest
+    response: WebhookResponse
     set_timestamp: bool = False
     set_signature: bool = False
     add_signature: bool = False
@@ -33,8 +33,8 @@ class WebhookTest:
         WebhookTest(
             name="Signing secret is required",
             secret="",
-            request=Request(),
-            response=Response(
+            request=WebhookRequest(),
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"Signing secret is required","code":"UNKNOWN"}',
             ),
@@ -42,8 +42,8 @@ class WebhookTest:
         WebhookTest(
             name="Headers are required",
             secret="test",
-            request=Request(),
-            response=Response(
+            request=WebhookRequest(),
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"Headers are required","code":"UNKNOWN"}',
             ),
@@ -51,12 +51,12 @@ class WebhookTest:
         WebhookTest(
             name="Body is required",
             secret="test",
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "content-type": "application/json",
                 },
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"Body is required","code":"UNKNOWN"}',
             ),
@@ -64,13 +64,13 @@ class WebhookTest:
         WebhookTest(
             name="UserHub-Action header is missing",
             secret="test",
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "content-type": "application/json",
                 },
                 body=b"{}",
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"UserHub-Action header is missing","code":"UNKNOWN"}',
             ),
@@ -78,13 +78,13 @@ class WebhookTest:
         WebhookTest(
             name="UserHub-Timestamp header is missing",
             secret="test",
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "events.handle",
                 },
                 body=b"{}",
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"UserHub-Timestamp header is missing","code":"UNKNOWN"}',
             ),
@@ -93,13 +93,13 @@ class WebhookTest:
             name="UserHub-Signature header is missing",
             secret="test",
             set_timestamp=True,
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "events.handle",
                 },
                 body=b"{}",
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"UserHub-Signature header is missing","code":"UNKNOWN"}',
             ),
@@ -108,14 +108,14 @@ class WebhookTest:
             name="Signatures normalized to nothing",
             secret="test",
             set_timestamp=True,
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "events.handle",
                     "UserHub-Signature": ",",
                 },
                 body=b"{}",
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"UserHub-Signature header normalized to nothing","code":"UNKNOWN"}',
             ),
@@ -123,7 +123,7 @@ class WebhookTest:
         WebhookTest(
             name="Timestamp is invalid",
             secret="test",
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "events.handle",
                     "UserHub-Timestamp": "timestamp",
@@ -131,7 +131,7 @@ class WebhookTest:
                 },
                 body=b"{}",
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"Timestamp is invalid: timestamp","code":"UNKNOWN"}',
             ),
@@ -139,7 +139,7 @@ class WebhookTest:
         WebhookTest(
             name="Timestamp is too far in the past",
             secret="test",
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "events.handle",
                     "UserHub-Timestamp": "1",
@@ -147,7 +147,7 @@ class WebhookTest:
                 },
                 body=b"{}",
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"Timestamp is too far in the past: 1","code":"UNKNOWN"}',
             ),
@@ -155,7 +155,7 @@ class WebhookTest:
         WebhookTest(
             name="Timestamp is too far in the past",
             secret="test",
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "events.handle",
                     "UserHub-Timestamp": "5000000000",
@@ -163,7 +163,7 @@ class WebhookTest:
                 },
                 body=b"{}",
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"Timestamp is too far in the future: 5000000000","code":"UNKNOWN"}',
             ),
@@ -172,14 +172,14 @@ class WebhookTest:
             name="Signatures do not match",
             secret="test",
             set_timestamp=True,
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "events.handle",
                     "UserHub-Signature": "fail",
                 },
                 body=b"{}",
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=500,
                 body=b'{"message":"Signatures do not match","code":"UNKNOWN"}',
             ),
@@ -189,13 +189,13 @@ class WebhookTest:
             secret="test",
             set_timestamp=True,
             add_signature=True,
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "challenge",
                 },
                 body=b'{"challenge": "some-value"}',
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=200,
                 body=b'{"challenge": "some-value"}',
             ),
@@ -205,14 +205,14 @@ class WebhookTest:
             secret="test",
             set_timestamp=True,
             add_signature=True,
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "challenge",
                     "UserHub-Signature": "fail",
                 },
                 body=b'{"challenge": "some-value"}',
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=200,
                 body=b'{"challenge": "some-value"}',
             ),
@@ -222,14 +222,14 @@ class WebhookTest:
             secret="test",
             set_timestamp=True,
             set_signature=True,
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "challenge",
                     "UserHub-Signature": "fail, {signature}",
                 },
                 body=b'{"challenge": "some-value"}',
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=200,
                 body=b'{"challenge": "some-value"}',
             ),
@@ -239,13 +239,13 @@ class WebhookTest:
             secret="test",
             set_timestamp=True,
             add_signature=True,
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "unknown",
                 },
                 body=b"{}",
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=501,
                 body=b'{"message":"Handler not implemented: unknown","code":"UNIMPLEMENTED"}',
             ),
@@ -255,13 +255,13 @@ class WebhookTest:
             secret="test",
             set_timestamp=True,
             add_signature=True,
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "events.handle",
                 },
                 body=b'{"type": "ok"}',
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=200,
                 body=b"{}",
             ),
@@ -271,13 +271,13 @@ class WebhookTest:
             secret="test",
             set_timestamp=True,
             add_signature=True,
-            request=Request(
+            request=WebhookRequest(
                 headers={
                     "UserHub-Action": "events.handle",
                 },
                 body=b'{"type": "fail"}',
             ),
-            response=Response(
+            response=WebhookResponse(
                 status_code=400,
                 body=b'{"message":"Event failed: fail","code":"INVALID_ARGUMENT"}',
             ),

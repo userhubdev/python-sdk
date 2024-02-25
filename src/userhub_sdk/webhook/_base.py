@@ -6,7 +6,7 @@ from typing import Any, Callable, Dict, Generic, Optional, TypeVar
 
 from .._internal import constants
 from ..types import UserHubError
-from ._http import Request, Response
+from ._http import WebhookRequest, WebhookResponse
 from ._util import create_response, default_on_error
 
 T = TypeVar("T")
@@ -36,7 +36,7 @@ class BaseWebhook(Generic[T]):
             self._handlers[name] = handler
         return self
 
-    def verify(self, req: Request, /) -> None:
+    def verify(self, req: WebhookRequest, /) -> None:
         """
         Ensures the body matches the specified signature/timestamp and throws
         an error if verification fails.
@@ -86,7 +86,7 @@ class BaseWebhook(Generic[T]):
         if not matched:
             raise UserHubError("Signatures do not match")
 
-    def create_response(self, data: Any, /) -> Response:
+    def create_response(self, data: Any, /) -> WebhookResponse:
         """
         Creates a response from an object that can be encoded
         using json.dumps or an Exception.

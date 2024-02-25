@@ -13,7 +13,7 @@ from ._handler import (
     challenge_handler,
     unimplemented_handler,
 )
-from ._http import Request, Response
+from ._http import WebhookRequest, WebhookResponse
 
 
 class Webhook(BaseWebhook[Handler]):
@@ -21,9 +21,9 @@ class Webhook(BaseWebhook[Handler]):
     Webhook is a parsing and dispatch helper for UserHub webhooks.
     """
 
-    def __call__(self, req: Request, /) -> Response:
+    def __call__(self, req: WebhookRequest, /) -> WebhookResponse:
         """
-        Executes a handler based on specified Request.
+        Executes a handler based on specified WebhookRequest.
         """
         try:
             self.verify(req)
@@ -189,9 +189,9 @@ class AsyncWebhook(BaseWebhook[AsyncHandler]):
     AsyncWebhook is a parsing and dispatch helper for UserHub webhooks.
     """
 
-    async def __call__(self, req: Request, /) -> Response:
+    async def __call__(self, req: WebhookRequest, /) -> WebhookResponse:
         """
-        Executes a handler based on specified Request.
+        Executes a handler based on specified WebhookRequest.
         """
         try:
             self.verify(req)
