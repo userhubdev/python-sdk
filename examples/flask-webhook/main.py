@@ -3,7 +3,7 @@ import os
 from flask import Flask, Response, request
 
 from userhub_sdk import eventsv1
-from userhub_sdk.webhook import Webhook, WebhookRequest
+from userhub_sdk.webhook import Webhook
 
 signing_secret = os.environ.get("SIGNING_SECRET")
 if not signing_secret:
@@ -30,6 +30,5 @@ app = Flask("flask-webhook")
 
 @app.post("/webhook")
 def handle_webhook():
-    req = WebhookRequest(headers=dict(request.headers), body=request.get_data())
-    res = webhook(req)
+    res = webhook(headers=dict(request.headers), body=request.get_data())
     return Response(res.body, status=res.status_code, headers=res.headers)

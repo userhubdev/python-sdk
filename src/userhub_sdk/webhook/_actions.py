@@ -1,6 +1,6 @@
 # Code generated. DO NOT EDIT.
 
-from typing import Awaitable, Callable, NoReturn, Optional
+from typing import Awaitable, Callable, Dict, List, NoReturn, Optional, Union
 
 from userhub_sdk import connectionsv1, eventsv1
 
@@ -21,7 +21,7 @@ class Webhook(BaseWebhook[Handler]):
     Webhook is a parsing and dispatch helper for UserHub webhooks.
     """
 
-    def __call__(self, req: WebhookRequest, /) -> WebhookResponse:
+    def handle_action(self, req: WebhookRequest, /) -> WebhookResponse:
         """
         Executes a handler based on specified WebhookRequest.
         """
@@ -43,6 +43,25 @@ class Webhook(BaseWebhook[Handler]):
             return handler(req)
         except Exception as ex:
             return self.create_response(ex)
+
+    def __call__(
+        self,
+        *,
+        headers: Optional[Dict[str, Union[str, List[str]]]] = None,
+        body: Optional[Union[str, bytes]] = None,
+    ) -> WebhookResponse:
+        """
+        Executes a handler based on specified headers/body.
+        """
+        if not body:
+            body = b""
+        elif isinstance(body, str):
+            body = body.encode("utf-8")
+
+        if not headers:
+            headers = {}
+
+        return self.handle_action(WebhookRequest(headers=headers, body=body))
 
     def on_action(self, name: str, handler: Optional[Handler], /) -> "Webhook":
         """
@@ -189,7 +208,7 @@ class AsyncWebhook(BaseWebhook[AsyncHandler]):
     AsyncWebhook is a parsing and dispatch helper for UserHub webhooks.
     """
 
-    async def __call__(self, req: WebhookRequest, /) -> WebhookResponse:
+    async def handle_action(self, req: WebhookRequest, /) -> WebhookResponse:
         """
         Executes a handler based on specified WebhookRequest.
         """
@@ -211,6 +230,25 @@ class AsyncWebhook(BaseWebhook[AsyncHandler]):
             return await handler(req)
         except Exception as ex:
             return self.create_response(ex)
+
+    async def __call__(
+        self,
+        *,
+        headers: Optional[Dict[str, Union[str, List[str]]]] = None,
+        body: Optional[Union[str, bytes]] = None,
+    ) -> WebhookResponse:
+        """
+        Executes a handler based on specified headers/body.
+        """
+        if not body:
+            body = b""
+        elif isinstance(body, str):
+            body = body.encode("utf-8")
+
+        if not headers:
+            headers = {}
+
+        return await self.handle_action(WebhookRequest(headers=headers, body=body))
 
     def on_action(
         self, name: str, handler: Optional[AsyncHandler], /
