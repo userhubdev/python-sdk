@@ -1,0 +1,4 @@
+fastapi
+userhub-sdk
+userhub-sdk[asyncio]
+uvicorn
