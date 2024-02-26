@@ -3,7 +3,7 @@ import os
 from fastapi import FastAPI, Request, Response
 
 from userhub_sdk import eventsv1
-from userhub_sdk.webhook import AsyncWebhook, WebhookRequest
+from userhub_sdk.webhook import AsyncWebhook
 
 signing_secret = os.environ.get("SIGNING_SECRET")
 if not signing_secret:
@@ -32,7 +32,7 @@ app = FastAPI()
 async def handle_webhook(req: Request):
     body = await req.body()
 
-    res = await webhook(WebhookRequest(headers=dict(req.headers), body=body))
+    res = await webhook(headers=dict(req.headers), body=body)
 
     return Response(
         status_code=res.status_code,

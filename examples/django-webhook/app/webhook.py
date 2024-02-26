@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from userhub_sdk import eventsv1
-from userhub_sdk.webhook import Webhook, WebhookRequest
+from userhub_sdk.webhook import Webhook
 
 
 def handle_event(event: eventsv1.Event):
@@ -23,7 +23,7 @@ webhook.on_event(handle_event)
 
 @csrf_exempt
 def webhook_view(request):
-    res = webhook(WebhookRequest(headers=dict(request.headers), body=request.body))
+    res = webhook(headers=dict(request.headers), body=request.body)
 
     return HttpResponse(
         status=res.status_code,

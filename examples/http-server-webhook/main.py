@@ -3,7 +3,7 @@ from contextlib import suppress
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 from userhub_sdk import eventsv1
-from userhub_sdk.webhook import Webhook, WebhookRequest
+from userhub_sdk.webhook import Webhook
 
 port = int(os.environ.get("PORT") or "8000")
 
@@ -31,10 +31,10 @@ class Handler(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
     def do_POST(self):
-        req = WebhookRequest(headers=dict(self.headers))
-        req.body = self.rfile.read(int(self.headers.get("Content-Length")))
-
-        res = webhook(req)
+        res = webhook(
+            headers=dict(self.headers),
+            body=self.rfile.read(int(self.headers.get("Content-Length"))),
+        )
 
         self.send_response(res.status_code)
 

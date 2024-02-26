@@ -292,8 +292,8 @@ def test_handler(test: WebhookTest):
                 f"Event failed: {event.type}", api_code=Code.INVALID_ARGUMENT
             )
 
-    wh = Webhook(test.secret)
-    wh.on_event(handle_event)
+    webhook = Webhook(test.secret)
+    webhook.on_event(handle_event)
 
     req = test.request
     if test.set_timestamp:
@@ -320,7 +320,7 @@ def test_handler(test: WebhookTest):
         else:
             add_header(req, "UserHub-Signature", signature)
 
-    res = wh(req)
+    res = webhook.handle_action(req)
 
     assert res.status_code == test.response.status_code, str(res.body or "")
 
