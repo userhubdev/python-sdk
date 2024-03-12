@@ -28,7 +28,7 @@ def test_list():
       "remainingDueAmount": "string",
       "dueTime": "2024-02-05T23:07:46.483Z",
       "paidAmount": "string",
-      "paymentState": "ACTION_REQUIRED",
+      "paymentState": "PAYMENT_METHOD_REQUIRED",
       "pullTime": "2024-02-05T23:07:46.483Z",
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
@@ -131,7 +131,7 @@ def test_get():
   "remainingDueAmount": "string",
   "dueTime": "2024-02-05T23:07:46.483Z",
   "paidAmount": "string",
-  "paymentState": "ACTION_REQUIRED",
+  "paymentState": "PAYMENT_METHOD_REQUIRED",
   "paymentIntent": {
     "stripe": {
       "accountId": "string",
@@ -198,7 +198,7 @@ async def test_async_list():
       "remainingDueAmount": "string",
       "dueTime": "2024-02-05T23:07:46.483Z",
       "paidAmount": "string",
-      "paymentState": "ACTION_REQUIRED",
+      "paymentState": "PAYMENT_METHOD_REQUIRED",
       "pullTime": "2024-02-05T23:07:46.483Z",
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
@@ -302,7 +302,7 @@ async def test_async_get():
   "remainingDueAmount": "string",
   "dueTime": "2024-02-05T23:07:46.483Z",
   "paidAmount": "string",
-  "paymentState": "ACTION_REQUIRED",
+  "paymentState": "PAYMENT_METHOD_REQUIRED",
   "paymentIntent": {
     "stripe": {
       "accountId": "string",

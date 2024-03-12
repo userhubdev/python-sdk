@@ -4,7 +4,7 @@ import dataclasses
 import datetime
 from typing import Any, Dict, Optional
 
-from userhub_sdk import commonv1
+from userhub_sdk import apiv1, commonv1
 from userhub_sdk._internal import constants, util
 
 from ._card_payment_method import CardPaymentMethod
@@ -37,6 +37,11 @@ class PaymentMethod:
     address: Optional[commonv1.Address] = None
     #: Whether the payment method is the default for the connected account.
     default: Optional[bool] = None
+    #: The last payment error.
+    #:
+    #: This will be unset if the payment method is updated
+    #: or if a payment succeeds.
+    last_payment_error: Optional[apiv1.Status] = None
     #: The last time the payment method was pulled from the connection.
     pull_time: Optional[datetime.datetime] = None
     #: The creation time of the payment method connection.
@@ -75,6 +80,11 @@ class PaymentMethod:
 
         if self.default is not None:
             data["default"] = self.default
+
+        if self.last_payment_error is not None:
+            data["lastPaymentError"] = apiv1.Status.__json_encode__(
+                self.last_payment_error
+            )
 
         if self.pull_time is not None:
             data["pullTime"] = util.encode_datetime(self.pull_time)
@@ -123,6 +133,11 @@ class PaymentMethod:
 
         if data.get("default") is not None:
             kwargs["default"] = data["default"]
+
+        if data.get("lastPaymentError") is not None:
+            kwargs["last_payment_error"] = apiv1.Status.__json_decode__(
+                data["lastPaymentError"]
+            )
 
         if data.get("pullTime") is not None:
             kwargs["pull_time"] = util.decode_datetime(data["pullTime"])

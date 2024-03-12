@@ -136,13 +136,22 @@ def test_get():
       "country": "US"
     },
     "default": true,
+    "lastPaymentError": {
+      "code": "OK",
+      "message": "string",
+      "reason": "string",
+      "param": "string",
+      "metadata": {}
+    },
     "pullTime": "2024-02-05T23:07:46.483Z",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z",
     "card": {
       "brand": "AMERICAN_EXPRESS",
       "last4": "string",
-      "fundingType": "CREDIT"
+      "fundingType": "CREDIT",
+      "expYear": 1,
+      "expMonth": 1
     }
   },
   "cancelPeriodEnd": true,
@@ -373,13 +382,22 @@ async def test_async_get():
       "country": "US"
     },
     "default": true,
+    "lastPaymentError": {
+      "code": "OK",
+      "message": "string",
+      "reason": "string",
+      "param": "string",
+      "metadata": {}
+    },
     "pullTime": "2024-02-05T23:07:46.483Z",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z",
     "card": {
       "brand": "AMERICAN_EXPRESS",
       "last4": "string",
-      "fundingType": "CREDIT"
+      "fundingType": "CREDIT",
+      "expYear": 1,
+      "expMonth": 1
     }
   },
   "cancelPeriodEnd": true,
