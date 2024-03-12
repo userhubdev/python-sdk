@@ -69,7 +69,16 @@ def test_create_join_organization():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -124,7 +133,16 @@ def test_create_signup():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -179,7 +197,16 @@ def test_get():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -234,7 +261,16 @@ def test_approve():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -289,7 +325,16 @@ def test_consume():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -344,7 +389,16 @@ def test_cancel():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -426,7 +480,16 @@ async def test_async_create_join_organization():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -482,7 +545,16 @@ async def test_async_create_signup():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -538,7 +610,16 @@ async def test_async_get():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -594,7 +675,16 @@ async def test_async_approve():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -650,7 +740,16 @@ async def test_async_consume():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",
@@ -706,7 +805,16 @@ async def test_async_cancel():
   "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
-    "email": "test@example.com"
+    "email": "test@example.com",
+    "role": {
+      "id": "string",
+      "uniqueId": "test",
+      "displayName": "Test",
+      "type": "OWNER",
+      "description": "string",
+      "permissionSets": [],
+      "default": true
+    }
   },
   "signup": {
     "email": "test@example.com",

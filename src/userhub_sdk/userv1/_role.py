@@ -30,6 +30,8 @@ class Role:
     description: Optional[str] = None
     #: The additional permissions allowed by the role.
     permission_sets: List[str] = dataclasses.field(default_factory=list)
+    #: Whether the role is the default for the tenant.
+    default: bool = False
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -51,6 +53,9 @@ class Role:
 
         if self.permission_sets is not None:
             data["permissionSets"] = self.permission_sets
+
+        if self.default is not None:
+            data["default"] = self.default
 
         return data
 
@@ -78,5 +83,8 @@ class Role:
 
         if data.get("permissionSets") is not None:
             kwargs["permission_sets"] = data["permissionSets"]
+
+        if data.get("default") is not None:
+            kwargs["default"] = data["default"]
 
         return Role(**kwargs)

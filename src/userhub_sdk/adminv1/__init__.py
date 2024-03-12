@@ -64,6 +64,7 @@ from ._organization_input import OrganizationInput
 from ._organization_result import OrganizationResult
 from ._payment_intent import PaymentIntent
 from ._payment_method import PaymentMethod
+from ._payment_method_input import PaymentMethodInput
 from ._plan import Plan
 from ._plan_group import PlanGroup
 from ._plan_group_change_path import PlanGroupChangePath
@@ -165,6 +166,7 @@ __all__ = [
     "OrganizationResult",
     "PaymentIntent",
     "PaymentMethod",
+    "PaymentMethodInput",
     "Plan",
     "PlanGroup",
     "PlanGroupChangePath",
