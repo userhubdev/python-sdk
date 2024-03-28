@@ -21,6 +21,8 @@ class Organizations:
     def list(
         self,
         *,
+        display_name: Optional[str] = None,
+        email: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -30,6 +32,22 @@ class Organizations:
         """
         Lists organizations.
 
+        :param display_name:
+            Filter the results by display name.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
+        :param email:
+            Filter the results by email address.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
         :param page_size:
             The maximum number of organizations to return. The API may return fewer than
             this value.
@@ -43,14 +61,14 @@ class Organizations:
             When paginating, all other parameters provided to list organizations must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `displayName`
-            - `email`
-            - `createTime`
-            - `deleteTime`
+            Supports:
+            - `displayName asc`
+            - `email asc`
+            - `signupTime desc`
+            - `createTime desc`
+            - `deleteTime desc`
         :param show_deleted:
             Whether to show deleted organizations.
         :param view:
@@ -61,6 +79,10 @@ class Organizations:
         req = Request("admin.organizations.list", "GET", "/admin/v1/organizations")
         req.set_idempotent(True)
 
+        if display_name:
+            req.set_query("displayName", display_name)
+        if email:
+            req.set_query("email", email)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:
@@ -446,6 +468,9 @@ class Organizations:
         self,
         organization_id: str,
         *,
+        display_name: Optional[str] = None,
+        email: Optional[str] = None,
+        role_id: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -455,6 +480,24 @@ class Organizations:
 
         :param organization_id:
             The identifier of the organization.
+        :param display_name:
+            Filter the results by display name.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
+        :param email:
+            Filter the results by email address.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
+        :param role_id:
+            Filter the results by a role identifier.
         :param page_size:
             The maximum number of members to return. The API may return fewer than
             this value.
@@ -468,12 +511,12 @@ class Organizations:
             When paginating, all other parameters provided to list members must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `createTime`
-            - `updateTime`
+            Supports:
+            - `displayName asc`
+            - `email asc`
+            - `createTime desc`
         """
         req = Request(
             "admin.organizations.listMembers",
@@ -482,6 +525,12 @@ class Organizations:
         )
         req.set_idempotent(True)
 
+        if display_name:
+            req.set_query("displayName", display_name)
+        if email:
+            req.set_query("email", email)
+        if role_id:
+            req.set_query("roleId", role_id)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:
@@ -509,8 +558,6 @@ class Organizations:
             The identifier of the user.
         :param role_id:
             The identifier of the role.
-
-            This is currently limited to `member`, `admin`, and `owner`.
         """
         req = Request(
             "admin.organizations.addMember",
@@ -571,8 +618,6 @@ class Organizations:
             The identifier of the user.
         :param role_id:
             The identifier of the role.
-
-            This is currently limited to `member`, `admin`, and `owner`.
         :param allow_missing:
             If set to true, and the member is not found, a new member will be created.
         """
@@ -630,6 +675,8 @@ class AsyncOrganizations:
     async def list(
         self,
         *,
+        display_name: Optional[str] = None,
+        email: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -639,6 +686,22 @@ class AsyncOrganizations:
         """
         Lists organizations.
 
+        :param display_name:
+            Filter the results by display name.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
+        :param email:
+            Filter the results by email address.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
         :param page_size:
             The maximum number of organizations to return. The API may return fewer than
             this value.
@@ -652,14 +715,14 @@ class AsyncOrganizations:
             When paginating, all other parameters provided to list organizations must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `displayName`
-            - `email`
-            - `createTime`
-            - `deleteTime`
+            Supports:
+            - `displayName asc`
+            - `email asc`
+            - `signupTime desc`
+            - `createTime desc`
+            - `deleteTime desc`
         :param show_deleted:
             Whether to show deleted organizations.
         :param view:
@@ -670,6 +733,10 @@ class AsyncOrganizations:
         req = Request("admin.organizations.list", "GET", "/admin/v1/organizations")
         req.set_idempotent(True)
 
+        if display_name:
+            req.set_query("displayName", display_name)
+        if email:
+            req.set_query("email", email)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:
@@ -1055,6 +1122,9 @@ class AsyncOrganizations:
         self,
         organization_id: str,
         *,
+        display_name: Optional[str] = None,
+        email: Optional[str] = None,
+        role_id: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -1064,6 +1134,24 @@ class AsyncOrganizations:
 
         :param organization_id:
             The identifier of the organization.
+        :param display_name:
+            Filter the results by display name.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
+        :param email:
+            Filter the results by email address.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
+        :param role_id:
+            Filter the results by a role identifier.
         :param page_size:
             The maximum number of members to return. The API may return fewer than
             this value.
@@ -1077,12 +1165,12 @@ class AsyncOrganizations:
             When paginating, all other parameters provided to list members must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `createTime`
-            - `updateTime`
+            Supports:
+            - `displayName asc`
+            - `email asc`
+            - `createTime desc`
         """
         req = Request(
             "admin.organizations.listMembers",
@@ -1091,6 +1179,12 @@ class AsyncOrganizations:
         )
         req.set_idempotent(True)
 
+        if display_name:
+            req.set_query("displayName", display_name)
+        if email:
+            req.set_query("email", email)
+        if role_id:
+            req.set_query("roleId", role_id)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:
@@ -1118,8 +1212,6 @@ class AsyncOrganizations:
             The identifier of the user.
         :param role_id:
             The identifier of the role.
-
-            This is currently limited to `member`, `admin`, and `owner`.
         """
         req = Request(
             "admin.organizations.addMember",
@@ -1180,8 +1272,6 @@ class AsyncOrganizations:
             The identifier of the user.
         :param role_id:
             The identifier of the role.
-
-            This is currently limited to `member`, `admin`, and `owner`.
         :param allow_missing:
             If set to true, and the member is not found, a new member will be created.
         """

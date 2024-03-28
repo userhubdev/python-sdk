@@ -21,6 +21,8 @@ class Flows:
         *,
         organization_id: Optional[str] = None,
         type: Optional[str] = None,
+        active: Optional[bool] = None,
+        creator: Optional[bool] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -37,6 +39,11 @@ class Flows:
             the flows associated with that organization are returned.
         :param type:
             Filter the results by the specified flow type.
+        :param active:
+            Whether to filter out flows not in the `START_PENDING` or `STARTED`
+            state.
+        :param creator:
+            Whether to only return flows created by the authenticated user.
         :param page_size:
             The maximum number of flows to return. The API may return fewer than
             this value.
@@ -50,12 +57,10 @@ class Flows:
             When paginating, all other parameters provided to list flows must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `type`
-            - `createTime`
+            Supports:
+            - `createTime desc`
         """
         req = Request("user.flows.list", "GET", "/user/v1/flows")
         req.set_idempotent(True)
@@ -64,6 +69,10 @@ class Flows:
             req.set_query("organizationId", organization_id)
         if type:
             req.set_query("type", type)
+        if active:
+            req.set_query("active", active)
+        if creator:
+            req.set_query("creator", creator)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:
@@ -274,6 +283,8 @@ class AsyncFlows:
         *,
         organization_id: Optional[str] = None,
         type: Optional[str] = None,
+        active: Optional[bool] = None,
+        creator: Optional[bool] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -290,6 +301,11 @@ class AsyncFlows:
             the flows associated with that organization are returned.
         :param type:
             Filter the results by the specified flow type.
+        :param active:
+            Whether to filter out flows not in the `START_PENDING` or `STARTED`
+            state.
+        :param creator:
+            Whether to only return flows created by the authenticated user.
         :param page_size:
             The maximum number of flows to return. The API may return fewer than
             this value.
@@ -303,12 +319,10 @@ class AsyncFlows:
             When paginating, all other parameters provided to list flows must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `type`
-            - `createTime`
+            Supports:
+            - `createTime desc`
         """
         req = Request("user.flows.list", "GET", "/user/v1/flows")
         req.set_idempotent(True)
@@ -317,6 +331,10 @@ class AsyncFlows:
             req.set_query("organizationId", organization_id)
         if type:
             req.set_query("type", type)
+        if active:
+            req.set_query("active", active)
+        if creator:
+            req.set_query("creator", creator)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:

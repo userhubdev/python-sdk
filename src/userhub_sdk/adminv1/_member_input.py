@@ -13,8 +13,6 @@ class MemberInput:
     #: The identifier of the user.
     user_id: str = ""
     #: The identifier of the role.
-    #:
-    #: This is currently limited to `member`, `admin`, and `owner`.
     role_id: str = ""
 
     def __json_encode__(self) -> Dict[str, Any]:

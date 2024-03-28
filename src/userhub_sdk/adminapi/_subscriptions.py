@@ -50,11 +50,11 @@ class Subscriptions:
             When paginating, all other parameters provided to list subscriptions must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `createTime`
+            Supports:
+            - `active desc`
+            - `createTime desc`
         :param view:
             The Subscription view to return in the results.
 
@@ -156,11 +156,11 @@ class AsyncSubscriptions:
             When paginating, all other parameters provided to list subscriptions must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `createTime`
+            Supports:
+            - `active desc`
+            - `createTime desc`
         :param view:
             The Subscription view to return in the results.
 

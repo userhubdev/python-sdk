@@ -21,6 +21,8 @@ class Users:
     def list(
         self,
         *,
+        display_name: Optional[str] = None,
+        email: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -30,6 +32,22 @@ class Users:
         """
         Lists users.
 
+        :param display_name:
+            Filter the results by display name.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
+        :param email:
+            Filter the results by email address.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
         :param page_size:
             The maximum number of users to return. The API may return fewer than
             this value.
@@ -43,14 +61,14 @@ class Users:
             When paginating, all other parameters provided to list users must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `displayName`
-            - `email`
-            - `createTime`
-            - `deleteTime`
+            Supports:
+            - `displayName asc`
+            - `email asc`
+            - `signupTime desc`
+            - `createTime desc`
+            - `deleteTime desc`
         :param show_deleted:
             Whether to show deleted users.
         :param view:
@@ -61,6 +79,10 @@ class Users:
         req = Request("admin.users.list", "GET", "/admin/v1/users")
         req.set_idempotent(True)
 
+        if display_name:
+            req.set_query("displayName", display_name)
+        if email:
+            req.set_query("email", email)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:
@@ -558,6 +580,8 @@ class AsyncUsers:
     async def list(
         self,
         *,
+        display_name: Optional[str] = None,
+        email: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -567,6 +591,22 @@ class AsyncUsers:
         """
         Lists users.
 
+        :param display_name:
+            Filter the results by display name.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
+        :param email:
+            Filter the results by email address.
+
+            To enable prefix filtering append `*` to the end of the value
+            and ensure you provide at least 3 characters excluding the
+            wildcard.
+
+            This filter is case-insensitivity.
         :param page_size:
             The maximum number of users to return. The API may return fewer than
             this value.
@@ -580,14 +620,14 @@ class AsyncUsers:
             When paginating, all other parameters provided to list users must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `displayName`
-            - `email`
-            - `createTime`
-            - `deleteTime`
+            Supports:
+            - `displayName asc`
+            - `email asc`
+            - `signupTime desc`
+            - `createTime desc`
+            - `deleteTime desc`
         :param show_deleted:
             Whether to show deleted users.
         :param view:
@@ -598,6 +638,10 @@ class AsyncUsers:
         req = Request("admin.users.list", "GET", "/admin/v1/users")
         req.set_idempotent(True)
 
+        if display_name:
+            req.set_query("displayName", display_name)
+        if email:
+            req.set_query("email", email)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:

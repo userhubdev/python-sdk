@@ -94,15 +94,7 @@ def test_update():
 
 def test_delete():
     tr = SyncTestTransport()
-    tr.body = """{
-  "id": "string",
-  "uniqueId": "test",
-  "displayName": "Test",
-  "email": "test@example.com",
-  "emailVerified": true,
-  "imageUrl": "https://example.com/test.png",
-  "disabled": true
-}"""
+    tr.body = """{}"""
 
     n = Organizations(tr)
 
@@ -217,15 +209,7 @@ async def test_async_update():
 @pytest.mark.asyncio
 async def test_async_delete():
     tr = AsyncTestTransport()
-    tr.body = """{
-  "id": "string",
-  "uniqueId": "test",
-  "displayName": "Test",
-  "email": "test@example.com",
-  "emailVerified": true,
-  "imageUrl": "https://example.com/test.png",
-  "disabled": true
-}"""
+    tr.body = """{}"""
 
     n = AsyncOrganizations(tr)
 

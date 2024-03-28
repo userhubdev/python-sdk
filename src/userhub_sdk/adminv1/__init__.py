@@ -82,9 +82,6 @@ from ._price_transform_quantity import PriceTransformQuantity
 from ._product import Product
 from ._product_connection import ProductConnection
 from ._role import Role
-from ._search_members_response import SearchMembersResponse
-from ._search_organizations_response import SearchOrganizationsResponse
-from ._search_users_response import SearchUsersResponse
 from ._signing_secret import SigningSecret
 from ._signup_flow import SignupFlow
 from ._stripe_connection import StripeConnection
@@ -184,9 +181,6 @@ __all__ = [
     "Product",
     "ProductConnection",
     "Role",
-    "SearchMembersResponse",
-    "SearchOrganizationsResponse",
-    "SearchUsersResponse",
     "SigningSecret",
     "SignupFlow",
     "StripeConnection",
