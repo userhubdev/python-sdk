@@ -1,4 +1,7 @@
 # UserHub Python SDK
+[![PyPI Latest Version](https://img.shields.io/pypi/v/userhub_sdk?color=0173b4)](https://pypi.org/project/userhub-sdk/)
+
+The official [UserHub](https://userhub.com) Python SDK.
 
 Stability: alpha
 
