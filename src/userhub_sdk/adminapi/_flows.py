@@ -23,6 +23,8 @@ class Flows:
         organization_id: Optional[str] = None,
         user_id: Optional[str] = None,
         type: Optional[str] = None,
+        active: Optional[bool] = None,
+        creator_user_id: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -37,6 +39,14 @@ class Flows:
             Filter results by user identifier.
         :param type:
             Filter the results by the specified flow type.
+        :param active:
+            Whether to filter out flows not in the `START_PENDING` or `STARTED`
+            state.
+        :param creator_user_id:
+            The identifier of the user that created the flow.
+
+            When this is specified only the flows created by the user are
+            returned.
         :param page_size:
             The maximum number of flows to return. The API may return fewer than
             this value.
@@ -50,12 +60,10 @@ class Flows:
             When paginating, all other parameters provided to list flows must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `type`
-            - `createTime`
+            Supports:
+            - `createTime desc`
         :param view:
             The Flow view to return in the results.
 
@@ -70,6 +78,10 @@ class Flows:
             req.set_query("userId", user_id)
         if type:
             req.set_query("type", type)
+        if active:
+            req.set_query("active", active)
+        if creator_user_id:
+            req.set_query("creatorUserId", creator_user_id)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:
@@ -272,6 +284,8 @@ class AsyncFlows:
         organization_id: Optional[str] = None,
         user_id: Optional[str] = None,
         type: Optional[str] = None,
+        active: Optional[bool] = None,
+        creator_user_id: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -286,6 +300,14 @@ class AsyncFlows:
             Filter results by user identifier.
         :param type:
             Filter the results by the specified flow type.
+        :param active:
+            Whether to filter out flows not in the `START_PENDING` or `STARTED`
+            state.
+        :param creator_user_id:
+            The identifier of the user that created the flow.
+
+            When this is specified only the flows created by the user are
+            returned.
         :param page_size:
             The maximum number of flows to return. The API may return fewer than
             this value.
@@ -299,12 +321,10 @@ class AsyncFlows:
             When paginating, all other parameters provided to list flows must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `type`
-            - `createTime`
+            Supports:
+            - `createTime desc`
         :param view:
             The Flow view to return in the results.
 
@@ -319,6 +339,10 @@ class AsyncFlows:
             req.set_query("userId", user_id)
         if type:
             req.set_query("type", type)
+        if active:
+            req.set_query("active", active)
+        if creator_user_id:
+            req.set_query("creatorUserId", creator_user_id)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:

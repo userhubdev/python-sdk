@@ -40,12 +40,11 @@ class Organizations:
             When paginating, all other parameters provided to list organizations must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `displayName`
-            - `email`
+            Supports:
+            - `displayName asc`
+            - `email asc`
         """
         req = Request("user.organizations.list", "GET", "/user/v1/organizations")
         req.set_idempotent(True)
@@ -194,7 +193,7 @@ class Organizations:
     def delete(
         self,
         organization_id: str,
-    ) -> userv1.Organization:
+    ) -> apiv1.EmptyResponse:
         """
         Delete specified organization.
 
@@ -208,7 +207,7 @@ class Organizations:
         )
         res = self._transport.execute(req)
 
-        return res.decode_body(userv1.Organization.__json_decode__)
+        return res.decode_body(apiv1.EmptyResponse.__json_decode__)
 
     def leave(
         self,
@@ -264,12 +263,11 @@ class AsyncOrganizations:
             When paginating, all other parameters provided to list organizations must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `displayName`
-            - `email`
+            Supports:
+            - `displayName asc`
+            - `email asc`
         """
         req = Request("user.organizations.list", "GET", "/user/v1/organizations")
         req.set_idempotent(True)
@@ -418,7 +416,7 @@ class AsyncOrganizations:
     async def delete(
         self,
         organization_id: str,
-    ) -> userv1.Organization:
+    ) -> apiv1.EmptyResponse:
         """
         Delete specified organization.
 
@@ -432,7 +430,7 @@ class AsyncOrganizations:
         )
         res = await self._transport.execute(req)
 
-        return res.decode_body(userv1.Organization.__json_decode__)
+        return res.decode_body(apiv1.EmptyResponse.__json_decode__)
 
     async def leave(
         self,

@@ -49,14 +49,11 @@ class Invoices:
             When paginating, all other parameters provided to list invoices must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `state`
-            - `dueTime`
-            - `createTime`
-            - `updateTime`
+            Supports:
+            - `createTime asc`
+            - `createTime desc`
         """
         req = Request("admin.invoices.list", "GET", "/admin/v1/invoices")
         req.set_idempotent(True)
@@ -151,14 +148,11 @@ class AsyncInvoices:
             When paginating, all other parameters provided to list invoices must match
             the call that provided the page token.
         :param order_by:
-            A comma-separated list of fields to order by, sorted in ascending order.
-            Use `desc` after a field name for descending.
+            A comma-separated list of fields to order by.
 
-            Supported fields:
-            - `state`
-            - `dueTime`
-            - `createTime`
-            - `updateTime`
+            Supports:
+            - `createTime asc`
+            - `createTime desc`
         """
         req = Request("admin.invoices.list", "GET", "/admin/v1/invoices")
         req.set_idempotent(True)
