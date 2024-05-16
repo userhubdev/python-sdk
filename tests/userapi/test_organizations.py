@@ -17,6 +17,7 @@ def test_list():
       "email": "test@example.com",
       "emailVerified": true,
       "imageUrl": "https://example.com/test.png",
+      "memberCount": 1,
       "disabled": true
     }
   ],
@@ -41,6 +42,7 @@ def test_create():
   "email": "test@example.com",
   "emailVerified": true,
   "imageUrl": "https://example.com/test.png",
+  "memberCount": 1,
   "disabled": true
 }"""
 
@@ -61,6 +63,7 @@ def test_get():
   "email": "test@example.com",
   "emailVerified": true,
   "imageUrl": "https://example.com/test.png",
+  "memberCount": 1,
   "disabled": true
 }"""
 
@@ -81,6 +84,7 @@ def test_update():
   "email": "test@example.com",
   "emailVerified": true,
   "imageUrl": "https://example.com/test.png",
+  "memberCount": 1,
   "disabled": true
 }"""
 
@@ -128,6 +132,7 @@ async def test_async_list():
       "email": "test@example.com",
       "emailVerified": true,
       "imageUrl": "https://example.com/test.png",
+      "memberCount": 1,
       "disabled": true
     }
   ],
@@ -153,6 +158,7 @@ async def test_async_create():
   "email": "test@example.com",
   "emailVerified": true,
   "imageUrl": "https://example.com/test.png",
+  "memberCount": 1,
   "disabled": true
 }"""
 
@@ -174,6 +180,7 @@ async def test_async_get():
   "email": "test@example.com",
   "emailVerified": true,
   "imageUrl": "https://example.com/test.png",
+  "memberCount": 1,
   "disabled": true
 }"""
 
@@ -195,6 +202,7 @@ async def test_async_update():
   "email": "test@example.com",
   "emailVerified": true,
   "imageUrl": "https://example.com/test.png",
+  "memberCount": 1,
   "disabled": true
 }"""
 

@@ -45,6 +45,7 @@ def test_create_join_organization():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -109,6 +110,7 @@ def test_create_signup():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -173,6 +175,7 @@ def test_get():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -237,6 +240,7 @@ def test_approve():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -301,6 +305,7 @@ def test_consume():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -365,6 +370,7 @@ def test_cancel():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -456,6 +462,7 @@ async def test_async_create_join_organization():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -521,6 +528,7 @@ async def test_async_create_signup():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -586,6 +594,7 @@ async def test_async_get():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -651,6 +660,7 @@ async def test_async_approve():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -716,6 +726,7 @@ async def test_async_consume():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
@@ -781,6 +792,7 @@ async def test_async_cancel():
     "email": "test@example.com",
     "emailVerified": true,
     "imageUrl": "https://example.com/test.png",
+    "memberCount": 1,
     "disabled": true
   },
   "user": {
