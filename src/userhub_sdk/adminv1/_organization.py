@@ -55,6 +55,10 @@ class Organization:
     subscription: Optional[AccountSubscription] = None
     #: The sign-up time for the organization.
     signup_time: Optional[datetime.datetime] = None
+    #: The number of members in the organization.
+    #:
+    #: This includes disabled users, but does not include user's marked for deletion.
+    member_count: int = 0
     #: Whether the organization is disabled.
     disabled: Optional[bool] = None
     #: The creation time of the organization.
@@ -122,6 +126,9 @@ class Organization:
 
         if self.signup_time is not None:
             data["signupTime"] = util.encode_datetime(self.signup_time)
+
+        if self.member_count is not None:
+            data["memberCount"] = self.member_count
 
         if self.disabled is not None:
             data["disabled"] = self.disabled
@@ -198,6 +205,9 @@ class Organization:
 
         if data.get("signupTime") is not None:
             kwargs["signup_time"] = util.decode_datetime(data["signupTime"])
+
+        if data.get("memberCount") is not None:
+            kwargs["member_count"] = data["memberCount"]
 
         if data.get("disabled") is not None:
             kwargs["disabled"] = data["disabled"]

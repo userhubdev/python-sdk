@@ -94,7 +94,6 @@ from ._subscription_trial import SubscriptionTrial
 from ._tiered_price_tier import TieredPriceTier
 from ._trigger import Trigger
 from ._trigger_result import TriggerResult
-from ._update_subscription_items_request_item import UpdateSubscriptionItemsRequestItem
 from ._user import User
 from ._user_input import UserInput
 from ._user_result import UserResult
@@ -193,7 +192,6 @@ __all__ = [
     "TieredPriceTier",
     "Trigger",
     "TriggerResult",
-    "UpdateSubscriptionItemsRequestItem",
     "User",
     "UserInput",
     "UserResult",

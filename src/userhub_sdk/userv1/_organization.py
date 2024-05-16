@@ -22,6 +22,10 @@ class Organization:
     email_verified: Optional[bool] = None
     #: The photo/avatar URL of the organization.
     image_url: Optional[str] = None
+    #: The number of members in the organization.
+    #:
+    #: This includes disabled users, but does not include user's marked for deletion.
+    member_count: int = 0
     #: Whether the organization is disabled.
     disabled: Optional[bool] = None
 
@@ -45,6 +49,9 @@ class Organization:
 
         if self.image_url is not None:
             data["imageUrl"] = self.image_url
+
+        if self.member_count is not None:
+            data["memberCount"] = self.member_count
 
         if self.disabled is not None:
             data["disabled"] = self.disabled
@@ -75,6 +82,9 @@ class Organization:
 
         if data.get("imageUrl") is not None:
             kwargs["image_url"] = data["imageUrl"]
+
+        if data.get("memberCount") is not None:
+            kwargs["member_count"] = data["memberCount"]
 
         if data.get("disabled") is not None:
             kwargs["disabled"] = data["disabled"]

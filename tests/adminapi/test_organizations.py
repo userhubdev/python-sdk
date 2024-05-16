@@ -26,6 +26,7 @@ def test_list():
       "regionCode": "US",
       "timeZone": "America/New_York",
       "signupTime": "2024-02-05T23:07:46.483Z",
+      "memberCount": 1,
       "disabled": true,
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
@@ -93,6 +94,7 @@ def test_create():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -156,6 +158,7 @@ def test_get():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -219,6 +222,7 @@ def test_update():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -282,6 +286,7 @@ def test_delete():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -345,6 +350,7 @@ def test_undelete():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -408,6 +414,7 @@ def test_connect():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -471,6 +478,7 @@ def test_disconnect():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -752,6 +760,7 @@ async def test_async_list():
       "regionCode": "US",
       "timeZone": "America/New_York",
       "signupTime": "2024-02-05T23:07:46.483Z",
+      "memberCount": 1,
       "disabled": true,
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
@@ -820,6 +829,7 @@ async def test_async_create():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -884,6 +894,7 @@ async def test_async_get():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -948,6 +959,7 @@ async def test_async_update():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -1012,6 +1024,7 @@ async def test_async_delete():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -1076,6 +1089,7 @@ async def test_async_undelete():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -1140,6 +1154,7 @@ async def test_async_connect():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
@@ -1204,6 +1219,7 @@ async def test_async_disconnect():
     }
   },
   "signupTime": "2024-02-05T23:07:46.483Z",
+  "memberCount": 1,
   "disabled": true,
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"

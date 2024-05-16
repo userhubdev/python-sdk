@@ -71,6 +71,7 @@ def test_create_join_organization():
       "anchorTime": "2024-02-05T23:07:46.483Z"
     },
     "signupTime": "2024-02-05T23:07:46.483Z",
+    "memberCount": 1,
     "disabled": true,
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
@@ -216,6 +217,7 @@ def test_create_signup():
       "anchorTime": "2024-02-05T23:07:46.483Z"
     },
     "signupTime": "2024-02-05T23:07:46.483Z",
+    "memberCount": 1,
     "disabled": true,
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
@@ -361,6 +363,7 @@ def test_get():
       "anchorTime": "2024-02-05T23:07:46.483Z"
     },
     "signupTime": "2024-02-05T23:07:46.483Z",
+    "memberCount": 1,
     "disabled": true,
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
@@ -506,6 +509,7 @@ def test_cancel():
       "anchorTime": "2024-02-05T23:07:46.483Z"
     },
     "signupTime": "2024-02-05T23:07:46.483Z",
+    "memberCount": 1,
     "disabled": true,
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
@@ -682,6 +686,7 @@ async def test_async_create_join_organization():
       "anchorTime": "2024-02-05T23:07:46.483Z"
     },
     "signupTime": "2024-02-05T23:07:46.483Z",
+    "memberCount": 1,
     "disabled": true,
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
@@ -828,6 +833,7 @@ async def test_async_create_signup():
       "anchorTime": "2024-02-05T23:07:46.483Z"
     },
     "signupTime": "2024-02-05T23:07:46.483Z",
+    "memberCount": 1,
     "disabled": true,
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
@@ -974,6 +980,7 @@ async def test_async_get():
       "anchorTime": "2024-02-05T23:07:46.483Z"
     },
     "signupTime": "2024-02-05T23:07:46.483Z",
+    "memberCount": 1,
     "disabled": true,
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
@@ -1120,6 +1127,7 @@ async def test_async_cancel():
       "anchorTime": "2024-02-05T23:07:46.483Z"
     },
     "signupTime": "2024-02-05T23:07:46.483Z",
+    "memberCount": 1,
     "disabled": true,
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
