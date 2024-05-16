@@ -57,9 +57,9 @@ class Connection:
     #: The builtin email configuration data.
     builtin_email: Optional[BuiltinEmailConnection] = None
     #: The Google Cloud Identity Platform (Firebase Auth) connection.
-    google_cloud_identity_platform: Optional[
-        GoogleCloudIdentityPlatformConnection
-    ] = None
+    google_cloud_identity_platform: Optional[GoogleCloudIdentityPlatformConnection] = (
+        None
+    )
     #: The Postmark configuration data.
     postmark: Optional[PostmarkConnection] = None
     #: The Stripe billing configuration data.
@@ -111,10 +111,10 @@ class Connection:
             )
 
         if self.google_cloud_identity_platform is not None:
-            data[
-                "googleCloudIdentityPlatform"
-            ] = GoogleCloudIdentityPlatformConnection.__json_encode__(
-                self.google_cloud_identity_platform
+            data["googleCloudIdentityPlatform"] = (
+                GoogleCloudIdentityPlatformConnection.__json_encode__(
+                    self.google_cloud_identity_platform
+                )
             )
 
         if self.postmark is not None:
@@ -176,10 +176,10 @@ class Connection:
             )
 
         if data.get("googleCloudIdentityPlatform") is not None:
-            kwargs[
-                "google_cloud_identity_platform"
-            ] = GoogleCloudIdentityPlatformConnection.__json_decode__(
-                data["googleCloudIdentityPlatform"]
+            kwargs["google_cloud_identity_platform"] = (
+                GoogleCloudIdentityPlatformConnection.__json_decode__(
+                    data["googleCloudIdentityPlatform"]
+                )
             )
 
         if data.get("postmark") is not None:
