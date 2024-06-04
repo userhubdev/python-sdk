@@ -21,6 +21,8 @@ class Subscriptions:
         *,
         organization_id: Optional[str] = None,
         user_id: Optional[str] = None,
+        state: Optional[str] = None,
+        plan_group_id: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -31,12 +33,14 @@ class Subscriptions:
 
         :param organization_id:
             Filter results by organization identifier.
-
-            This is required if user identifier is not specified.
         :param user_id:
             Filter results by user identifier.
+        :param state:
+            Filter results by state.
+        :param plan_group_id:
+            Filter results by plan group identifier.
 
-            This is required if organization identifier is not specified.
+            You can specify `unmanaged` to see all subscriptions without a plan.
         :param page_size:
             The maximum number of subscriptions to return. The API may return fewer than
             this value.
@@ -52,9 +56,12 @@ class Subscriptions:
         :param order_by:
             A comma-separated list of fields to order by.
 
+            This is only supported when either `organizationId` or `userId` is specified.
+
             Supports:
             - `active desc`
             - `createTime desc`
+            - `startTime desc`
         :param view:
             The Subscription view to return in the results.
 
@@ -67,6 +74,10 @@ class Subscriptions:
             req.set_query("organizationId", organization_id)
         if user_id:
             req.set_query("userId", user_id)
+        if state:
+            req.set_query("state", state)
+        if plan_group_id:
+            req.set_query("planGroupId", plan_group_id)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:
@@ -127,6 +138,8 @@ class AsyncSubscriptions:
         *,
         organization_id: Optional[str] = None,
         user_id: Optional[str] = None,
+        state: Optional[str] = None,
+        plan_group_id: Optional[str] = None,
         page_size: Optional[int] = None,
         page_token: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -137,12 +150,14 @@ class AsyncSubscriptions:
 
         :param organization_id:
             Filter results by organization identifier.
-
-            This is required if user identifier is not specified.
         :param user_id:
             Filter results by user identifier.
+        :param state:
+            Filter results by state.
+        :param plan_group_id:
+            Filter results by plan group identifier.
 
-            This is required if organization identifier is not specified.
+            You can specify `unmanaged` to see all subscriptions without a plan.
         :param page_size:
             The maximum number of subscriptions to return. The API may return fewer than
             this value.
@@ -158,9 +173,12 @@ class AsyncSubscriptions:
         :param order_by:
             A comma-separated list of fields to order by.
 
+            This is only supported when either `organizationId` or `userId` is specified.
+
             Supports:
             - `active desc`
             - `createTime desc`
+            - `startTime desc`
         :param view:
             The Subscription view to return in the results.
 
@@ -173,6 +191,10 @@ class AsyncSubscriptions:
             req.set_query("organizationId", organization_id)
         if user_id:
             req.set_query("userId", user_id)
+        if state:
+            req.set_query("state", state)
+        if plan_group_id:
+            req.set_query("planGroupId", plan_group_id)
         if page_size:
             req.set_query("pageSize", page_size)
         if page_token:
