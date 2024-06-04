@@ -88,6 +88,7 @@ ignore = [
      "E501",
      "EM",
      "FA100",
+     "N818",
      "PLR2004",
      "SLF001",
      "TID252",
@@ -97,7 +98,7 @@ ignore = [
 [tool.ruff.lint.per-file-ignores]
 "examples/*" = ["INP001", "T201"]
 "examples/http-server-webhook/main.py" = ["N802"]
-"tests/*" = ["S101", "S106"]
+"tests/*" = ["S101", "S106", "TRY002"]
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
