@@ -8,11 +8,21 @@ from dataclasses import dataclass
 
 import pytest
 
-from userhub_sdk import Code
 from userhub_sdk._internal import constants
+from userhub_sdk.connectionsv1 import (
+    CustomUser,
+    GetCustomUserRequest,
+    ListCustomUsersRequest,
+    ListCustomUsersResponse,
+)
 from userhub_sdk.eventsv1 import Event
-from userhub_sdk.types import UserHubError
-from userhub_sdk.webhook import Webhook, WebhookRequest, WebhookResponse
+from userhub_sdk.types import Code, UserHubError
+from userhub_sdk.webhook import (
+    Webhook,
+    WebhookRequest,
+    WebhookResponse,
+    WebhookUserNotFound,
+)
 from userhub_sdk.webhook._http import add_header, get_header
 
 
@@ -282,18 +292,89 @@ class WebhookTest:
                 body=b'{"message":"Event failed: fail","code":"INVALID_ARGUMENT"}',
             ),
         ),
+        WebhookTest(
+            name="List users",
+            secret="test",
+            set_timestamp=True,
+            add_signature=True,
+            request=WebhookRequest(
+                headers={
+                    "UserHub-Action": "users.list",
+                },
+                body=b'{"pageSize":100}',
+            ),
+            response=WebhookResponse(
+                status_code=200,
+                body=b'{"nextPageToken":"","users":[]}',
+            ),
+        ),
+        WebhookTest(
+            name="Get user",
+            secret="test",
+            set_timestamp=True,
+            add_signature=True,
+            request=WebhookRequest(
+                headers={
+                    "UserHub-Action": "users.get",
+                },
+                body=b'{"id": "1"}',
+            ),
+            response=WebhookResponse(
+                status_code=200,
+                body=b'{"id":"1","displayName":"","email":"","emailVerified":false,"phoneNumber":"","phoneNumberVerified":false,"imageUrl":"","disabled":false}',
+            ),
+        ),
+        WebhookTest(
+            name="Get user not found",
+            secret="test",
+            set_timestamp=True,
+            add_signature=True,
+            request=WebhookRequest(
+                headers={
+                    "UserHub-Action": "users.get",
+                },
+                body=b'{"id": "not-found"}',
+            ),
+            response=WebhookResponse(
+                status_code=404,
+                body=b'{"message":"User not found","code":"NOT_FOUND"}',
+            ),
+        ),
     ],
     ids=lambda test: test.name.lower().replace(" ", "-"),
 )
 def test_handler(test: WebhookTest):
-    def handle_event(event: Event):
-        if event.type != "ok":
+    def handle_event(input: Event):
+        if input.type != "ok":
             raise UserHubError(
-                f"Event failed: {event.type}", api_code=Code.INVALID_ARGUMENT
+                f"Event failed: {input.type}", api_code=Code.INVALID_ARGUMENT
             )
+
+    def handle_list_users(input: ListCustomUsersRequest) -> ListCustomUsersResponse:
+        if input.page_size != 100:
+            raise Exception(f"unexpected page size: {input.page_size}")
+
+        return ListCustomUsersResponse(users=[], next_page_token="")
+
+    def handle_get_user(input: GetCustomUserRequest) -> CustomUser:
+        if input.id == "not-found":
+            raise WebhookUserNotFound
+
+        return CustomUser(
+            id=input.id,
+            display_name="",
+            email="",
+            email_verified=False,
+            phone_number="",
+            phone_number_verified=False,
+            image_url="",
+            disabled=False,
+        )
 
     webhook = Webhook(test.secret)
     webhook.on_event(handle_event)
+    webhook.on_list_users(handle_list_users)
+    webhook.on_get_user(handle_get_user)
 
     req = test.request
     if test.set_timestamp:
