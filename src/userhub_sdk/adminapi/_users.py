@@ -520,6 +520,7 @@ class Users:
         portal_url: Optional[str] = None,
         return_url: Optional[str] = None,
         success_url: Optional[str] = None,
+        organization_id: Optional[str] = None,
     ) -> adminv1.CreatePortalSessionResponse:
         """
         Create Portal session.
@@ -535,16 +536,37 @@ class Users:
             The portal URL, this is the target URL on the portal site.
 
             If not defined the root URL for the portal will be used.
+
+            This does not need to be the full URL, you have the option
+            of passing in a path instead (e.g. `/`).
+
+            You also have the option of including the `{accountId}`
+            string in the path/URL which will be replaced with either the
+            UserHub user ID (if `organizationId` is not specified)
+            or the UserHub organization ID (if specified).
+
+            Examples:
+            * `/{accountId}` - the billing dashboard
+            * `/{accountId}/plans` - select a plan to checkout
+            * `/{accountId}/checkout/<some-plan-id>` - checkout specified plan
+            * `/{accountId}/members` - manage organization members
+            * `/{accountId}/invite` - invite a user to an organization
         :param return_url:
             The URL the user should be sent to when they want to return to
             the app (e.g. cancel checkout).
 
             If not defined the app URL will be used.
         :param success_url:
-            The URl the user should be sent after they successfully complete
+            The URL the user should be sent after they successfully complete
             an action (e.g. checkout).
 
             If not defined the return URL will be used.
+        :param organization_id:
+            The organization ID.
+
+            When specified the `{accountId}` in the `portalUrl` will be
+            replaced with the organization ID, otherwise the user ID
+            will be used.
         """
         req = Request(
             "admin.users.createPortalSession",
@@ -561,6 +583,8 @@ class Users:
             body["returnUrl"] = return_url
         if success_url:
             body["successUrl"] = success_url
+        if organization_id:
+            body["organizationId"] = organization_id
 
         req.set_body(body)
 
@@ -1079,6 +1103,7 @@ class AsyncUsers:
         portal_url: Optional[str] = None,
         return_url: Optional[str] = None,
         success_url: Optional[str] = None,
+        organization_id: Optional[str] = None,
     ) -> adminv1.CreatePortalSessionResponse:
         """
         Create Portal session.
@@ -1094,16 +1119,37 @@ class AsyncUsers:
             The portal URL, this is the target URL on the portal site.
 
             If not defined the root URL for the portal will be used.
+
+            This does not need to be the full URL, you have the option
+            of passing in a path instead (e.g. `/`).
+
+            You also have the option of including the `{accountId}`
+            string in the path/URL which will be replaced with either the
+            UserHub user ID (if `organizationId` is not specified)
+            or the UserHub organization ID (if specified).
+
+            Examples:
+            * `/{accountId}` - the billing dashboard
+            * `/{accountId}/plans` - select a plan to checkout
+            * `/{accountId}/checkout/<some-plan-id>` - checkout specified plan
+            * `/{accountId}/members` - manage organization members
+            * `/{accountId}/invite` - invite a user to an organization
         :param return_url:
             The URL the user should be sent to when they want to return to
             the app (e.g. cancel checkout).
 
             If not defined the app URL will be used.
         :param success_url:
-            The URl the user should be sent after they successfully complete
+            The URL the user should be sent after they successfully complete
             an action (e.g. checkout).
 
             If not defined the return URL will be used.
+        :param organization_id:
+            The organization ID.
+
+            When specified the `{accountId}` in the `portalUrl` will be
+            replaced with the organization ID, otherwise the user ID
+            will be used.
         """
         req = Request(
             "admin.users.createPortalSession",
@@ -1120,6 +1166,8 @@ class AsyncUsers:
             body["returnUrl"] = return_url
         if success_url:
             body["successUrl"] = success_url
+        if organization_id:
+            body["organizationId"] = organization_id
 
         req.set_body(body)
 
