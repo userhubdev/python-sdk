@@ -46,7 +46,7 @@ class User:
     region_code: Optional[str] = None
     #: The IANA time zone for the user (e.g. `America/New_York`).
     time_zone: Optional[str] = None
-    #: The billing address for the user.
+    #: The default address for the user.
     address: Optional[commonv1.Address] = None
     #: The connected accounts.
     account_connections: Optional[List[AccountConnection]] = dataclasses.field(

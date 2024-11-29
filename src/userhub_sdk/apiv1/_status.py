@@ -20,6 +20,8 @@ class Status:
     param: Optional[str] = None
     #: Additional metadata related to the error.
     metadata: Optional[Dict[str, str]] = dataclasses.field(default_factory=dict)
+    #: A user-facing error message.
+    locale_message: Optional[str] = None
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -38,6 +40,9 @@ class Status:
 
         if self.metadata is not None:
             data["metadata"] = self.metadata
+
+        if self.locale_message is not None:
+            data["localeMessage"] = self.locale_message
 
         return data
 
@@ -62,5 +67,8 @@ class Status:
 
         if data.get("metadata") is not None:
             kwargs["metadata"] = data["metadata"]
+
+        if data.get("localeMessage") is not None:
+            kwargs["locale_message"] = data["localeMessage"]
 
         return Status(**kwargs)

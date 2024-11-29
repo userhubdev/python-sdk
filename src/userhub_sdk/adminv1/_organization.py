@@ -45,7 +45,7 @@ class Organization:
     region_code: Optional[str] = None
     #: The IANA time zone for the organization (e.g. `America/New_York`).
     time_zone: Optional[str] = None
-    #: The address for the organization.
+    #: The default address for the organization.
     address: Optional[commonv1.Address] = None
     #: The connected accounts.
     account_connections: Optional[List[AccountConnection]] = dataclasses.field(

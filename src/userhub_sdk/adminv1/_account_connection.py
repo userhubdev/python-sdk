@@ -4,6 +4,7 @@ import dataclasses
 import datetime
 from typing import Any, Dict, List, Optional
 
+from userhub_sdk import commonv1
 from userhub_sdk._internal import constants, util
 
 from ._connection import Connection
@@ -13,7 +14,7 @@ from ._payment_method import PaymentMethod
 @dataclasses.dataclass
 class AccountConnection:
     """
-    A link between a account and an external account.
+    A link between an organization/user and an external account.
     """
 
     #: The tenant connection.
@@ -26,6 +27,20 @@ class AccountConnection:
     state: str = ""
     #: The code that best describes the reason for the state.
     state_reason: Optional[str] = None
+    #: The human-readable display name of the external account.
+    display_name: Optional[str] = None
+    #: The email address of the external account.
+    email: Optional[str] = None
+    #: Whether the external account's email address has been verified.
+    email_verified: Optional[bool] = None
+    #: The E164 phone number for the external account (e.g. `+12125550123`).
+    phone_number: Optional[str] = None
+    #: Whether the external account's phone number has been verified.
+    phone_number_verified: Optional[bool] = None
+    #: The billing address for the external account.
+    address: Optional[commonv1.Address] = None
+    #: The currency code for the account.
+    currency_code: Optional[str] = None
     #: The balance amount for the account.
     #:
     #: A negative value indicates an amount which will be subtracted from the next
@@ -34,8 +49,6 @@ class AccountConnection:
     #: A positive value indicates an amount which will be added to the next
     #: invoice (debt).
     balance_amount: Optional[str] = None
-    #: The currency code for the account.
-    currency_code: Optional[str] = None
     #: The payment methods for connections that support it.
     payment_methods: Optional[List[PaymentMethod]] = dataclasses.field(
         default_factory=list
@@ -67,11 +80,29 @@ class AccountConnection:
         if self.state_reason is not None:
             data["stateReason"] = self.state_reason
 
-        if self.balance_amount is not None:
-            data["balanceAmount"] = self.balance_amount
+        if self.display_name is not None:
+            data["displayName"] = self.display_name
+
+        if self.email is not None:
+            data["email"] = self.email
+
+        if self.email_verified is not None:
+            data["emailVerified"] = self.email_verified
+
+        if self.phone_number is not None:
+            data["phoneNumber"] = self.phone_number
+
+        if self.phone_number_verified is not None:
+            data["phoneNumberVerified"] = self.phone_number_verified
+
+        if self.address is not None:
+            data["address"] = commonv1.Address.__json_encode__(self.address)
 
         if self.currency_code is not None:
             data["currencyCode"] = self.currency_code
+
+        if self.balance_amount is not None:
+            data["balanceAmount"] = self.balance_amount
 
         if self.payment_methods is not None:
             data["paymentMethods"] = [
@@ -114,11 +145,29 @@ class AccountConnection:
         if data.get("stateReason") is not None:
             kwargs["state_reason"] = data["stateReason"]
 
-        if data.get("balanceAmount") is not None:
-            kwargs["balance_amount"] = data["balanceAmount"]
+        if data.get("displayName") is not None:
+            kwargs["display_name"] = data["displayName"]
+
+        if data.get("email") is not None:
+            kwargs["email"] = data["email"]
+
+        if data.get("emailVerified") is not None:
+            kwargs["email_verified"] = data["emailVerified"]
+
+        if data.get("phoneNumber") is not None:
+            kwargs["phone_number"] = data["phoneNumber"]
+
+        if data.get("phoneNumberVerified") is not None:
+            kwargs["phone_number_verified"] = data["phoneNumberVerified"]
+
+        if data.get("address") is not None:
+            kwargs["address"] = commonv1.Address.__json_decode__(data["address"])
 
         if data.get("currencyCode") is not None:
             kwargs["currency_code"] = data["currencyCode"]
+
+        if data.get("balanceAmount") is not None:
+            kwargs["balance_amount"] = data["balanceAmount"]
 
         if data.get("paymentMethods") is not None:
             kwargs["payment_methods"] = [

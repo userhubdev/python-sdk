@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
@@ -16,6 +16,10 @@ class StripePaymentMethodIntent:
     live: bool = False
     #: The Stripe Setup Intent client secret.
     client_secret: str = ""
+    #: The Stripe.js Payment Element options.
+    payment_element_options: Optional[Dict[str, Any]] = dataclasses.field(
+        default_factory=dict
+    )
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -28,6 +32,9 @@ class StripePaymentMethodIntent:
 
         if self.client_secret is not None:
             data["clientSecret"] = self.client_secret
+
+        if self.payment_element_options is not None:
+            data["paymentElementOptions"] = self.payment_element_options
 
         return data
 
@@ -46,5 +53,8 @@ class StripePaymentMethodIntent:
 
         if data.get("clientSecret") is not None:
             kwargs["client_secret"] = data["clientSecret"]
+
+        if data.get("paymentElementOptions") is not None:
+            kwargs["payment_element_options"] = data["paymentElementOptions"]
 
         return StripePaymentMethodIntent(**kwargs)

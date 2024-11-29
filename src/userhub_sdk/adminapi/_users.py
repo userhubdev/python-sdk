@@ -154,7 +154,7 @@ class Users:
         :param time_zone:
             The IANA time zone for the user (e.g. `America/New_York`).
         :param address:
-            The billing address for the user.
+            The default address for the user.
         :param signup_time:
             The sign-up time for the user.
         :param disabled:
@@ -277,7 +277,7 @@ class Users:
         :param time_zone:
             The IANA time zone for the user (e.g. `America/New_York`).
         :param address:
-            The billing address for the user.
+            The default address for the user.
         :param signup_time:
             The sign-up time for the user.
         :param disabled:
@@ -372,6 +372,31 @@ class Users:
         res = self._transport.execute(req)
 
         return res.decode_body(adminv1.User.__json_decode__)
+
+    def purge(
+        self,
+        user_id: str,
+    ) -> adminv1.PurgeUserResponse:
+        """
+        Hard delete the specified user.
+
+        The user must be marked for deletion before it can be purged.
+
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "admin.users.purge",
+            "POST",
+            f"/admin/v1/users/{util.quote_path(user_id)}:purge",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(adminv1.PurgeUserResponse.__json_decode__)
 
     def connect(
         self,
@@ -533,7 +558,7 @@ class Users:
             format `<externalId>@<connectionId>` and if the user doesn't
             exist in UserHub they will automatically be imported.
         :param portal_url:
-            The portal URL, this is the target URL on the portal site.
+            The Portal URL, this is the target URL on the portal site.
 
             If not defined the root URL for the portal will be used.
 
@@ -547,8 +572,9 @@ class Users:
 
             Examples:
             * `/{accountId}` - the billing dashboard
-            * `/{accountId}/plans` - select a plan to checkout
-            * `/{accountId}/checkout/<some-plan-id>` - checkout specified plan
+            * `/{accountId}/checkout` - start a checkout
+            * `/{accountId}/checkout/<some-plan-id>` - start a checkout with a specified plan
+            * `/{accountId}/cancel` - cancel current plan
             * `/{accountId}/members` - manage organization members
             * `/{accountId}/invite` - invite a user to an organization
         :param return_url:
@@ -737,7 +763,7 @@ class AsyncUsers:
         :param time_zone:
             The IANA time zone for the user (e.g. `America/New_York`).
         :param address:
-            The billing address for the user.
+            The default address for the user.
         :param signup_time:
             The sign-up time for the user.
         :param disabled:
@@ -860,7 +886,7 @@ class AsyncUsers:
         :param time_zone:
             The IANA time zone for the user (e.g. `America/New_York`).
         :param address:
-            The billing address for the user.
+            The default address for the user.
         :param signup_time:
             The sign-up time for the user.
         :param disabled:
@@ -955,6 +981,31 @@ class AsyncUsers:
         res = await self._transport.execute(req)
 
         return res.decode_body(adminv1.User.__json_decode__)
+
+    async def purge(
+        self,
+        user_id: str,
+    ) -> adminv1.PurgeUserResponse:
+        """
+        Hard delete the specified user.
+
+        The user must be marked for deletion before it can be purged.
+
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "admin.users.purge",
+            "POST",
+            f"/admin/v1/users/{util.quote_path(user_id)}:purge",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(adminv1.PurgeUserResponse.__json_decode__)
 
     async def connect(
         self,
@@ -1116,7 +1167,7 @@ class AsyncUsers:
             format `<externalId>@<connectionId>` and if the user doesn't
             exist in UserHub they will automatically be imported.
         :param portal_url:
-            The portal URL, this is the target URL on the portal site.
+            The Portal URL, this is the target URL on the portal site.
 
             If not defined the root URL for the portal will be used.
 
@@ -1130,8 +1181,9 @@ class AsyncUsers:
 
             Examples:
             * `/{accountId}` - the billing dashboard
-            * `/{accountId}/plans` - select a plan to checkout
-            * `/{accountId}/checkout/<some-plan-id>` - checkout specified plan
+            * `/{accountId}/checkout` - start a checkout
+            * `/{accountId}/checkout/<some-plan-id>` - start a checkout with a specified plan
+            * `/{accountId}/cancel` - cancel current plan
             * `/{accountId}/members` - manage organization members
             * `/{accountId}/invite` - invite a user to an organization
         :param return_url:

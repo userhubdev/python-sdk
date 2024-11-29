@@ -32,14 +32,14 @@ class Flow:
     user: Optional[User] = None
     #: The user who created the flow.
     creator: Optional[User] = None
-    #: The time the flow will expire.
-    expire_time: datetime.datetime = constants.EMPTY_DATETIME
-    #: The creation time of the flow.
-    create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The join organization flow type specific data.
     join_organization: Optional[JoinOrganizationFlow] = None
     #: The signup flow type specific data.
     signup: Optional[SignupFlow] = None
+    #: The time the flow will expire.
+    expire_time: datetime.datetime = constants.EMPTY_DATETIME
+    #: The creation time of the flow.
+    create_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -65,12 +65,6 @@ class Flow:
         if self.creator is not None:
             data["creator"] = User.__json_encode__(self.creator)
 
-        if self.expire_time is not None:
-            data["expireTime"] = util.encode_datetime(self.expire_time)
-
-        if self.create_time is not None:
-            data["createTime"] = util.encode_datetime(self.create_time)
-
         if self.join_organization is not None:
             data["joinOrganization"] = JoinOrganizationFlow.__json_encode__(
                 self.join_organization
@@ -78,6 +72,12 @@ class Flow:
 
         if self.signup is not None:
             data["signup"] = SignupFlow.__json_encode__(self.signup)
+
+        if self.expire_time is not None:
+            data["expireTime"] = util.encode_datetime(self.expire_time)
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
 
         return data
 
@@ -109,12 +109,6 @@ class Flow:
         if data.get("creator") is not None:
             kwargs["creator"] = User.__json_decode__(data["creator"])
 
-        if data.get("expireTime") is not None:
-            kwargs["expire_time"] = util.decode_datetime(data["expireTime"])
-
-        if data.get("createTime") is not None:
-            kwargs["create_time"] = util.decode_datetime(data["createTime"])
-
         if data.get("joinOrganization") is not None:
             kwargs["join_organization"] = JoinOrganizationFlow.__json_decode__(
                 data["joinOrganization"]
@@ -122,5 +116,11 @@ class Flow:
 
         if data.get("signup") is not None:
             kwargs["signup"] = SignupFlow.__json_decode__(data["signup"])
+
+        if data.get("expireTime") is not None:
+            kwargs["expire_time"] = util.decode_datetime(data["expireTime"])
+
+        if data.get("createTime") is not None:
+            kwargs["create_time"] = util.decode_datetime(data["createTime"])
 
         return Flow(**kwargs)
