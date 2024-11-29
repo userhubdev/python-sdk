@@ -13,7 +13,7 @@ def test_list():
     {
       "id": "string",
       "state": "ACTIVE",
-      "stateReason": "DELETED",
+      "stateReason": "UPDATING",
       "externalId": "string",
       "currencyCode": "USD",
       "cancelPeriodEnd": true,
@@ -44,25 +44,31 @@ def test_get():
     tr.body = """{
   "id": "string",
   "state": "ACTIVE",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "connection": {
     "id": "string",
     "uniqueId": "test",
     "displayName": "Test",
-    "state": "PENDING_SETUP",
-    "stateReason": "DELETED",
-    "type": "string",
+    "state": "ACTIVE",
+    "stateReason": "UPDATING",
+    "type": "AMAZON_COGNITO",
     "delegate": {
       "id": "string",
       "uniqueId": "test",
       "displayName": "Test",
-      "state": "PENDING_SETUP",
-      "stateReason": "DELETED",
-      "type": "string"
+      "state": "ACTIVE",
+      "stateReason": "UPDATING",
+      "type": "AMAZON_COGNITO"
     },
     "providers": [],
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z",
+    "amazonCognito": {
+      "userPoolId": "string",
+      "region": "string",
+      "accessKeyId": "string",
+      "accessKeySecret": "string"
+    },
     "auth0": {
       "domain": "string",
       "clientId": "string",
@@ -124,10 +130,10 @@ def test_get():
     "id": "string",
     "externalId": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
-    "type": "string",
+    "stateReason": "UPDATING",
+    "type": "CARD",
     "displayName": "Test",
-    "fullName": "Test",
+    "fullName": "Jane Doe",
     "address": {
       "lines": [],
       "city": "Brooklyn",
@@ -141,7 +147,8 @@ def test_get():
       "message": "string",
       "reason": "string",
       "param": "string",
-      "metadata": {}
+      "metadata": {},
+      "localeMessage": "string"
     },
     "pullTime": "2024-02-05T23:07:46.483Z",
     "createTime": "2024-02-05T23:07:46.483Z",
@@ -171,7 +178,7 @@ def test_get():
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -205,7 +212,7 @@ def test_get():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -259,7 +266,7 @@ async def test_async_list():
     {
       "id": "string",
       "state": "ACTIVE",
-      "stateReason": "DELETED",
+      "stateReason": "UPDATING",
       "externalId": "string",
       "currencyCode": "USD",
       "cancelPeriodEnd": true,
@@ -291,25 +298,31 @@ async def test_async_get():
     tr.body = """{
   "id": "string",
   "state": "ACTIVE",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "connection": {
     "id": "string",
     "uniqueId": "test",
     "displayName": "Test",
-    "state": "PENDING_SETUP",
-    "stateReason": "DELETED",
-    "type": "string",
+    "state": "ACTIVE",
+    "stateReason": "UPDATING",
+    "type": "AMAZON_COGNITO",
     "delegate": {
       "id": "string",
       "uniqueId": "test",
       "displayName": "Test",
-      "state": "PENDING_SETUP",
-      "stateReason": "DELETED",
-      "type": "string"
+      "state": "ACTIVE",
+      "stateReason": "UPDATING",
+      "type": "AMAZON_COGNITO"
     },
     "providers": [],
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z",
+    "amazonCognito": {
+      "userPoolId": "string",
+      "region": "string",
+      "accessKeyId": "string",
+      "accessKeySecret": "string"
+    },
     "auth0": {
       "domain": "string",
       "clientId": "string",
@@ -371,10 +384,10 @@ async def test_async_get():
     "id": "string",
     "externalId": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
-    "type": "string",
+    "stateReason": "UPDATING",
+    "type": "CARD",
     "displayName": "Test",
-    "fullName": "Test",
+    "fullName": "Jane Doe",
     "address": {
       "lines": [],
       "city": "Brooklyn",
@@ -388,7 +401,8 @@ async def test_async_get():
       "message": "string",
       "reason": "string",
       "param": "string",
-      "metadata": {}
+      "metadata": {},
+      "localeMessage": "string"
     },
     "pullTime": "2024-02-05T23:07:46.483Z",
     "createTime": "2024-02-05T23:07:46.483Z",
@@ -418,7 +432,7 @@ async def test_async_get():
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -452,7 +466,7 @@ async def test_async_get():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",

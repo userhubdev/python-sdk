@@ -13,7 +13,7 @@ def test_list():
     {
       "id": "string",
       "state": "START_PENDING",
-      "stateReason": "DELETED",
+      "stateReason": "UPDATING",
       "type": "JOIN_ORGANIZATION",
       "expireTime": "2024-02-05T23:07:46.483Z",
       "createTime": "2024-02-05T23:07:46.483Z"
@@ -36,7 +36,7 @@ def test_create_join_organization():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -66,8 +66,6 @@ def test_create_join_organization():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -85,7 +83,9 @@ def test_create_join_organization():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = Flows(tr)
@@ -101,7 +101,7 @@ def test_create_signup():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -131,8 +131,6 @@ def test_create_signup():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -150,7 +148,9 @@ def test_create_signup():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = Flows(tr)
@@ -166,7 +166,7 @@ def test_get():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -196,8 +196,6 @@ def test_get():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -215,7 +213,9 @@ def test_get():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = Flows(tr)
@@ -231,7 +231,7 @@ def test_approve():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -261,8 +261,6 @@ def test_approve():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -280,7 +278,9 @@ def test_approve():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = Flows(tr)
@@ -296,7 +296,7 @@ def test_consume():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -326,8 +326,6 @@ def test_consume():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -345,7 +343,9 @@ def test_consume():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = Flows(tr)
@@ -361,7 +361,7 @@ def test_cancel():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -391,8 +391,6 @@ def test_cancel():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -410,7 +408,9 @@ def test_cancel():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = Flows(tr)
@@ -429,7 +429,7 @@ async def test_async_list():
     {
       "id": "string",
       "state": "START_PENDING",
-      "stateReason": "DELETED",
+      "stateReason": "UPDATING",
       "type": "JOIN_ORGANIZATION",
       "expireTime": "2024-02-05T23:07:46.483Z",
       "createTime": "2024-02-05T23:07:46.483Z"
@@ -453,7 +453,7 @@ async def test_async_create_join_organization():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -483,8 +483,6 @@ async def test_async_create_join_organization():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -502,7 +500,9 @@ async def test_async_create_join_organization():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = AsyncFlows(tr)
@@ -519,7 +519,7 @@ async def test_async_create_signup():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -549,8 +549,6 @@ async def test_async_create_signup():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -568,7 +566,9 @@ async def test_async_create_signup():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = AsyncFlows(tr)
@@ -585,7 +585,7 @@ async def test_async_get():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -615,8 +615,6 @@ async def test_async_get():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -634,7 +632,9 @@ async def test_async_get():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = AsyncFlows(tr)
@@ -651,7 +651,7 @@ async def test_async_approve():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -681,8 +681,6 @@ async def test_async_approve():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -700,7 +698,9 @@ async def test_async_approve():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = AsyncFlows(tr)
@@ -717,7 +717,7 @@ async def test_async_consume():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -747,8 +747,6 @@ async def test_async_consume():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -766,7 +764,9 @@ async def test_async_consume():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = AsyncFlows(tr)
@@ -783,7 +783,7 @@ async def test_async_cancel():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
@@ -813,8 +813,6 @@ async def test_async_cancel():
     "imageUrl": "https://example.com/test.png",
     "disabled": true
   },
-  "expireTime": "2024-02-05T23:07:46.483Z",
-  "createTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
     "displayName": "Test",
     "email": "test@example.com",
@@ -832,7 +830,9 @@ async def test_async_cancel():
     "email": "test@example.com",
     "displayName": "Test",
     "createOrganization": true
-  }
+  },
+  "expireTime": "2024-02-05T23:07:46.483Z",
+  "createTime": "2024-02-05T23:07:46.483Z"
 }"""
 
     n = AsyncFlows(tr)

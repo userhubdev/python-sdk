@@ -35,7 +35,7 @@ class PlanGroup:
     #:
     #: The maximum length is 200 characters.
     display_name: str = ""
-    #: The admin facing description of the plan group.
+    #: The admin-facing description of the plan group.
     #:
     #: The maximum length is 1000 characters.
     description: Optional[str] = None

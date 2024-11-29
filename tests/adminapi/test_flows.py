@@ -13,7 +13,7 @@ def test_list():
     {
       "id": "string",
       "state": "START_PENDING",
-      "stateReason": "DELETED",
+      "stateReason": "UPDATING",
       "type": "JOIN_ORGANIZATION",
       "startTime": "2024-02-05T23:07:46.483Z",
       "expireTime": "2024-02-05T23:07:46.483Z",
@@ -40,12 +40,12 @@ def test_create_join_organization():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -79,7 +79,7 @@ def test_create_join_organization():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -113,7 +113,7 @@ def test_create_join_organization():
   "creator": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -186,12 +186,12 @@ def test_create_signup():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -225,7 +225,7 @@ def test_create_signup():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -259,7 +259,7 @@ def test_create_signup():
   "creator": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -332,12 +332,12 @@ def test_get():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -371,7 +371,7 @@ def test_get():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -405,7 +405,7 @@ def test_get():
   "creator": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -478,12 +478,12 @@ def test_cancel():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -517,7 +517,7 @@ def test_cancel():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -551,7 +551,7 @@ def test_cancel():
   "creator": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -627,7 +627,7 @@ async def test_async_list():
     {
       "id": "string",
       "state": "START_PENDING",
-      "stateReason": "DELETED",
+      "stateReason": "UPDATING",
       "type": "JOIN_ORGANIZATION",
       "startTime": "2024-02-05T23:07:46.483Z",
       "expireTime": "2024-02-05T23:07:46.483Z",
@@ -655,12 +655,12 @@ async def test_async_create_join_organization():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -694,7 +694,7 @@ async def test_async_create_join_organization():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -728,7 +728,7 @@ async def test_async_create_join_organization():
   "creator": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -802,12 +802,12 @@ async def test_async_create_signup():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -841,7 +841,7 @@ async def test_async_create_signup():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -875,7 +875,7 @@ async def test_async_create_signup():
   "creator": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -949,12 +949,12 @@ async def test_async_get():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -988,7 +988,7 @@ async def test_async_get():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -1022,7 +1022,7 @@ async def test_async_get():
   "creator": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -1096,12 +1096,12 @@ async def test_async_cancel():
     tr.body = """{
   "id": "string",
   "state": "START_PENDING",
-  "stateReason": "DELETED",
+  "stateReason": "UPDATING",
   "type": "JOIN_ORGANIZATION",
   "organization": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -1135,7 +1135,7 @@ async def test_async_cancel():
   "user": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",
@@ -1169,7 +1169,7 @@ async def test_async_cancel():
   "creator": {
     "id": "string",
     "state": "ACTIVE",
-    "stateReason": "DELETED",
+    "stateReason": "UPDATING",
     "uniqueId": "test",
     "displayName": "Test",
     "email": "test@example.com",

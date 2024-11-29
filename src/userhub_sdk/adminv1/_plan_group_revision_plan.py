@@ -24,7 +24,7 @@ class PlanGroupRevisionPlan:
     interval: commonv1.Interval = dataclasses.field(default_factory=commonv1.Interval)
     #: The customer facing human-readable display name for the plan.
     display_name: Optional[str] = None
-    #: The admin facing description of the plan.
+    #: The admin-facing description of the plan.
     #:
     #: The maximum length is 1000 characters.
     description: Optional[str] = None

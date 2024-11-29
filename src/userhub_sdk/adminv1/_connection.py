@@ -6,6 +6,7 @@ from typing import Any, Dict, List, Optional
 
 from userhub_sdk._internal import constants, util
 
+from ._amazon_cognito_connection import AmazonCognitoConnection
 from ._auth0_connection import Auth0Connection
 from ._builtin_email_connection import BuiltinEmailConnection
 from ._connection_delegate import ConnectionDelegate
@@ -52,6 +53,8 @@ class Connection:
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the connection.
     update_time: datetime.datetime = constants.EMPTY_DATETIME
+    #: The Amazon Cognito connection data.
+    amazon_cognito: Optional[AmazonCognitoConnection] = None
     #: The Auth0 connection data.
     auth0: Optional[Auth0Connection] = None
     #: The builtin email configuration data.
@@ -101,6 +104,11 @@ class Connection:
 
         if self.update_time is not None:
             data["updateTime"] = util.encode_datetime(self.update_time)
+
+        if self.amazon_cognito is not None:
+            data["amazonCognito"] = AmazonCognitoConnection.__json_encode__(
+                self.amazon_cognito
+            )
 
         if self.auth0 is not None:
             data["auth0"] = Auth0Connection.__json_encode__(self.auth0)
@@ -166,6 +174,11 @@ class Connection:
 
         if data.get("updateTime") is not None:
             kwargs["update_time"] = util.decode_datetime(data["updateTime"])
+
+        if data.get("amazonCognito") is not None:
+            kwargs["amazon_cognito"] = AmazonCognitoConnection.__json_decode__(
+                data["amazonCognito"]
+            )
 
         if data.get("auth0") is not None:
             kwargs["auth0"] = Auth0Connection.__json_decode__(data["auth0"])

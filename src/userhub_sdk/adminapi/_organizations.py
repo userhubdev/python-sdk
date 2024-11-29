@@ -154,7 +154,7 @@ class Organizations:
         :param time_zone:
             The IANA time zone for the organization (e.g. `America/New_York`).
         :param address:
-            The billing address for the organization.
+            The default address for the organization.
         :param signup_time:
             The sign-up time for the organization.
         :param disabled:
@@ -279,7 +279,7 @@ class Organizations:
         :param time_zone:
             The IANA time zone for the organization (e.g. `America/New_York`).
         :param address:
-            The billing address for the organization.
+            The default address for the organization.
         :param signup_time:
             The sign-up time for the organization.
         :param disabled:
@@ -380,6 +380,31 @@ class Organizations:
         res = self._transport.execute(req)
 
         return res.decode_body(adminv1.Organization.__json_decode__)
+
+    def purge(
+        self,
+        organization_id: str,
+    ) -> adminv1.PurgeOrganizationResponse:
+        """
+        Hard delete the specified organization.
+
+        The organization must be marked for deletion before it can be purged.
+
+        :param organization_id:
+            The identifier of the organization.
+        """
+        req = Request(
+            "admin.organizations.purge",
+            "POST",
+            f"/admin/v1/organizations/{util.quote_path(organization_id)}:purge",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(adminv1.PurgeOrganizationResponse.__json_decode__)
 
     def connect(
         self,
@@ -808,7 +833,7 @@ class AsyncOrganizations:
         :param time_zone:
             The IANA time zone for the organization (e.g. `America/New_York`).
         :param address:
-            The billing address for the organization.
+            The default address for the organization.
         :param signup_time:
             The sign-up time for the organization.
         :param disabled:
@@ -933,7 +958,7 @@ class AsyncOrganizations:
         :param time_zone:
             The IANA time zone for the organization (e.g. `America/New_York`).
         :param address:
-            The billing address for the organization.
+            The default address for the organization.
         :param signup_time:
             The sign-up time for the organization.
         :param disabled:
@@ -1034,6 +1059,31 @@ class AsyncOrganizations:
         res = await self._transport.execute(req)
 
         return res.decode_body(adminv1.Organization.__json_decode__)
+
+    async def purge(
+        self,
+        organization_id: str,
+    ) -> adminv1.PurgeOrganizationResponse:
+        """
+        Hard delete the specified organization.
+
+        The organization must be marked for deletion before it can be purged.
+
+        :param organization_id:
+            The identifier of the organization.
+        """
+        req = Request(
+            "admin.organizations.purge",
+            "POST",
+            f"/admin/v1/organizations/{util.quote_path(organization_id)}:purge",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(adminv1.PurgeOrganizationResponse.__json_decode__)
 
     async def connect(
         self,
