@@ -5,9 +5,9 @@ from flask import Flask, Response, request
 from userhub_sdk import eventsv1
 from userhub_sdk.webhook import Webhook
 
-signing_secret = os.environ.get("SIGNING_SECRET")
+signing_secret = os.environ.get("USERHUB_SIGNING_SECRET")
 if not signing_secret:
-    raise RuntimeError("SIGNING_SECRET required")
+    raise RuntimeError("USERHUB_SIGNING_SECRET required")
 
 
 def handle_event(event: eventsv1.Event):
