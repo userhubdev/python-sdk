@@ -30,10 +30,6 @@ class AdminApi(_client.Client):
         admin_key = (admin_key or "").strip()
         if not admin_key:
             raise types.UserHubError("admin_key required")
-        if not admin_key.startswith(constants.ADMIN_KEY_PREFIX):
-            raise types.UserHubError(
-                f"admin_key must start with `{constants.ADMIN_KEY_PREFIX}`"
-            )
 
         headers[constants.AUTH_HEADER] = f"Bearer {admin_key}"
 
@@ -63,10 +59,6 @@ class AsyncAdminApi(_client.AsyncClient):
         admin_key = (admin_key or "").strip()
         if not admin_key:
             raise types.UserHubError("admin_key required")
-        if not admin_key.startswith(constants.ADMIN_KEY_PREFIX):
-            raise types.UserHubError(
-                f"admin_key must start with `{constants.ADMIN_KEY_PREFIX}`"
-            )
 
         headers[constants.AUTH_HEADER] = f"Bearer {admin_key}"
 
