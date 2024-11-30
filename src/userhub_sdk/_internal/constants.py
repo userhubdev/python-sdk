@@ -9,8 +9,6 @@ VERSION = "0.7.0"
 
 AUTH_HEADER = "Authorization"
 API_KEY_HEADER = "UserHub-Api-Key"
-ADMIN_KEY_PREFIX = "sk_"
-USER_KEY_PREFIX = "pk_"
 
 WEBHOOK_ACTION_HEADER = "UserHub-Action"
 WEBHOOK_AGENT_HEADER = "Webhook-Agent"

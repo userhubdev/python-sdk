@@ -32,10 +32,6 @@ class UserApi(_client.Client):
         user_key = (user_key or "").strip()
         if not user_key:
             raise types.UserHubError("user_key required")
-        if not user_key.startswith(constants.USER_KEY_PREFIX):
-            raise types.UserHubError(
-                f"user_key must start with `{constants.USER_KEY_PREFIX}`"
-            )
 
         headers[constants.API_KEY_HEADER] = user_key
 
@@ -71,10 +67,6 @@ class AsyncUserApi(_client.AsyncClient):
         user_key = (user_key or "").strip()
         if not user_key:
             raise types.UserHubError("user_key required")
-        if not user_key.startswith(constants.USER_KEY_PREFIX):
-            raise types.UserHubError(
-                f"user_key must start with `{constants.USER_KEY_PREFIX}`"
-            )
 
         headers[constants.API_KEY_HEADER] = user_key
 
