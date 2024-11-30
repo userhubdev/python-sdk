@@ -5,13 +5,13 @@ from userhub_sdk import AsyncAdminApi, AsyncUserApi, UserHubError
 
 
 async def main():
-    admin_key = os.environ.get("ADMIN_KEY")
+    admin_key = os.environ.get("USERHUB_ADMIN_KEY")
     if not admin_key:
-        raise RuntimeError("ADMIN_KEY required")
+        raise RuntimeError("USERHUB_ADMIN_KEY required")
 
-    user_key = os.environ.get("USER_KEY")
+    user_key = os.environ.get("USERHUB_USER_KEY")
     if not user_key:
-        raise RuntimeError("USER_KEY required")
+        raise RuntimeError("USERHUB_USER_KEY required")
 
     admin_api = AsyncAdminApi(admin_key)
 

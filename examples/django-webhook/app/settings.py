@@ -84,6 +84,6 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-SIGNING_SECRET = os.environ.get("SIGNING_SECRET")
-if not SIGNING_SECRET:
-    raise RuntimeError("SIGNING_SECRET required")
+USERHUB_SIGNING_SECRET = os.environ.get("USERHUB_SIGNING_SECRET")
+if not USERHUB_SIGNING_SECRET:
+    raise RuntimeError("USERHUB_SIGNING_SECRET required")

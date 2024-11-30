@@ -5,9 +5,9 @@ from fastapi import FastAPI, Request, Response
 from userhub_sdk import eventsv1
 from userhub_sdk.webhook import AsyncWebhook
 
-signing_secret = os.environ.get("SIGNING_SECRET")
+signing_secret = os.environ.get("USERHUB_SIGNING_SECRET")
 if not signing_secret:
-    raise RuntimeError("SIGNING_SECRET required")
+    raise RuntimeError("USERHUB_SIGNING_SECRET required")
 
 
 async def handle_event(event: eventsv1.Event):

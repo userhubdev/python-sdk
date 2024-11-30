@@ -17,7 +17,7 @@ def handle_event(event: eventsv1.Event):
         print(" - User:", user.id, user.display_name)
 
 
-webhook = Webhook(settings.SIGNING_SECRET)
+webhook = Webhook(settings.USERHUB_SIGNING_SECRET)
 webhook.on_event(handle_event)
 
 

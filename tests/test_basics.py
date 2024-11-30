@@ -27,20 +27,20 @@ def get_env(name: str) -> str:
 
 
 def test_admin_api():
-    api = AdminApi(get_env("TEST_ADMIN_KEY"))
+    api = AdminApi(get_env("TEST_USERHUB_ADMIN_KEY"))
     res = api.users.list()
     assert res
 
 
 @pytest.mark.asyncio
 async def test_async_admin_api():
-    api = AsyncAdminApi(get_env("TEST_ADMIN_KEY"))
+    api = AsyncAdminApi(get_env("TEST_USERHUB_ADMIN_KEY"))
     res = await api.users.list()
     assert res
 
 
 def test_user_api():
-    api = UserApi(get_env("TEST_USER_KEY"))
+    api = UserApi(get_env("TEST_USERHUB_USER_KEY"))
     session = api.session.get()
     assert session is not None
     assert session.scopes
@@ -48,7 +48,7 @@ def test_user_api():
 
 @pytest.mark.asyncio
 async def test_async_user_api():
-    api = AsyncUserApi(get_env("TEST_USER_KEY"))
+    api = AsyncUserApi(get_env("TEST_USERHUB_USER_KEY"))
     session = await api.session.get()
     assert session is not None
     assert session.scopes

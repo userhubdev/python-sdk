@@ -7,9 +7,9 @@ from userhub_sdk.webhook import Webhook
 
 port = int(os.environ.get("PORT") or "8000")
 
-signing_secret = os.environ.get("SIGNING_SECRET")
+signing_secret = os.environ.get("USERHUB_SIGNING_SECRET")
 if not signing_secret:
-    raise RuntimeError("SIGNING_SECRET required")
+    raise RuntimeError("USERHUB_SIGNING_SECRET required")
 
 
 def handle_event(event: eventsv1.Event):
