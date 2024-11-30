@@ -16,6 +16,7 @@ class UserHubError(Exception):
     _reason: Optional[str] = None
     _param: Optional[str] = None
     _metadata: Optional[Dict[str, str]] = None
+    _locale_message: Optional[str] = None
     _call: Optional[str] = None
     _res: Optional["HttpCoreResponse"] = None
 
@@ -27,6 +28,7 @@ class UserHubError(Exception):
         reason: Optional[str] = None,
         param: Optional[str] = None,
         metadata: Optional[Dict[str, str]] = None,
+        locale_message: Optional[str] = None,
         call: Optional[str] = None,
         status: Optional[apiv1.Status] = None,
         # internal
@@ -46,7 +48,10 @@ class UserHubError(Exception):
                 self._reason = status.reason
             if status.param:
                 self._param = status.param
-            self._metadata = status.metadata
+            if status.metadata:
+                self._metadata = status.metadata
+            if status.locale_message:
+                self._locale_message = status.locale_message
 
         if api_code is not None:
             self._api_code = api_code
@@ -56,6 +61,8 @@ class UserHubError(Exception):
             self._param = param
         if metadata is not None:
             self._metadata = metadata
+        if locale_message is not None:
+            self._locale_message = locale_message
 
         super()
 
@@ -103,6 +110,7 @@ class UserHubError(Exception):
         reason: Union[str, Undefined, None] = UNDEFINED,
         param: Union[str, Undefined, None] = UNDEFINED,
         metadata: Union[Dict[str, str], Undefined, None] = UNDEFINED,
+        locale_message: Union[str, Undefined, None] = UNDEFINED,
         call: Union[str, Undefined, None] = UNDEFINED,
     ) -> "UserHubError":
         if not isinstance(message, str):
@@ -115,6 +123,8 @@ class UserHubError(Exception):
             param = self._param
         if isinstance(metadata, Undefined):
             metadata = self._metadata
+        if isinstance(locale_message, Undefined):
+            locale_message = self._locale_message
         if isinstance(call, Undefined):
             call = self._call
 
@@ -124,6 +134,7 @@ class UserHubError(Exception):
             reason=reason,
             param=param,
             metadata=metadata,
+            locale_message=locale_message,
             call=call,
         )
 
@@ -161,6 +172,13 @@ class UserHubError(Exception):
         The additional error related data.
         """
         return dict(self._metadata) if self._metadata else {}
+
+    @property
+    def locale_message(self) -> Optional[str]:
+        """
+        The user-facing error message.
+        """
+        return self._locale_message
 
     @property
     def call(self) -> Optional[str]:
