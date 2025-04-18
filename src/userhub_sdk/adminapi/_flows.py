@@ -102,6 +102,7 @@ class Flows:
         user_id: Optional[str] = None,
         email: Optional[str] = None,
         display_name: Optional[str] = None,
+        role_id: Optional[str] = None,
         creator_user_id: Optional[str] = None,
         expire_time: Optional[datetime.datetime] = None,
         ttl: Optional[str] = None,
@@ -124,6 +125,8 @@ class Flows:
             does not have an email address.
         :param display_name:
             The display name of the person to invite.
+        :param role_id:
+            The identifier of the role.
         :param creator_user_id:
             The identifier of the user sending the invite.
         :param expire_time:
@@ -153,6 +156,8 @@ class Flows:
             body["email"] = email
         if display_name:
             body["displayName"] = display_name
+        if role_id:
+            body["roleId"] = role_id
         if creator_user_id:
             body["creatorUserId"] = creator_user_id
         if expire_time:
@@ -363,6 +368,7 @@ class AsyncFlows:
         user_id: Optional[str] = None,
         email: Optional[str] = None,
         display_name: Optional[str] = None,
+        role_id: Optional[str] = None,
         creator_user_id: Optional[str] = None,
         expire_time: Optional[datetime.datetime] = None,
         ttl: Optional[str] = None,
@@ -385,6 +391,8 @@ class AsyncFlows:
             does not have an email address.
         :param display_name:
             The display name of the person to invite.
+        :param role_id:
+            The identifier of the role.
         :param creator_user_id:
             The identifier of the user sending the invite.
         :param expire_time:
@@ -414,6 +422,8 @@ class AsyncFlows:
             body["email"] = email
         if display_name:
             body["displayName"] = display_name
+        if role_id:
+            body["roleId"] = role_id
         if creator_user_id:
             body["creatorUserId"] = creator_user_id
         if expire_time:

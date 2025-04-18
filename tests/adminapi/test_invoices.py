@@ -69,6 +69,7 @@ def test_get():
       "type": "AMAZON_COGNITO"
     },
     "providers": [],
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z",
     "amazonCognito": {
@@ -246,6 +247,7 @@ async def test_async_get():
       "type": "AMAZON_COGNITO"
     },
     "providers": [],
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z",
     "amazonCognito": {

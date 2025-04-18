@@ -28,6 +28,7 @@ def test_list():
       "signupTime": "2024-02-05T23:07:46.483Z",
       "memberCount": 1,
       "disabled": true,
+      "view": "BASIC",
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
     }
@@ -101,6 +102,7 @@ def test_create():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -170,6 +172,7 @@ def test_get():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -239,6 +242,7 @@ def test_update():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -308,6 +312,7 @@ def test_delete():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -377,6 +382,7 @@ def test_undelete():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -458,6 +464,7 @@ def test_connect():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -527,6 +534,7 @@ def test_disconnect():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -596,6 +604,7 @@ def test_add_member():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -605,6 +614,7 @@ def test_add_member():
     "displayName": "Test",
     "type": "OWNER",
     "description": "string",
+    "seatPolicy": "DEFAULT",
     "permissionSets": [
       "string"
     ],
@@ -667,6 +677,7 @@ def test_get_member():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -676,6 +687,7 @@ def test_get_member():
     "displayName": "Test",
     "type": "OWNER",
     "description": "string",
+    "seatPolicy": "DEFAULT",
     "permissionSets": [
       "string"
     ],
@@ -738,6 +750,7 @@ def test_update_member():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -747,6 +760,7 @@ def test_update_member():
     "displayName": "Test",
     "type": "OWNER",
     "description": "string",
+    "seatPolicy": "DEFAULT",
     "permissionSets": [
       "string"
     ],
@@ -809,6 +823,7 @@ async def test_async_list():
       "signupTime": "2024-02-05T23:07:46.483Z",
       "memberCount": 1,
       "disabled": true,
+      "view": "BASIC",
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
     }
@@ -883,6 +898,7 @@ async def test_async_create():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -953,6 +969,7 @@ async def test_async_get():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1023,6 +1040,7 @@ async def test_async_update():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1093,6 +1111,7 @@ async def test_async_delete():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1163,6 +1182,7 @@ async def test_async_undelete():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1246,6 +1266,7 @@ async def test_async_connect():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1316,6 +1337,7 @@ async def test_async_disconnect():
   "signupTime": "2024-02-05T23:07:46.483Z",
   "memberCount": 1,
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1387,6 +1409,7 @@ async def test_async_add_member():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -1396,6 +1419,7 @@ async def test_async_add_member():
     "displayName": "Test",
     "type": "OWNER",
     "description": "string",
+    "seatPolicy": "DEFAULT",
     "permissionSets": [
       "string"
     ],
@@ -1459,6 +1483,7 @@ async def test_async_get_member():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -1468,6 +1493,7 @@ async def test_async_get_member():
     "displayName": "Test",
     "type": "OWNER",
     "description": "string",
+    "seatPolicy": "DEFAULT",
     "permissionSets": [
       "string"
     ],
@@ -1531,6 +1557,7 @@ async def test_async_update_member():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -1540,6 +1567,7 @@ async def test_async_update_member():
     "displayName": "Test",
     "type": "OWNER",
     "description": "string",
+    "seatPolicy": "DEFAULT",
     "permissionSets": [
       "string"
     ],

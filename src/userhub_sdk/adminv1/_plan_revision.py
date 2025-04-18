@@ -5,23 +5,29 @@ from typing import Any, Dict, Optional
 
 
 @dataclasses.dataclass
-class CheckoutPlanRevision:
+class PlanRevision:
     """
-    Revision is a collection of plans with the same revision.
-
-    This will group plans with different billing cycles.
+    The revision information for the plan.
     """
 
-    #: The system-assigned identifier of the plan group revision.
+    #: The system-assigned identifier of the plan revision.
     id: str = ""
     #: Whether this is the current revision for the subscription.
-    current: Optional[bool] = None
-    #: Whether this is the selected revision for the checkout.
-    selected: Optional[bool] = None
-    #: Whether this is the latest revision for the plan group.
     #:
-    #: This will only be set for a current or selected plan group.
+    #: This is only set in checkout.
+    current: Optional[bool] = None
+    #: Whether this is the selected revision.
+    #:
+    #: This is only set in checkout.
+    selected: Optional[bool] = None
+    #: Whether this is the latest revision for the plan.
+    #:
+    #: This is only set for a current or selected plan in checkout.
     latest: Optional[bool] = None
+    #: The tag for the revision.
+    #:
+    #: This will only be set in checkout for plans set using a tag.
+    tag: Optional[str] = None
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -38,10 +44,13 @@ class CheckoutPlanRevision:
         if self.latest is not None:
             data["latest"] = self.latest
 
+        if self.tag is not None:
+            data["tag"] = self.tag
+
         return data
 
     @staticmethod
-    def __json_decode__(data: Dict[str, Any]) -> "CheckoutPlanRevision":
+    def __json_decode__(data: Dict[str, Any]) -> "PlanRevision":
         if data is None:
             data = {}
 
@@ -59,4 +68,7 @@ class CheckoutPlanRevision:
         if data.get("latest") is not None:
             kwargs["latest"] = data["latest"]
 
-        return CheckoutPlanRevision(**kwargs)
+        if data.get("tag") is not None:
+            kwargs["tag"] = data["tag"]
+
+        return PlanRevision(**kwargs)

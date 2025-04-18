@@ -31,6 +31,8 @@ class Role:
     #:
     #: The maximum length is 1000 characters.
     description: Optional[str] = None
+    #: The policy that defines how a member is assigned a seat.
+    seat_policy: Optional[str] = None
     #: The additional permissions allowed by the role.
     permission_sets: List[str] = dataclasses.field(default_factory=list)
     #: Whether the role is the default for the tenant.
@@ -59,6 +61,9 @@ class Role:
 
         if self.description is not None:
             data["description"] = self.description
+
+        if self.seat_policy is not None:
+            data["seatPolicy"] = self.seat_policy
 
         if self.permission_sets is not None:
             data["permissionSets"] = self.permission_sets
@@ -98,6 +103,9 @@ class Role:
 
         if data.get("description") is not None:
             kwargs["description"] = data["description"]
+
+        if data.get("seatPolicy") is not None:
+            kwargs["seat_policy"] = data["seatPolicy"]
 
         if data.get("permissionSets") is not None:
             kwargs["permission_sets"] = data["permissionSets"]

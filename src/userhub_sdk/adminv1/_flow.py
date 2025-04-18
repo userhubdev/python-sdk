@@ -44,6 +44,8 @@ class Flow:
     #:
     #: This is only populated on create.
     secret: Optional[str] = None
+    #: The flow view.
+    view: str = ""
     #: The creation time of the flow.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the flow.
@@ -88,6 +90,9 @@ class Flow:
 
         if self.secret is not None:
             data["secret"] = self.secret
+
+        if self.view is not None:
+            data["view"] = self.view
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
@@ -144,6 +149,9 @@ class Flow:
 
         if data.get("secret") is not None:
             kwargs["secret"] = data["secret"]
+
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])
