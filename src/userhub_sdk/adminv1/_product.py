@@ -46,6 +46,8 @@ class Product:
     product_connections: Optional[List[ProductConnection]] = dataclasses.field(
         default_factory=list
     )
+    #: The product view.
+    view: str = ""
     #: The creation time of the product.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the product.
@@ -76,6 +78,9 @@ class Product:
             data["productConnections"] = [
                 ProductConnection.__json_encode__(v) for v in self.product_connections
             ]
+
+        if self.view is not None:
+            data["view"] = self.view
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
@@ -114,6 +119,9 @@ class Product:
             kwargs["product_connections"] = [
                 ProductConnection.__json_decode__(v) for v in data["productConnections"]
             ]
+
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])

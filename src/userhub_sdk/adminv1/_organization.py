@@ -61,6 +61,8 @@ class Organization:
     member_count: int = 0
     #: Whether the organization is disabled.
     disabled: Optional[bool] = None
+    #: The organization view.
+    view: str = ""
     #: The creation time of the organization.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the organization.
@@ -132,6 +134,9 @@ class Organization:
 
         if self.disabled is not None:
             data["disabled"] = self.disabled
+
+        if self.view is not None:
+            data["view"] = self.view
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
@@ -211,6 +216,9 @@ class Organization:
 
         if data.get("disabled") is not None:
             kwargs["disabled"] = data["disabled"]
+
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])

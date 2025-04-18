@@ -1,17 +1,17 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
-class PlanGroupTrial:
+class PlanTrial:
     """
-    The trial settings.
+    The trial details.
     """
 
-    #: The default number of days in the trial.
-    days: Optional[int] = None
+    #: The number of days in the trial.
+    days: int = 0
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -22,7 +22,7 @@ class PlanGroupTrial:
         return data
 
     @staticmethod
-    def __json_decode__(data: Dict[str, Any]) -> "PlanGroupTrial":
+    def __json_decode__(data: Dict[str, Any]) -> "PlanTrial":
         if data is None:
             data = {}
 
@@ -31,4 +31,4 @@ class PlanGroupTrial:
         if data.get("days") is not None:
             kwargs["days"] = data["days"]
 
-        return PlanGroupTrial(**kwargs)
+        return PlanTrial(**kwargs)

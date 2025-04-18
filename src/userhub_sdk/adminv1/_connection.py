@@ -49,6 +49,8 @@ class Connection:
     delegate: Optional[ConnectionDelegate] = None
     #: The connection providers.
     providers: List[ConnectionProvider] = dataclasses.field(default_factory=list)
+    #: The connection view.
+    view: str = ""
     #: The creation time of the connection.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the connection.
@@ -98,6 +100,9 @@ class Connection:
             data["providers"] = [
                 ConnectionProvider.__json_encode__(v) for v in self.providers
             ]
+
+        if self.view is not None:
+            data["view"] = self.view
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
@@ -168,6 +173,9 @@ class Connection:
             kwargs["providers"] = [
                 ConnectionProvider.__json_decode__(v) for v in data["providers"]
             ]
+
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])

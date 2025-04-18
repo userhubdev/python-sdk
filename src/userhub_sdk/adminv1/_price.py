@@ -8,6 +8,7 @@ from userhub_sdk import commonv1
 from userhub_sdk._internal import constants, util
 
 from ._connection import Connection
+from ._price_empty_price import PriceEmptyPrice
 from ._price_fixed_price import PriceFixedPrice
 from ._price_tiered_price import PriceTieredPrice
 from ._product import Product
@@ -47,10 +48,14 @@ class Price:
     pull_time: Optional[datetime.datetime] = None
     #: The last time the price was pushed to the connection.
     push_time: Optional[datetime.datetime] = None
+    #: The price view.
+    view: str = ""
     #: The creation time of the price.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the price.
     update_time: datetime.datetime = constants.EMPTY_DATETIME
+    #: The price is dependent on the quantity.
+    empty: Optional[PriceEmptyPrice] = None
     #: The price is fixed per quantity.
     fixed: Optional[PriceFixedPrice] = None
     #: The price is dependent on the quantity.
@@ -98,11 +103,17 @@ class Price:
         if self.push_time is not None:
             data["pushTime"] = util.encode_datetime(self.push_time)
 
+        if self.view is not None:
+            data["view"] = self.view
+
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
 
         if self.update_time is not None:
             data["updateTime"] = util.encode_datetime(self.update_time)
+
+        if self.empty is not None:
+            data["empty"] = PriceEmptyPrice.__json_encode__(self.empty)
 
         if self.fixed is not None:
             data["fixed"] = PriceFixedPrice.__json_encode__(self.fixed)
@@ -158,11 +169,17 @@ class Price:
         if data.get("pushTime") is not None:
             kwargs["push_time"] = util.decode_datetime(data["pushTime"])
 
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
+
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])
 
         if data.get("updateTime") is not None:
             kwargs["update_time"] = util.decode_datetime(data["updateTime"])
+
+        if data.get("empty") is not None:
+            kwargs["empty"] = PriceEmptyPrice.__json_decode__(data["empty"])
 
         if data.get("fixed") is not None:
             kwargs["fixed"] = PriceFixedPrice.__json_decode__(data["fixed"])

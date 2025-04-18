@@ -19,6 +19,7 @@ def test_list():
       "expireTime": "2024-02-05T23:07:46.483Z",
       "ttl": "string",
       "secret": "string",
+      "view": "BASIC",
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
     }
@@ -73,6 +74,7 @@ def test_create_join_organization():
     "signupTime": "2024-02-05T23:07:46.483Z",
     "memberCount": 1,
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -107,6 +109,7 @@ def test_create_join_organization():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -141,6 +144,7 @@ def test_create_join_organization():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -148,6 +152,7 @@ def test_create_join_organization():
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
@@ -159,6 +164,7 @@ def test_create_join_organization():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true,
       "archived": true,
@@ -219,6 +225,7 @@ def test_create_signup():
     "signupTime": "2024-02-05T23:07:46.483Z",
     "memberCount": 1,
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -253,6 +260,7 @@ def test_create_signup():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -287,6 +295,7 @@ def test_create_signup():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -294,6 +303,7 @@ def test_create_signup():
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
@@ -305,6 +315,7 @@ def test_create_signup():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true,
       "archived": true,
@@ -365,6 +376,7 @@ def test_get():
     "signupTime": "2024-02-05T23:07:46.483Z",
     "memberCount": 1,
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -399,6 +411,7 @@ def test_get():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -433,6 +446,7 @@ def test_get():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -440,6 +454,7 @@ def test_get():
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
@@ -451,6 +466,7 @@ def test_get():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true,
       "archived": true,
@@ -511,6 +527,7 @@ def test_cancel():
     "signupTime": "2024-02-05T23:07:46.483Z",
     "memberCount": 1,
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -545,6 +562,7 @@ def test_cancel():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -579,6 +597,7 @@ def test_cancel():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -586,6 +605,7 @@ def test_cancel():
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
@@ -597,6 +617,7 @@ def test_cancel():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true,
       "archived": true,
@@ -633,6 +654,7 @@ async def test_async_list():
       "expireTime": "2024-02-05T23:07:46.483Z",
       "ttl": "string",
       "secret": "string",
+      "view": "BASIC",
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
     }
@@ -688,6 +710,7 @@ async def test_async_create_join_organization():
     "signupTime": "2024-02-05T23:07:46.483Z",
     "memberCount": 1,
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -722,6 +745,7 @@ async def test_async_create_join_organization():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -756,6 +780,7 @@ async def test_async_create_join_organization():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -763,6 +788,7 @@ async def test_async_create_join_organization():
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
@@ -774,6 +800,7 @@ async def test_async_create_join_organization():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true,
       "archived": true,
@@ -835,6 +862,7 @@ async def test_async_create_signup():
     "signupTime": "2024-02-05T23:07:46.483Z",
     "memberCount": 1,
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -869,6 +897,7 @@ async def test_async_create_signup():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -903,6 +932,7 @@ async def test_async_create_signup():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -910,6 +940,7 @@ async def test_async_create_signup():
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
@@ -921,6 +952,7 @@ async def test_async_create_signup():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true,
       "archived": true,
@@ -982,6 +1014,7 @@ async def test_async_get():
     "signupTime": "2024-02-05T23:07:46.483Z",
     "memberCount": 1,
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -1016,6 +1049,7 @@ async def test_async_get():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -1050,6 +1084,7 @@ async def test_async_get():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -1057,6 +1092,7 @@ async def test_async_get():
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
@@ -1068,6 +1104,7 @@ async def test_async_get():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true,
       "archived": true,
@@ -1129,6 +1166,7 @@ async def test_async_cancel():
     "signupTime": "2024-02-05T23:07:46.483Z",
     "memberCount": 1,
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -1163,6 +1201,7 @@ async def test_async_cancel():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -1197,6 +1236,7 @@ async def test_async_cancel():
     "memberships": [],
     "signupTime": "2024-02-05T23:07:46.483Z",
     "disabled": true,
+    "view": "BASIC",
     "createTime": "2024-02-05T23:07:46.483Z",
     "updateTime": "2024-02-05T23:07:46.483Z"
   },
@@ -1204,6 +1244,7 @@ async def test_async_cancel():
   "expireTime": "2024-02-05T23:07:46.483Z",
   "ttl": "string",
   "secret": "string",
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z",
   "joinOrganization": {
@@ -1215,6 +1256,7 @@ async def test_async_cancel():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true,
       "archived": true,

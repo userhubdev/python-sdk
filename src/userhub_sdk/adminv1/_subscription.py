@@ -74,6 +74,8 @@ class Subscription:
     pull_time: Optional[datetime.datetime] = None
     #: The last time the subscription was pushed to the connection.
     push_time: Optional[datetime.datetime] = None
+    #: The subscription view.
+    view: str = ""
     #: The creation time of the subscription.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the subscription.
@@ -148,6 +150,9 @@ class Subscription:
 
         if self.push_time is not None:
             data["pushTime"] = util.encode_datetime(self.push_time)
+
+        if self.view is not None:
+            data["view"] = self.view
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
@@ -234,6 +239,9 @@ class Subscription:
 
         if data.get("pushTime") is not None:
             kwargs["push_time"] = util.decode_datetime(data["pushTime"])
+
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])

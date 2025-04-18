@@ -75,6 +75,7 @@ def test_create_join_organization():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -140,6 +141,7 @@ def test_create_signup():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -205,6 +207,7 @@ def test_get():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -270,6 +273,7 @@ def test_approve():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -335,6 +339,7 @@ def test_consume():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -400,6 +405,7 @@ def test_cancel():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -492,6 +498,7 @@ async def test_async_create_join_organization():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -558,6 +565,7 @@ async def test_async_create_signup():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -624,6 +632,7 @@ async def test_async_get():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -690,6 +699,7 @@ async def test_async_approve():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -756,6 +766,7 @@ async def test_async_consume():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }
@@ -822,6 +833,7 @@ async def test_async_cancel():
       "displayName": "Test",
       "type": "OWNER",
       "description": "string",
+      "seatPolicy": "DEFAULT",
       "permissionSets": [],
       "default": true
     }

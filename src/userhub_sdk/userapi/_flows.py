@@ -91,6 +91,7 @@ class Flows:
         user_id: Optional[str] = None,
         email: Optional[str] = None,
         display_name: Optional[str] = None,
+        role_id: Optional[str] = None,
     ) -> userv1.Flow:
         """
         Creates a join organization flow.
@@ -110,6 +111,8 @@ class Flows:
             does not have an email address.
         :param display_name:
             The display name of the person to invite.
+        :param role_id:
+            The identifier of the role.
         """
         req = Request(
             "user.flows.createJoinOrganization",
@@ -126,6 +129,8 @@ class Flows:
             body["email"] = email
         if display_name:
             body["displayName"] = display_name
+        if role_id:
+            body["roleId"] = role_id
 
         req.set_body(body)
 
@@ -353,6 +358,7 @@ class AsyncFlows:
         user_id: Optional[str] = None,
         email: Optional[str] = None,
         display_name: Optional[str] = None,
+        role_id: Optional[str] = None,
     ) -> userv1.Flow:
         """
         Creates a join organization flow.
@@ -372,6 +378,8 @@ class AsyncFlows:
             does not have an email address.
         :param display_name:
             The display name of the person to invite.
+        :param role_id:
+            The identifier of the role.
         """
         req = Request(
             "user.flows.createJoinOrganization",
@@ -388,6 +396,8 @@ class AsyncFlows:
             body["email"] = email
         if display_name:
             body["displayName"] = display_name
+        if role_id:
+            body["roleId"] = role_id
 
         req.set_body(body)
 

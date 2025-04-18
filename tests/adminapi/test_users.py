@@ -27,6 +27,7 @@ def test_list():
       "timeZone": "America/New_York",
       "signupTime": "2024-02-05T23:07:46.483Z",
       "disabled": true,
+      "view": "BASIC",
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
     }
@@ -105,6 +106,7 @@ def test_create():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -179,6 +181,7 @@ def test_get():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -253,6 +256,7 @@ def test_update():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -327,6 +331,7 @@ def test_delete():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -401,6 +406,7 @@ def test_undelete():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -487,6 +493,7 @@ def test_connect():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -561,6 +568,7 @@ def test_disconnect():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -635,6 +643,7 @@ def test_import_account():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -698,6 +707,7 @@ async def test_async_list():
       "timeZone": "America/New_York",
       "signupTime": "2024-02-05T23:07:46.483Z",
       "disabled": true,
+      "view": "BASIC",
       "createTime": "2024-02-05T23:07:46.483Z",
       "updateTime": "2024-02-05T23:07:46.483Z"
     }
@@ -777,6 +787,7 @@ async def test_async_create():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -852,6 +863,7 @@ async def test_async_get():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -927,6 +939,7 @@ async def test_async_update():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1002,6 +1015,7 @@ async def test_async_delete():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1077,6 +1091,7 @@ async def test_async_undelete():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1165,6 +1180,7 @@ async def test_async_connect():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1240,6 +1256,7 @@ async def test_async_disconnect():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
@@ -1315,6 +1332,7 @@ async def test_async_import_account():
   ],
   "signupTime": "2024-02-05T23:07:46.483Z",
   "disabled": true,
+  "view": "BASIC",
   "createTime": "2024-02-05T23:07:46.483Z",
   "updateTime": "2024-02-05T23:07:46.483Z"
 }"""
