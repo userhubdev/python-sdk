@@ -22,12 +22,17 @@ class UserApi(_client.Client):
         user_key: str,
         access_token: Optional[str] = None,
         *,
+        api_version: Optional[str] = None,
         base_url: Optional[str] = None,
     ):
+        if not api_version:
+            api_version = constants.API_VERSION
         if not base_url:
             base_url = constants.API_BASE_URL
 
         headers = {}
+
+        headers[constants.API_VERSION_HEADER] = api_version
 
         user_key = (user_key or "").strip()
         if not user_key:
@@ -57,12 +62,17 @@ class AsyncUserApi(_client.AsyncClient):
         user_key: str,
         access_token: Optional[str] = None,
         *,
+        api_version: Optional[str] = None,
         base_url: Optional[str] = None,
     ):
+        if not api_version:
+            api_version = constants.API_VERSION
         if not base_url:
             base_url = constants.API_BASE_URL
 
         headers = {}
+
+        headers[constants.API_VERSION_HEADER] = api_version
 
         user_key = (user_key or "").strip()
         if not user_key:
