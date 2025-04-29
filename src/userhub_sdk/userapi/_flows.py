@@ -192,35 +192,6 @@ class Flows:
 
         return res.decode_body(userv1.Flow.__json_decode__)
 
-    def approve(
-        self,
-        flow_id: str,
-    ) -> userv1.Flow:
-        """
-        Approve a flow.
-
-        This will approve the specified flow and start the next step
-        in the flow (e.g. for a join organization flow it will send the
-        invitee an email with a link to join the organization).
-
-        :param flow_id:
-            The identifier of the flow.
-        """
-        req = Request(
-            "user.flows.approve",
-            "POST",
-            f"/user/v1/flows/{util.quote_path(flow_id)}:approve",
-        )
-        req.set_idempotent(True)
-
-        body: Dict[str, Any] = {}
-
-        req.set_body(body)
-
-        res = self._transport.execute(req)
-
-        return res.decode_body(userv1.Flow.__json_decode__)
-
     def consume(
         self,
         flow_id: str,
@@ -454,35 +425,6 @@ class AsyncFlows:
             "user.flows.get", "GET", f"/user/v1/flows/{util.quote_path(flow_id)}"
         )
         req.set_idempotent(True)
-
-        res = await self._transport.execute(req)
-
-        return res.decode_body(userv1.Flow.__json_decode__)
-
-    async def approve(
-        self,
-        flow_id: str,
-    ) -> userv1.Flow:
-        """
-        Approve a flow.
-
-        This will approve the specified flow and start the next step
-        in the flow (e.g. for a join organization flow it will send the
-        invitee an email with a link to join the organization).
-
-        :param flow_id:
-            The identifier of the flow.
-        """
-        req = Request(
-            "user.flows.approve",
-            "POST",
-            f"/user/v1/flows/{util.quote_path(flow_id)}:approve",
-        )
-        req.set_idempotent(True)
-
-        body: Dict[str, Any] = {}
-
-        req.set_body(body)
 
         res = await self._transport.execute(req)
 
