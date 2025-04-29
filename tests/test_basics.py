@@ -13,7 +13,7 @@ from userhub_sdk import (
     UserApi,
     UserHubError,
 )
-from userhub_sdk._internal import util
+from userhub_sdk._internal import constants, util
 from userhub_sdk.adminv1 import AccountConnection, User
 
 SYNC_ASYNC = (False, True)
@@ -92,7 +92,10 @@ async def test_api_get(
         httpserver.expect_oneshot_request(
             uri="/admin/v1/users/usr_1",
             method="GET",
-            headers={"Authorization": "Bearer sk_test"},
+            headers={
+                "UserHub-Api-Version": constants.API_VERSION,
+                "Authorization": "Bearer sk_test",
+            },
         ).respond_with_json(
             {
                 "id": "usr_1",
@@ -119,7 +122,10 @@ async def test_api_post(
         httpserver.expect_oneshot_request(
             uri="/admin/v1/users",
             method="POST",
-            headers={"Authorization": "Bearer sk_test"},
+            headers={
+                "UserHub-Api-Version": constants.API_VERSION,
+                "Authorization": "Bearer sk_test",
+            },
             json={"displayName": "Jane Doe"},
         ).respond_with_json(
             {
@@ -163,7 +169,10 @@ async def test_api_patch(
         httpserver.expect_oneshot_request(
             uri="/admin/v1/users/usr_1",
             method="PATCH",
-            headers={"Authorization": "Bearer sk_test"},
+            headers={
+                "UserHub-Api-Version": constants.API_VERSION,
+                "Authorization": "Bearer sk_test",
+            },
             json={"displayName": "Jane Doe"},
         ).respond_with_json(
             {
@@ -183,7 +192,10 @@ async def test_api_patch(
         httpserver.expect_request(
             uri="/admin/v1/users/usr_1",
             method="PATCH",
-            headers={"Authorization": "Bearer sk_test"},
+            headers={
+                "UserHub-Api-Version": constants.API_VERSION,
+                "Authorization": "Bearer sk_test",
+            },
             json={"displayName": ""},
         ).respond_with_json({"id": "usr_1"})
 
@@ -206,7 +218,10 @@ async def test_api_delete(
         httpserver.expect_oneshot_request(
             uri="/admin/v1/users/usr_1",
             method="DELETE",
-            headers={"Authorization": "Bearer sk_test"},
+            headers={
+                "UserHub-Api-Version": constants.API_VERSION,
+                "Authorization": "Bearer sk_test",
+            },
         ).respond_with_json({"id": "usr_1"})
 
         args = ("usr_1",)
@@ -228,7 +243,10 @@ async def test_api_error(
         httpserver.expect_oneshot_request(
             uri="/admin/v1/users/usr_1",
             method="GET",
-            headers={"Authorization": "Bearer sk_test"},
+            headers={
+                "UserHub-Api-Version": constants.API_VERSION,
+                "Authorization": "Bearer sk_test",
+            },
         ).respond_with_json(
             {
                 "code": "NOT_FOUND",
@@ -266,7 +284,10 @@ async def test_api_rate_limited(
             httpserver.expect_ordered_request(
                 uri="/admin/v1/users/usr_1",
                 method="GET",
-                headers={"Authorization": "Bearer sk_test"},
+                headers={
+                    "UserHub-Api-Version": constants.API_VERSION,
+                    "Authorization": "Bearer sk_test",
+                },
             ).respond_with_data(
                 response_data="API call rate limited",
                 status=429,

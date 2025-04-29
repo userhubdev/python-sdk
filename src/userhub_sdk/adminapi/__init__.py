@@ -20,12 +20,17 @@ class AdminApi(_client.Client):
         self,
         admin_key: str,
         *,
+        api_version: Optional[str] = None,
         base_url: Optional[str] = None,
     ):
+        if not api_version:
+            api_version = constants.API_VERSION
         if not base_url:
             base_url = constants.API_BASE_URL
 
         headers = {}
+
+        headers[constants.API_VERSION_HEADER] = api_version
 
         admin_key = (admin_key or "").strip()
         if not admin_key:
@@ -49,12 +54,17 @@ class AsyncAdminApi(_client.AsyncClient):
         self,
         admin_key: str,
         *,
+        api_version: Optional[str] = None,
         base_url: Optional[str] = None,
     ):
+        if not api_version:
+            api_version = constants.API_VERSION
         if not base_url:
             base_url = constants.API_BASE_URL
 
         headers = {}
+
+        headers[constants.API_VERSION_HEADER] = api_version
 
         admin_key = (admin_key or "").strip()
         if not admin_key:

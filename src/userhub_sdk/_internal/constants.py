@@ -4,11 +4,13 @@ import datetime
 import sys
 
 API_BASE_URL = "https://api.userhub.com"
+API_VERSION = "2022-11-15"
 USER_AGENT = "UserHub-Python/0.7.0"
 VERSION = "0.7.0"
 
 AUTH_HEADER = "Authorization"
 API_KEY_HEADER = "UserHub-Api-Key"
+API_VERSION_HEADER = "UserHub-Api-Version"
 
 WEBHOOK_ACTION_HEADER = "UserHub-Action"
 WEBHOOK_AGENT_HEADER = "Webhook-Agent"
