@@ -26,7 +26,7 @@ class PlanRevision:
     latest: Optional[bool] = None
     #: The tag for the revision.
     #:
-    #: This will only be set in checkout for plans set using a tag.
+    #: This is only set in checkout for plans selected using a tag.
     tag: Optional[str] = None
 
     def __json_encode__(self) -> Dict[str, Any]:

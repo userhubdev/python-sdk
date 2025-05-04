@@ -20,6 +20,8 @@ class Plan:
     id: str = ""
     #: The status of the plan.
     state: str = ""
+    #: The client defined unique identifier of the plan.
+    unique_id: Optional[str] = None
     #: The name of the plan.
     display_name: str = ""
     #: The description of the plan.
@@ -29,13 +31,11 @@ class Plan:
     #: This is only available in checkout and pricing.
     tier: Optional[str] = None
     #: The currency code for the plan (e.g. `USD`).
-    currency_code: str = ""
+    currency_code: Optional[str] = None
     #: The billing interval for the plan.
-    billing_interval: commonv1.Interval = dataclasses.field(
-        default_factory=commonv1.Interval
-    )
+    interval: Optional[commonv1.Interval] = None
     #: The revision for the plan.
-    revision: PlanRevision = dataclasses.field(default_factory=PlanRevision)
+    revision: Optional[PlanRevision] = None
     #: Whether this is the current plan for the subscription.
     #:
     #: This is only set in checkout.
@@ -72,6 +72,9 @@ class Plan:
         if self.state is not None:
             data["state"] = self.state
 
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
+
         if self.display_name is not None:
             data["displayName"] = self.display_name
 
@@ -84,10 +87,8 @@ class Plan:
         if self.currency_code is not None:
             data["currencyCode"] = self.currency_code
 
-        if self.billing_interval is not None:
-            data["billingInterval"] = commonv1.Interval.__json_encode__(
-                self.billing_interval
-            )
+        if self.interval is not None:
+            data["interval"] = commonv1.Interval.__json_encode__(self.interval)
 
         if self.revision is not None:
             data["revision"] = PlanRevision.__json_encode__(self.revision)
@@ -131,6 +132,9 @@ class Plan:
         if data.get("state") is not None:
             kwargs["state"] = data["state"]
 
+        if data.get("uniqueId") is not None:
+            kwargs["unique_id"] = data["uniqueId"]
+
         if data.get("displayName") is not None:
             kwargs["display_name"] = data["displayName"]
 
@@ -143,10 +147,8 @@ class Plan:
         if data.get("currencyCode") is not None:
             kwargs["currency_code"] = data["currencyCode"]
 
-        if data.get("billingInterval") is not None:
-            kwargs["billing_interval"] = commonv1.Interval.__json_decode__(
-                data["billingInterval"]
-            )
+        if data.get("interval") is not None:
+            kwargs["interval"] = commonv1.Interval.__json_decode__(data["interval"])
 
         if data.get("revision") is not None:
             kwargs["revision"] = PlanRevision.__json_decode__(data["revision"])

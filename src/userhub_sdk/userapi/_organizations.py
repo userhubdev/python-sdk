@@ -25,7 +25,7 @@ class Organizations:
         order_by: Optional[str] = None,
     ) -> userv1.ListOrganizationsResponse:
         """
-        Lists organizations.
+        List organizations.
 
         :param page_size:
             The maximum number of organizations to return. The API may return fewer than
@@ -41,10 +41,6 @@ class Organizations:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `displayName asc`
-            - `email asc`
         """
         req = Request("user.organizations.list", "GET", "/user/v1/organizations")
         req.set_idempotent(True)
@@ -69,7 +65,7 @@ class Organizations:
         flow_id: Optional[str] = None,
     ) -> userv1.Organization:
         """
-        Creates a new organization.
+        Create a new organization.
 
         :param unique_id:
             The client defined unique identifier of the organization account.
@@ -115,7 +111,7 @@ class Organizations:
         organization_id: str,
     ) -> userv1.Organization:
         """
-        Retrieves specified organization.
+        Get an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -141,7 +137,7 @@ class Organizations:
         flow_id: Union[Optional[str], Undefined] = UNDEFINED,
     ) -> userv1.Organization:
         """
-        Updates specified organization.
+        Update an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -190,12 +186,195 @@ class Organizations:
 
         return res.decode_body(userv1.Organization.__json_decode__)
 
+    def list_members(
+        self,
+        organization_id: str,
+        *,
+        page_size: Optional[int] = None,
+        page_token: Optional[str] = None,
+        order_by: Optional[str] = None,
+    ) -> userv1.ListMembersResponse:
+        """
+        List organization members.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param page_size:
+            The maximum number of members to return. The API may return fewer than
+            this value.
+
+            If unspecified, at most 20 members will be returned.
+            The maximum value is 100; values above 100 will be coerced to 100.
+        :param page_token:
+            A page token, received from a previous list members call.
+            Provide this to retrieve the subsequent page.
+
+            When paginating, all other parameters provided to list members must match
+            the call that provided the page token.
+        :param order_by:
+            A comma-separated list of fields to order by.
+        """
+        req = Request(
+            "user.organizations.listMembers",
+            "GET",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members",
+        )
+        req.set_idempotent(True)
+
+        if page_size:
+            req.set_query("pageSize", page_size)
+        if page_token:
+            req.set_query("pageToken", page_token)
+        if order_by:
+            req.set_query("orderBy", order_by)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(userv1.ListMembersResponse.__json_decode__)
+
+    def get_member(
+        self,
+        organization_id: str,
+        user_id: str,
+    ) -> userv1.Member:
+        """
+        Get an organization member.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "user.organizations.getMember",
+            "GET",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}",
+        )
+        req.set_idempotent(True)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(userv1.Member.__json_decode__)
+
+    def update_member(
+        self,
+        organization_id: str,
+        user_id: str,
+        *,
+        role_id: Union[str, Undefined] = UNDEFINED,
+    ) -> userv1.Member:
+        """
+        Update an organization member.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        :param role_id:
+            The identifier of the role.
+        """
+        req = Request(
+            "user.organizations.updateMember",
+            "PATCH",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if role_id is not UNDEFINED:
+            body["roleId"] = role_id
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(userv1.Member.__json_decode__)
+
+    def assign_member_seat(
+        self,
+        organization_id: str,
+        user_id: str,
+    ) -> userv1.Member:
+        """
+        Assign a seat to an organization member.
+
+        This will automatically purchase additional seats if none
+        are available and the plan has just-in-time seat provisioning
+        enabled.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "user.organizations.assignMemberSeat",
+            "POST",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}:assignSeat",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(userv1.Member.__json_decode__)
+
+    def unassign_member_seat(
+        self,
+        organization_id: str,
+        user_id: str,
+    ) -> userv1.Member:
+        """
+        Unassign a seat from an organization member.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "user.organizations.unassignMemberSeat",
+            "POST",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}:unassignSeat",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(userv1.Member.__json_decode__)
+
+    def remove_member(
+        self,
+        organization_id: str,
+        user_id: str,
+    ) -> apiv1.EmptyResponse:
+        """
+        Remove a member from an organization.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "user.organizations.removeMember",
+            "DELETE",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}",
+        )
+        res = self._transport.execute(req)
+
+        return res.decode_body(apiv1.EmptyResponse.__json_decode__)
+
     def delete(
         self,
         organization_id: str,
     ) -> apiv1.EmptyResponse:
         """
-        Delete specified organization.
+        Delete an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -214,7 +393,7 @@ class Organizations:
         organization_id: str,
     ) -> apiv1.EmptyResponse:
         """
-        Leave organization.
+        Leave an organization.
 
         This allows a user to remove themselves from an organization
         without have permission to manage the organization.
@@ -248,7 +427,7 @@ class AsyncOrganizations:
         order_by: Optional[str] = None,
     ) -> userv1.ListOrganizationsResponse:
         """
-        Lists organizations.
+        List organizations.
 
         :param page_size:
             The maximum number of organizations to return. The API may return fewer than
@@ -264,10 +443,6 @@ class AsyncOrganizations:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `displayName asc`
-            - `email asc`
         """
         req = Request("user.organizations.list", "GET", "/user/v1/organizations")
         req.set_idempotent(True)
@@ -292,7 +467,7 @@ class AsyncOrganizations:
         flow_id: Optional[str] = None,
     ) -> userv1.Organization:
         """
-        Creates a new organization.
+        Create a new organization.
 
         :param unique_id:
             The client defined unique identifier of the organization account.
@@ -338,7 +513,7 @@ class AsyncOrganizations:
         organization_id: str,
     ) -> userv1.Organization:
         """
-        Retrieves specified organization.
+        Get an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -364,7 +539,7 @@ class AsyncOrganizations:
         flow_id: Union[Optional[str], Undefined] = UNDEFINED,
     ) -> userv1.Organization:
         """
-        Updates specified organization.
+        Update an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -413,12 +588,195 @@ class AsyncOrganizations:
 
         return res.decode_body(userv1.Organization.__json_decode__)
 
+    async def list_members(
+        self,
+        organization_id: str,
+        *,
+        page_size: Optional[int] = None,
+        page_token: Optional[str] = None,
+        order_by: Optional[str] = None,
+    ) -> userv1.ListMembersResponse:
+        """
+        List organization members.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param page_size:
+            The maximum number of members to return. The API may return fewer than
+            this value.
+
+            If unspecified, at most 20 members will be returned.
+            The maximum value is 100; values above 100 will be coerced to 100.
+        :param page_token:
+            A page token, received from a previous list members call.
+            Provide this to retrieve the subsequent page.
+
+            When paginating, all other parameters provided to list members must match
+            the call that provided the page token.
+        :param order_by:
+            A comma-separated list of fields to order by.
+        """
+        req = Request(
+            "user.organizations.listMembers",
+            "GET",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members",
+        )
+        req.set_idempotent(True)
+
+        if page_size:
+            req.set_query("pageSize", page_size)
+        if page_token:
+            req.set_query("pageToken", page_token)
+        if order_by:
+            req.set_query("orderBy", order_by)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(userv1.ListMembersResponse.__json_decode__)
+
+    async def get_member(
+        self,
+        organization_id: str,
+        user_id: str,
+    ) -> userv1.Member:
+        """
+        Get an organization member.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "user.organizations.getMember",
+            "GET",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}",
+        )
+        req.set_idempotent(True)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(userv1.Member.__json_decode__)
+
+    async def update_member(
+        self,
+        organization_id: str,
+        user_id: str,
+        *,
+        role_id: Union[str, Undefined] = UNDEFINED,
+    ) -> userv1.Member:
+        """
+        Update an organization member.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        :param role_id:
+            The identifier of the role.
+        """
+        req = Request(
+            "user.organizations.updateMember",
+            "PATCH",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if role_id is not UNDEFINED:
+            body["roleId"] = role_id
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(userv1.Member.__json_decode__)
+
+    async def assign_member_seat(
+        self,
+        organization_id: str,
+        user_id: str,
+    ) -> userv1.Member:
+        """
+        Assign a seat to an organization member.
+
+        This will automatically purchase additional seats if none
+        are available and the plan has just-in-time seat provisioning
+        enabled.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "user.organizations.assignMemberSeat",
+            "POST",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}:assignSeat",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(userv1.Member.__json_decode__)
+
+    async def unassign_member_seat(
+        self,
+        organization_id: str,
+        user_id: str,
+    ) -> userv1.Member:
+        """
+        Unassign a seat from an organization member.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "user.organizations.unassignMemberSeat",
+            "POST",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}:unassignSeat",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(userv1.Member.__json_decode__)
+
+    async def remove_member(
+        self,
+        organization_id: str,
+        user_id: str,
+    ) -> apiv1.EmptyResponse:
+        """
+        Remove a member from an organization.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param user_id:
+            The identifier of the user.
+        """
+        req = Request(
+            "user.organizations.removeMember",
+            "DELETE",
+            f"/user/v1/organizations/{util.quote_path(organization_id)}/members/{util.quote_path(user_id)}",
+        )
+        res = await self._transport.execute(req)
+
+        return res.decode_body(apiv1.EmptyResponse.__json_decode__)
+
     async def delete(
         self,
         organization_id: str,
     ) -> apiv1.EmptyResponse:
         """
-        Delete specified organization.
+        Delete an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -437,7 +795,7 @@ class AsyncOrganizations:
         organization_id: str,
     ) -> apiv1.EmptyResponse:
         """
-        Leave organization.
+        Leave an organization.
 
         This allows a user to remove themselves from an organization
         without have permission to manage the organization.

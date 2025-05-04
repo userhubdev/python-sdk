@@ -13,7 +13,7 @@ class AdminApi(_client.Client):
     """
     The client for the Admin API.
 
-    :param admin_key: The Admin API key (e.g. `sk_2vm8...`).
+    :param admin_key: The Admin API key (e.g. `userhub_admin_2vm8...`).
     """
 
     def __init__(
@@ -47,7 +47,7 @@ class AsyncAdminApi(_client.AsyncClient):
     """
     The async client for the Admin API.
 
-    :param admin_key: The Admin API key (e.g. `sk_2vm8...`).
+    :param admin_key: The Admin API key (e.g. `userhub_admin_2vm8...`).
     """
 
     def __init__(

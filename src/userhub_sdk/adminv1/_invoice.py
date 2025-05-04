@@ -80,8 +80,8 @@ class Invoice:
     items: Optional[List[InvoiceItem]] = dataclasses.field(default_factory=list)
     #: The prorated changes that occurred mid-billing cycle.
     changes: Optional[List[InvoiceChange]] = dataclasses.field(default_factory=list)
-    #: The last time the invoice was pulled from the connection.
-    pull_time: Optional[datetime.datetime] = None
+    #: The invoice view.
+    view: str = ""
     #: The creation time of the invoice.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the invoice.
@@ -165,8 +165,8 @@ class Invoice:
         if self.changes is not None:
             data["changes"] = [InvoiceChange.__json_encode__(v) for v in self.changes]
 
-        if self.pull_time is not None:
-            data["pullTime"] = util.encode_datetime(self.pull_time)
+        if self.view is not None:
+            data["view"] = self.view
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
@@ -262,8 +262,8 @@ class Invoice:
                 InvoiceChange.__json_decode__(v) for v in data["changes"]
             ]
 
-        if data.get("pullTime") is not None:
-            kwargs["pull_time"] = util.decode_datetime(data["pullTime"])
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])

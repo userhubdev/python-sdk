@@ -39,6 +39,8 @@ class Role:
     default: bool = False
     #: The archived status of the role.
     archived: bool = False
+    #: The role view.
+    view: str = ""
     #: The creation time of the role.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the role.
@@ -73,6 +75,9 @@ class Role:
 
         if self.archived is not None:
             data["archived"] = self.archived
+
+        if self.view is not None:
+            data["view"] = self.view
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
@@ -115,6 +120,9 @@ class Role:
 
         if data.get("archived") is not None:
             kwargs["archived"] = data["archived"]
+
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])

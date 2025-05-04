@@ -1,9 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, Optional
-
-from ._card_payment_method_expiration import CardPaymentMethodExpiration
+from typing import Any, Dict
 
 
 @dataclasses.dataclass
@@ -14,10 +12,6 @@ class CardPaymentMethod:
 
     #: The brand of the card (e.g. `VISA`).
     brand: str = ""
-    #: The expiration date of the card.
-    #:
-    #: Deprecated: Use `exp_year` and `exp_month` instead.
-    expiration: Optional[CardPaymentMethodExpiration] = None
     #: The last for digits of the card.
     last4: str = ""
     #: The funding method for the card (e.g. `DEBIT`).
@@ -32,11 +26,6 @@ class CardPaymentMethod:
 
         if self.brand is not None:
             data["brand"] = self.brand
-
-        if self.expiration is not None:
-            data["expiration"] = CardPaymentMethodExpiration.__json_encode__(
-                self.expiration
-            )
 
         if self.last4 is not None:
             data["last4"] = self.last4
@@ -61,11 +50,6 @@ class CardPaymentMethod:
 
         if data.get("brand") is not None:
             kwargs["brand"] = data["brand"]
-
-        if data.get("expiration") is not None:
-            kwargs["expiration"] = CardPaymentMethodExpiration.__json_decode__(
-                data["expiration"]
-            )
 
         if data.get("last4") is not None:
             kwargs["last4"] = data["last4"]

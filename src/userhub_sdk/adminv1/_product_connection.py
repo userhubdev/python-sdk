@@ -23,10 +23,6 @@ class ProductConnection:
     state: str = ""
     #: The code that best describes the reason for the state.
     state_reason: Optional[str] = None
-    #: The last time the product was pulled from the connection.
-    pull_time: Optional[datetime.datetime] = None
-    #: The last time the product was pushed to the connection.
-    push_time: Optional[datetime.datetime] = None
     #: The creation time of the product connection.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the product connection.
@@ -46,12 +42,6 @@ class ProductConnection:
 
         if self.state_reason is not None:
             data["stateReason"] = self.state_reason
-
-        if self.pull_time is not None:
-            data["pullTime"] = util.encode_datetime(self.pull_time)
-
-        if self.push_time is not None:
-            data["pushTime"] = util.encode_datetime(self.push_time)
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
@@ -79,12 +69,6 @@ class ProductConnection:
 
         if data.get("stateReason") is not None:
             kwargs["state_reason"] = data["stateReason"]
-
-        if data.get("pullTime") is not None:
-            kwargs["pull_time"] = util.decode_datetime(data["pullTime"])
-
-        if data.get("pushTime") is not None:
-            kwargs["push_time"] = util.decode_datetime(data["pushTime"])
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])

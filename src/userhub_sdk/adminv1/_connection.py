@@ -49,12 +49,6 @@ class Connection:
     delegate: Optional[ConnectionDelegate] = None
     #: The connection providers.
     providers: List[ConnectionProvider] = dataclasses.field(default_factory=list)
-    #: The connection view.
-    view: str = ""
-    #: The creation time of the connection.
-    create_time: datetime.datetime = constants.EMPTY_DATETIME
-    #: The last update time of the connection.
-    update_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The Amazon Cognito connection data.
     amazon_cognito: Optional[AmazonCognitoConnection] = None
     #: The Auth0 connection data.
@@ -71,6 +65,12 @@ class Connection:
     stripe: Optional[StripeConnection] = None
     #: The webhooks configuration data.
     webhook: Optional[WebhookConnection] = None
+    #: The connection view.
+    view: str = ""
+    #: The creation time of the connection.
+    create_time: datetime.datetime = constants.EMPTY_DATETIME
+    #: The last update time of the connection.
+    update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -101,15 +101,6 @@ class Connection:
                 ConnectionProvider.__json_encode__(v) for v in self.providers
             ]
 
-        if self.view is not None:
-            data["view"] = self.view
-
-        if self.create_time is not None:
-            data["createTime"] = util.encode_datetime(self.create_time)
-
-        if self.update_time is not None:
-            data["updateTime"] = util.encode_datetime(self.update_time)
-
         if self.amazon_cognito is not None:
             data["amazonCognito"] = AmazonCognitoConnection.__json_encode__(
                 self.amazon_cognito
@@ -138,6 +129,15 @@ class Connection:
 
         if self.webhook is not None:
             data["webhook"] = WebhookConnection.__json_encode__(self.webhook)
+
+        if self.view is not None:
+            data["view"] = self.view
+
+        if self.create_time is not None:
+            data["createTime"] = util.encode_datetime(self.create_time)
+
+        if self.update_time is not None:
+            data["updateTime"] = util.encode_datetime(self.update_time)
 
         return data
 
@@ -174,15 +174,6 @@ class Connection:
                 ConnectionProvider.__json_decode__(v) for v in data["providers"]
             ]
 
-        if data.get("view") is not None:
-            kwargs["view"] = data["view"]
-
-        if data.get("createTime") is not None:
-            kwargs["create_time"] = util.decode_datetime(data["createTime"])
-
-        if data.get("updateTime") is not None:
-            kwargs["update_time"] = util.decode_datetime(data["updateTime"])
-
         if data.get("amazonCognito") is not None:
             kwargs["amazon_cognito"] = AmazonCognitoConnection.__json_decode__(
                 data["amazonCognito"]
@@ -211,5 +202,14 @@ class Connection:
 
         if data.get("webhook") is not None:
             kwargs["webhook"] = WebhookConnection.__json_decode__(data["webhook"])
+
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
+
+        if data.get("createTime") is not None:
+            kwargs["create_time"] = util.decode_datetime(data["createTime"])
+
+        if data.get("updateTime") is not None:
+            kwargs["update_time"] = util.decode_datetime(data["updateTime"])
 
         return Connection(**kwargs)

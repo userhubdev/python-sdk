@@ -29,7 +29,7 @@ class Subscriptions:
         view: Optional[str] = None,
     ) -> adminv1.ListSubscriptionsResponse:
         """
-        Lists subscriptions.
+        List subscriptions.
 
         :param organization_id:
             Filter results by organization identifier.
@@ -57,11 +57,6 @@ class Subscriptions:
             A comma-separated list of fields to order by.
 
             This is only supported when either `organizationId` or `userId` is specified.
-
-            Supports:
-            - `active desc`
-            - `createTime desc`
-            - `startTime desc`
         :param view:
             The Subscription view to return in the results.
 
@@ -99,7 +94,7 @@ class Subscriptions:
         user_id: Optional[str] = None,
     ) -> adminv1.Subscription:
         """
-        Retrieves specified subscription.
+        Get a subscription.
 
         :param subscription_id:
             The identifier of the subscription.
@@ -146,7 +141,7 @@ class AsyncSubscriptions:
         view: Optional[str] = None,
     ) -> adminv1.ListSubscriptionsResponse:
         """
-        Lists subscriptions.
+        List subscriptions.
 
         :param organization_id:
             Filter results by organization identifier.
@@ -174,11 +169,6 @@ class AsyncSubscriptions:
             A comma-separated list of fields to order by.
 
             This is only supported when either `organizationId` or `userId` is specified.
-
-            Supports:
-            - `active desc`
-            - `createTime desc`
-            - `startTime desc`
         :param view:
             The Subscription view to return in the results.
 
@@ -216,7 +206,7 @@ class AsyncSubscriptions:
         user_id: Optional[str] = None,
     ) -> adminv1.Subscription:
         """
-        Retrieves specified subscription.
+        Get a subscription.
 
         :param subscription_id:
             The identifier of the subscription.

@@ -1,12 +1,13 @@
 # Code generated. DO NOT EDIT.
 
 import datetime
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 from userhub_sdk import adminv1
 from userhub_sdk._internal import util
 from userhub_sdk._internal.request import Request
 from userhub_sdk._internal.transport import AsyncTransport, Transport
+from userhub_sdk.types import UNDEFINED, Undefined
 
 
 class Flows:
@@ -31,7 +32,7 @@ class Flows:
         view: Optional[str] = None,
     ) -> adminv1.ListFlowsResponse:
         """
-        Lists flows.
+        List flows.
 
         :param organization_id:
             Filter results by organization identifier.
@@ -61,9 +62,6 @@ class Flows:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `createTime desc`
         :param view:
             The Flow view to return in the results.
 
@@ -121,7 +119,7 @@ class Flows:
         :param email:
             The email address of the person to invite.
 
-            This is required if user is not specified or the user
+            This is required if the user is not specified or
             does not have an email address.
         :param display_name:
             The display name of the person to invite.
@@ -164,6 +162,38 @@ class Flows:
             body["expireTime"] = expire_time
         if ttl:
             body["ttl"] = ttl
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(adminv1.Flow.__json_decode__)
+
+    def update_join_organization(
+        self,
+        flow_id: str,
+        *,
+        role_id: Union[Optional[str], Undefined] = UNDEFINED,
+    ) -> adminv1.Flow:
+        """
+        Update a join organization flow.
+
+        :param flow_id:
+            The identifier of the flow.
+        :param role_id:
+            The identifier of the role.
+        """
+        req = Request(
+            "admin.flows.updateJoinOrganization",
+            "PATCH",
+            f"/admin/v1/flows/{util.quote_path(flow_id)}:updateJoinOrganization",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if role_id is not UNDEFINED:
+            body["roleId"] = role_id
 
         req.set_body(body)
 
@@ -235,7 +265,7 @@ class Flows:
         flow_id: str,
     ) -> adminv1.Flow:
         """
-        Retrieves specified flow.
+        Get a flow.
 
         :param flow_id:
             The identifier of the flow.
@@ -254,7 +284,7 @@ class Flows:
         flow_id: str,
     ) -> adminv1.Flow:
         """
-        Cancels specified flow.
+        Cancel a flow.
 
         :param flow_id:
             The identifier of the flow.
@@ -297,7 +327,7 @@ class AsyncFlows:
         view: Optional[str] = None,
     ) -> adminv1.ListFlowsResponse:
         """
-        Lists flows.
+        List flows.
 
         :param organization_id:
             Filter results by organization identifier.
@@ -327,9 +357,6 @@ class AsyncFlows:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `createTime desc`
         :param view:
             The Flow view to return in the results.
 
@@ -387,7 +414,7 @@ class AsyncFlows:
         :param email:
             The email address of the person to invite.
 
-            This is required if user is not specified or the user
+            This is required if the user is not specified or
             does not have an email address.
         :param display_name:
             The display name of the person to invite.
@@ -430,6 +457,38 @@ class AsyncFlows:
             body["expireTime"] = expire_time
         if ttl:
             body["ttl"] = ttl
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(adminv1.Flow.__json_decode__)
+
+    async def update_join_organization(
+        self,
+        flow_id: str,
+        *,
+        role_id: Union[Optional[str], Undefined] = UNDEFINED,
+    ) -> adminv1.Flow:
+        """
+        Update a join organization flow.
+
+        :param flow_id:
+            The identifier of the flow.
+        :param role_id:
+            The identifier of the role.
+        """
+        req = Request(
+            "admin.flows.updateJoinOrganization",
+            "PATCH",
+            f"/admin/v1/flows/{util.quote_path(flow_id)}:updateJoinOrganization",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if role_id is not UNDEFINED:
+            body["roleId"] = role_id
 
         req.set_body(body)
 
@@ -501,7 +560,7 @@ class AsyncFlows:
         flow_id: str,
     ) -> adminv1.Flow:
         """
-        Retrieves specified flow.
+        Get a flow.
 
         :param flow_id:
             The identifier of the flow.
@@ -520,7 +579,7 @@ class AsyncFlows:
         flow_id: str,
     ) -> adminv1.Flow:
         """
-        Cancels specified flow.
+        Cancel a flow.
 
         :param flow_id:
             The identifier of the flow.

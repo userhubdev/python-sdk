@@ -42,14 +42,14 @@ class PaymentMethod:
     #: This will be unset if the payment method is updated
     #: or if a payment succeeds.
     last_payment_error: Optional[apiv1.Status] = None
-    #: The last time the payment method was pulled from the connection.
-    pull_time: Optional[datetime.datetime] = None
+    #: Card payment method (e.g. Visa credit card).
+    card: Optional[CardPaymentMethod] = None
+    #: The payment method view.
+    view: str = ""
     #: The creation time of the payment method connection.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the payment method connection.
     update_time: datetime.datetime = constants.EMPTY_DATETIME
-    #: Card payment method (e.g. Visa credit card).
-    card: Optional[CardPaymentMethod] = None
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -86,17 +86,17 @@ class PaymentMethod:
                 self.last_payment_error
             )
 
-        if self.pull_time is not None:
-            data["pullTime"] = util.encode_datetime(self.pull_time)
+        if self.card is not None:
+            data["card"] = CardPaymentMethod.__json_encode__(self.card)
+
+        if self.view is not None:
+            data["view"] = self.view
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
 
         if self.update_time is not None:
             data["updateTime"] = util.encode_datetime(self.update_time)
-
-        if self.card is not None:
-            data["card"] = CardPaymentMethod.__json_encode__(self.card)
 
         return data
 
@@ -139,16 +139,16 @@ class PaymentMethod:
                 data["lastPaymentError"]
             )
 
-        if data.get("pullTime") is not None:
-            kwargs["pull_time"] = util.decode_datetime(data["pullTime"])
+        if data.get("card") is not None:
+            kwargs["card"] = CardPaymentMethod.__json_decode__(data["card"])
+
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])
 
         if data.get("updateTime") is not None:
             kwargs["update_time"] = util.decode_datetime(data["updateTime"])
-
-        if data.get("card") is not None:
-            kwargs["card"] = CardPaymentMethod.__json_decode__(data["card"])
 
         return PaymentMethod(**kwargs)

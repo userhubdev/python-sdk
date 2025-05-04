@@ -29,6 +29,8 @@ class Member:
     #: subscription for the organization or the user
     #: has not been assigned a seat.
     seat: Optional[AccountSubscriptionSeat] = None
+    #: The member view.
+    view: str = ""
     #: The creation time of the membership.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the membership.
@@ -48,6 +50,9 @@ class Member:
 
         if self.seat is not None:
             data["seat"] = AccountSubscriptionSeat.__json_encode__(self.seat)
+
+        if self.view is not None:
+            data["view"] = self.view
 
         if self.create_time is not None:
             data["createTime"] = util.encode_datetime(self.create_time)
@@ -75,6 +80,9 @@ class Member:
 
         if data.get("seat") is not None:
             kwargs["seat"] = AccountSubscriptionSeat.__json_decode__(data["seat"])
+
+        if data.get("view") is not None:
+            kwargs["view"] = data["view"]
 
         if data.get("createTime") is not None:
             kwargs["create_time"] = util.decode_datetime(data["createTime"])

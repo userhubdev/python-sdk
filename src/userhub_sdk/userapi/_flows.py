@@ -1,11 +1,12 @@
 # Code generated. DO NOT EDIT.
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Union
 
 from userhub_sdk import userv1
 from userhub_sdk._internal import util
 from userhub_sdk._internal.request import Request
 from userhub_sdk._internal.transport import AsyncTransport, Transport
+from userhub_sdk.types import UNDEFINED, Undefined
 
 
 class Flows:
@@ -28,7 +29,7 @@ class Flows:
         order_by: Optional[str] = None,
     ) -> userv1.ListFlowsResponse:
         """
-        Lists flows.
+        List flows.
 
         :param organization_id:
             The identifier of the organization.
@@ -58,9 +59,6 @@ class Flows:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `createTime desc`
         """
         req = Request("user.flows.list", "GET", "/user/v1/flows")
         req.set_idempotent(True)
@@ -94,7 +92,7 @@ class Flows:
         role_id: Optional[str] = None,
     ) -> userv1.Flow:
         """
-        Creates a join organization flow.
+        Create a new join organization flow.
 
         This invites a person to join an organization.
 
@@ -138,6 +136,38 @@ class Flows:
 
         return res.decode_body(userv1.Flow.__json_decode__)
 
+    def update_join_organization(
+        self,
+        flow_id: str,
+        *,
+        role_id: Union[Optional[str], Undefined] = UNDEFINED,
+    ) -> userv1.Flow:
+        """
+        Update a join organization flow.
+
+        :param flow_id:
+            The identifier of the flow.
+        :param role_id:
+            The identifier of the role.
+        """
+        req = Request(
+            "user.flows.updateJoinOrganization",
+            "PATCH",
+            f"/user/v1/flows/{util.quote_path(flow_id)}:updateJoinOrganization",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if role_id is not UNDEFINED:
+            body["roleId"] = role_id
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(userv1.Flow.__json_decode__)
+
     def create_signup(
         self,
         *,
@@ -146,7 +176,7 @@ class Flows:
         create_organization: Optional[bool] = None,
     ) -> userv1.Flow:
         """
-        Creates a signup flow.
+        Create a new signup flow.
 
         This invites a person to join the app.
 
@@ -178,7 +208,7 @@ class Flows:
         flow_id: str,
     ) -> userv1.Flow:
         """
-        Retrieves specified flow.
+        Get a flow.
 
         :param flow_id:
             The identifier of the flow or the flow secret.
@@ -197,7 +227,7 @@ class Flows:
         flow_id: str,
     ) -> userv1.Flow:
         """
-        Consume the flow.
+        Consume a flow.
 
         This accepts the flow (e.g. for a join organization flow it will
         accept the invitation and add the member to the organization).
@@ -223,7 +253,7 @@ class Flows:
         flow_id: str,
     ) -> userv1.Flow:
         """
-        Cancels specified flow.
+        Cancel a flow.
 
         This cancels the flow and hides it from the user.
 
@@ -266,7 +296,7 @@ class AsyncFlows:
         order_by: Optional[str] = None,
     ) -> userv1.ListFlowsResponse:
         """
-        Lists flows.
+        List flows.
 
         :param organization_id:
             The identifier of the organization.
@@ -296,9 +326,6 @@ class AsyncFlows:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `createTime desc`
         """
         req = Request("user.flows.list", "GET", "/user/v1/flows")
         req.set_idempotent(True)
@@ -332,7 +359,7 @@ class AsyncFlows:
         role_id: Optional[str] = None,
     ) -> userv1.Flow:
         """
-        Creates a join organization flow.
+        Create a new join organization flow.
 
         This invites a person to join an organization.
 
@@ -376,6 +403,38 @@ class AsyncFlows:
 
         return res.decode_body(userv1.Flow.__json_decode__)
 
+    async def update_join_organization(
+        self,
+        flow_id: str,
+        *,
+        role_id: Union[Optional[str], Undefined] = UNDEFINED,
+    ) -> userv1.Flow:
+        """
+        Update a join organization flow.
+
+        :param flow_id:
+            The identifier of the flow.
+        :param role_id:
+            The identifier of the role.
+        """
+        req = Request(
+            "user.flows.updateJoinOrganization",
+            "PATCH",
+            f"/user/v1/flows/{util.quote_path(flow_id)}:updateJoinOrganization",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if role_id is not UNDEFINED:
+            body["roleId"] = role_id
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(userv1.Flow.__json_decode__)
+
     async def create_signup(
         self,
         *,
@@ -384,7 +443,7 @@ class AsyncFlows:
         create_organization: Optional[bool] = None,
     ) -> userv1.Flow:
         """
-        Creates a signup flow.
+        Create a new signup flow.
 
         This invites a person to join the app.
 
@@ -416,7 +475,7 @@ class AsyncFlows:
         flow_id: str,
     ) -> userv1.Flow:
         """
-        Retrieves specified flow.
+        Get a flow.
 
         :param flow_id:
             The identifier of the flow or the flow secret.
@@ -435,7 +494,7 @@ class AsyncFlows:
         flow_id: str,
     ) -> userv1.Flow:
         """
-        Consume the flow.
+        Consume a flow.
 
         This accepts the flow (e.g. for a join organization flow it will
         accept the invitation and add the member to the organization).
@@ -461,7 +520,7 @@ class AsyncFlows:
         flow_id: str,
     ) -> userv1.Flow:
         """
-        Cancels specified flow.
+        Cancel a flow.
 
         This cancels the flow and hides it from the user.
 
