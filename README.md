@@ -3,8 +3,6 @@
 
 The official [UserHub](https://userhub.com) Python SDK.
 
-Stability: alpha
-
 ### Requirements
 
 * Python 3.8 or later
@@ -22,7 +20,7 @@ Example
 ```python
 from userhub_sdk import AdminApi
 
-admin_api = AdminApi("sk_123...")
+admin_api = AdminApi("userhub_admin_123...")
 
 res = admin_api.users.list(page_size=5)
 
