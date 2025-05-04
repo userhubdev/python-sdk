@@ -22,11 +22,11 @@ class SubscriptionSeatInfo:
     #:
     #: This might be less than the total quantity while a subscription change
     #: is pending or if the subscription is over-provisioned.
-    current_period_quantity: int = 0
-    #: The number of seats scheduled to appear on the next invoice.
+    current_quantity: int = 0
+    #: The number of seats expected at renewal.
     #:
-    #: This will only be set when different from current period quantity.
-    next_period_quantity: Optional[int] = None
+    #: This will only be set when different from current quantity.
+    renew_quantity: Optional[int] = None
     #: The number of seats currently assigned.
     assigned_quantity: int = 0
     #: The number of seats not assigned.
@@ -37,7 +37,7 @@ class SubscriptionSeatInfo:
     reserved_quantity: Optional[int] = None
     #: The number of seats which can be assigned or reserved.
     available_quantity: Optional[int] = None
-    #: The total number of seats for the current period.
+    #: The total number of seats associated with the subscription.
     total_quantity: int = 0
 
     def __json_encode__(self) -> Dict[str, Any]:
@@ -52,11 +52,11 @@ class SubscriptionSeatInfo:
         if self.product is not None:
             data["product"] = Product.__json_encode__(self.product)
 
-        if self.current_period_quantity is not None:
-            data["currentPeriodQuantity"] = self.current_period_quantity
+        if self.current_quantity is not None:
+            data["currentQuantity"] = self.current_quantity
 
-        if self.next_period_quantity is not None:
-            data["nextPeriodQuantity"] = self.next_period_quantity
+        if self.renew_quantity is not None:
+            data["renewQuantity"] = self.renew_quantity
 
         if self.assigned_quantity is not None:
             data["assignedQuantity"] = self.assigned_quantity
@@ -91,11 +91,11 @@ class SubscriptionSeatInfo:
         if data.get("product") is not None:
             kwargs["product"] = Product.__json_decode__(data["product"])
 
-        if data.get("currentPeriodQuantity") is not None:
-            kwargs["current_period_quantity"] = data["currentPeriodQuantity"]
+        if data.get("currentQuantity") is not None:
+            kwargs["current_quantity"] = data["currentQuantity"]
 
-        if data.get("nextPeriodQuantity") is not None:
-            kwargs["next_period_quantity"] = data["nextPeriodQuantity"]
+        if data.get("renewQuantity") is not None:
+            kwargs["renew_quantity"] = data["renewQuantity"]
 
         if data.get("assignedQuantity") is not None:
             kwargs["assigned_quantity"] = data["assignedQuantity"]

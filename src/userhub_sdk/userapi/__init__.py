@@ -13,7 +13,7 @@ class UserApi(_client.Client):
     """
     The client for the User API.
 
-    :param user_key: The User API key `pk_8anj...`.
+    :param user_key: The User API key `userhub_user_8anj...`.
     :param access_token: The user's API access token. You can get this by calling `admin_api.users.create_api_session`.
     """
 
@@ -53,7 +53,7 @@ class AsyncUserApi(_client.AsyncClient):
     """
     The client for the User API.
 
-    :param user_key: The User API key `pk_8anj...`.
+    :param user_key: The User API key `userhub_user_8anj...`.
     :param access_token: The user's API access token. You can get this by calling `admin_api.users.create_api_session`.
     """
 

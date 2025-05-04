@@ -40,26 +40,22 @@ class Price:
     display_name: Optional[str] = None
     #: The product associated with the price.
     product: Optional[Product] = None
-    #: The archived status of the price.
-    #:
-    #: It determines if the price can be used.
-    archived: bool = False
-    #: The last time the price was pulled from the connection.
-    pull_time: Optional[datetime.datetime] = None
-    #: The last time the price was pushed to the connection.
-    push_time: Optional[datetime.datetime] = None
-    #: The price view.
-    view: str = ""
-    #: The creation time of the price.
-    create_time: datetime.datetime = constants.EMPTY_DATETIME
-    #: The last update time of the price.
-    update_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The price is dependent on the quantity.
     empty: Optional[PriceEmptyPrice] = None
     #: The price is fixed per quantity.
     fixed: Optional[PriceFixedPrice] = None
     #: The price is dependent on the quantity.
     tiered: Optional[PriceTieredPrice] = None
+    #: The archived status of the price.
+    #:
+    #: It determines if the price can be used.
+    archived: bool = False
+    #: The price view.
+    view: str = ""
+    #: The creation time of the price.
+    create_time: datetime.datetime = constants.EMPTY_DATETIME
+    #: The last update time of the price.
+    update_time: datetime.datetime = constants.EMPTY_DATETIME
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -94,14 +90,17 @@ class Price:
         if self.product is not None:
             data["product"] = Product.__json_encode__(self.product)
 
+        if self.empty is not None:
+            data["empty"] = PriceEmptyPrice.__json_encode__(self.empty)
+
+        if self.fixed is not None:
+            data["fixed"] = PriceFixedPrice.__json_encode__(self.fixed)
+
+        if self.tiered is not None:
+            data["tiered"] = PriceTieredPrice.__json_encode__(self.tiered)
+
         if self.archived is not None:
             data["archived"] = self.archived
-
-        if self.pull_time is not None:
-            data["pullTime"] = util.encode_datetime(self.pull_time)
-
-        if self.push_time is not None:
-            data["pushTime"] = util.encode_datetime(self.push_time)
 
         if self.view is not None:
             data["view"] = self.view
@@ -111,15 +110,6 @@ class Price:
 
         if self.update_time is not None:
             data["updateTime"] = util.encode_datetime(self.update_time)
-
-        if self.empty is not None:
-            data["empty"] = PriceEmptyPrice.__json_encode__(self.empty)
-
-        if self.fixed is not None:
-            data["fixed"] = PriceFixedPrice.__json_encode__(self.fixed)
-
-        if self.tiered is not None:
-            data["tiered"] = PriceTieredPrice.__json_encode__(self.tiered)
 
         return data
 
@@ -160,14 +150,17 @@ class Price:
         if data.get("product") is not None:
             kwargs["product"] = Product.__json_decode__(data["product"])
 
+        if data.get("empty") is not None:
+            kwargs["empty"] = PriceEmptyPrice.__json_decode__(data["empty"])
+
+        if data.get("fixed") is not None:
+            kwargs["fixed"] = PriceFixedPrice.__json_decode__(data["fixed"])
+
+        if data.get("tiered") is not None:
+            kwargs["tiered"] = PriceTieredPrice.__json_decode__(data["tiered"])
+
         if data.get("archived") is not None:
             kwargs["archived"] = data["archived"]
-
-        if data.get("pullTime") is not None:
-            kwargs["pull_time"] = util.decode_datetime(data["pullTime"])
-
-        if data.get("pushTime") is not None:
-            kwargs["push_time"] = util.decode_datetime(data["pushTime"])
 
         if data.get("view") is not None:
             kwargs["view"] = data["view"]
@@ -177,14 +170,5 @@ class Price:
 
         if data.get("updateTime") is not None:
             kwargs["update_time"] = util.decode_datetime(data["updateTime"])
-
-        if data.get("empty") is not None:
-            kwargs["empty"] = PriceEmptyPrice.__json_decode__(data["empty"])
-
-        if data.get("fixed") is not None:
-            kwargs["fixed"] = PriceFixedPrice.__json_decode__(data["fixed"])
-
-        if data.get("tiered") is not None:
-            kwargs["tiered"] = PriceTieredPrice.__json_decode__(data["tiered"])
 
         return Price(**kwargs)

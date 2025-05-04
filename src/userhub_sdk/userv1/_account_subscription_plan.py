@@ -14,6 +14,8 @@ class AccountSubscriptionPlan:
 
     #: The identifier of the plan.
     id: str = ""
+    #: The client defined unique identifier of the plan.
+    unique_id: Optional[str] = None
     #: The human-readable display name of the plan.
     display_name: str = ""
     #: The plan product.
@@ -24,6 +26,9 @@ class AccountSubscriptionPlan:
 
         if self.id is not None:
             data["id"] = self.id
+
+        if self.unique_id is not None:
+            data["uniqueId"] = self.unique_id
 
         if self.display_name is not None:
             data["displayName"] = self.display_name
@@ -42,6 +47,9 @@ class AccountSubscriptionPlan:
 
         if data.get("id") is not None:
             kwargs["id"] = data["id"]
+
+        if data.get("uniqueId") is not None:
+            kwargs["unique_id"] = data["uniqueId"]
 
         if data.get("displayName") is not None:
             kwargs["display_name"] = data["displayName"]

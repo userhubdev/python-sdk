@@ -47,6 +47,11 @@ class Subscription:
     payment_method: Optional[PaymentMethod] = None
     #: Whether the subscription is scheduled to be canceled
     #: at the end of the current billing period.
+    renew_canceled: Optional[bool] = None
+    #: Whether the subscription is scheduled to be canceled
+    #: at the end of the current billing period.
+    #:
+    #: Deprecated: Use `renewCanceled` instead.
     cancel_period_end: Optional[bool] = None
     #: The anchor time for the billing cycle.
     anchor_time: Optional[datetime.datetime] = None
@@ -59,21 +64,11 @@ class Subscription:
     #: The current billing period for the subscription.
     current_period: Optional[SubscriptionCurrentPeriod] = None
     #: The organization owner of the subscription.
-    #:
-    #: The ID field of this object must be populated if
-    #: if user isn't specified.
     organization: Optional[Organization] = None
     #: The user owner of the subscription.
-    #:
-    #: The ID field of this object must be populated if
-    #: if organization isn't specified.
     user: Optional[User] = None
     #: Whether the subscription is the default for the account.
     default: bool = False
-    #: The last time the subscription was pulled from the connection.
-    pull_time: Optional[datetime.datetime] = None
-    #: The last time the subscription was pushed to the connection.
-    push_time: Optional[datetime.datetime] = None
     #: The subscription view.
     view: str = ""
     #: The creation time of the subscription.
@@ -116,6 +111,9 @@ class Subscription:
         if self.payment_method is not None:
             data["paymentMethod"] = PaymentMethod.__json_encode__(self.payment_method)
 
+        if self.renew_canceled is not None:
+            data["renewCanceled"] = self.renew_canceled
+
         if self.cancel_period_end is not None:
             data["cancelPeriodEnd"] = self.cancel_period_end
 
@@ -144,12 +142,6 @@ class Subscription:
 
         if self.default is not None:
             data["default"] = self.default
-
-        if self.pull_time is not None:
-            data["pullTime"] = util.encode_datetime(self.pull_time)
-
-        if self.push_time is not None:
-            data["pushTime"] = util.encode_datetime(self.push_time)
 
         if self.view is not None:
             data["view"] = self.view
@@ -205,6 +197,9 @@ class Subscription:
                 data["paymentMethod"]
             )
 
+        if data.get("renewCanceled") is not None:
+            kwargs["renew_canceled"] = data["renewCanceled"]
+
         if data.get("cancelPeriodEnd") is not None:
             kwargs["cancel_period_end"] = data["cancelPeriodEnd"]
 
@@ -233,12 +228,6 @@ class Subscription:
 
         if data.get("default") is not None:
             kwargs["default"] = data["default"]
-
-        if data.get("pullTime") is not None:
-            kwargs["pull_time"] = util.decode_datetime(data["pullTime"])
-
-        if data.get("pushTime") is not None:
-            kwargs["push_time"] = util.decode_datetime(data["pushTime"])
 
         if data.get("view") is not None:
             kwargs["view"] = data["view"]

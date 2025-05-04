@@ -5,9 +5,13 @@ from typing import Optional, Type
 
 from userhub_sdk._internal.transport import AsyncTransport, Transport
 
+from ._checkouts import AsyncCheckouts, Checkouts
 from ._flows import AsyncFlows, Flows
 from ._invoices import AsyncInvoices, Invoices
 from ._organizations import AsyncOrganizations, Organizations
+from ._payment_methods import AsyncPaymentMethods, PaymentMethods
+from ._pricing import AsyncPricing, Pricing
+from ._roles import AsyncRoles, Roles
 from ._subscriptions import AsyncSubscriptions, Subscriptions
 from ._users import AsyncUsers, Users
 
@@ -19,6 +23,13 @@ class Client:
 
     def __init__(self, transport: Transport):
         self._transport = transport
+
+    @property
+    def checkouts(self) -> Checkouts:
+        """
+        The checkout methods.
+        """
+        return Checkouts(self._transport)
 
     @property
     def flows(self) -> Flows:
@@ -40,6 +51,27 @@ class Client:
         The organization methods.
         """
         return Organizations(self._transport)
+
+    @property
+    def payment_methods(self) -> PaymentMethods:
+        """
+        The payment method methods.
+        """
+        return PaymentMethods(self._transport)
+
+    @property
+    def pricing(self) -> Pricing:
+        """
+        The pricing methods.
+        """
+        return Pricing(self._transport)
+
+    @property
+    def roles(self) -> Roles:
+        """
+        The role methods.
+        """
+        return Roles(self._transport)
 
     @property
     def subscriptions(self) -> Subscriptions:
@@ -80,6 +112,13 @@ class AsyncClient:
         self._transport = transport
 
     @property
+    def checkouts(self) -> AsyncCheckouts:
+        """
+        The checkout methods.
+        """
+        return AsyncCheckouts(self._transport)
+
+    @property
     def flows(self) -> AsyncFlows:
         """
         The flow methods.
@@ -99,6 +138,27 @@ class AsyncClient:
         The organization methods.
         """
         return AsyncOrganizations(self._transport)
+
+    @property
+    def payment_methods(self) -> AsyncPaymentMethods:
+        """
+        The payment method methods.
+        """
+        return AsyncPaymentMethods(self._transport)
+
+    @property
+    def pricing(self) -> AsyncPricing:
+        """
+        The pricing methods.
+        """
+        return AsyncPricing(self._transport)
+
+    @property
+    def roles(self) -> AsyncRoles:
+        """
+        The role methods.
+        """
+        return AsyncRoles(self._transport)
 
     @property
     def subscriptions(self) -> AsyncSubscriptions:

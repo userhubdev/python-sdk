@@ -30,7 +30,7 @@ class Users:
         view: Optional[str] = None,
     ) -> adminv1.ListUsersResponse:
         """
-        Lists users.
+        List users.
 
         :param display_name:
             Filter the results by display name.
@@ -62,13 +62,6 @@ class Users:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `displayName asc`
-            - `email asc`
-            - `signupTime desc`
-            - `createTime desc`
-            - `deleteTime desc`
         :param show_deleted:
             Whether to show deleted users.
         :param view:
@@ -117,7 +110,7 @@ class Users:
         disabled: Optional[bool] = None,
     ) -> adminv1.User:
         """
-        Creates a new user.
+        Create a user.
 
         :param unique_id:
             The client defined unique identifier of the user account.
@@ -203,7 +196,7 @@ class Users:
         user_id: str,
     ) -> adminv1.User:
         """
-        Retrieves specified user.
+        Get a user.
 
         :param user_id:
             The identifier of the user.
@@ -238,7 +231,7 @@ class Users:
         allow_missing: Optional[bool] = None,
     ) -> adminv1.User:
         """
-        Updates specified user.
+        Update a user.
 
         :param user_id:
             The identifier of the user.
@@ -336,7 +329,12 @@ class Users:
         user_id: str,
     ) -> adminv1.User:
         """
-        Marks specified user for deletion.
+        Delete a user.
+
+        This marks the user for deletion and can be restored during
+        a grace period.
+
+        To immediately delete a user, you must also call purge user.
 
         :param user_id:
             The identifier of the user.
@@ -355,7 +353,7 @@ class Users:
         user_id: str,
     ) -> adminv1.User:
         """
-        Un-marks specified user for deletion.
+        Restore a user.
 
         :param user_id:
             The identifier of the user.
@@ -378,7 +376,7 @@ class Users:
         user_id: str,
     ) -> adminv1.PurgeUserResponse:
         """
-        Hard delete the specified user.
+        Purge a deleted user.
 
         The user must be marked for deletion before it can be purged.
 
@@ -406,7 +404,7 @@ class Users:
         external_id: Optional[str] = None,
     ) -> adminv1.User:
         """
-        Connect specified user to external account.
+        Connect a user to an external account.
 
         :param user_id:
             The user identifier.
@@ -436,6 +434,86 @@ class Users:
 
         return res.decode_body(adminv1.User.__json_decode__)
 
+    def update_connection(
+        self,
+        user_id: str,
+        *,
+        connection_id: str,
+        display_name: Union[Optional[str], Undefined] = UNDEFINED,
+        email: Union[Optional[str], Undefined] = UNDEFINED,
+        email_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        phone_number: Union[Optional[str], Undefined] = UNDEFINED,
+        phone_number_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        currency_code: Union[Optional[str], Undefined] = UNDEFINED,
+        address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
+        disabled: Union[Optional[bool], Undefined] = UNDEFINED,
+    ) -> adminv1.User:
+        """
+        Update a user's external account.
+
+        :param user_id:
+            The identifier of the user.
+        :param connection_id:
+            The system-assigned identifier for the connection of the external account.
+        :param display_name:
+            The human-readable display name of the external account.
+
+            The maximum length is 200 characters.
+
+            This might be further restricted by the external provider.
+        :param email:
+            The email address of the external account.
+
+            The maximum length is 320 characters.
+
+            This might be further restricted by the external provider.
+        :param email_verified:
+            Whether the external account's email address has been verified.
+        :param phone_number:
+            The E164 phone number for the external account (e.g. `+12125550123`).
+        :param phone_number_verified:
+            Whether the external account's phone number has been verified.
+        :param currency_code:
+            The default ISO-4217 currency code for the external account (e.g. `USD`).
+        :param address:
+            The billing address for the external account.
+        :param disabled:
+            Whether the external account is disabled.
+        """
+        req = Request(
+            "admin.users.updateConnection",
+            "PATCH",
+            f"/admin/v1/users/{util.quote_path(user_id)}:updateConnection",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if connection_id:
+            body["connectionId"] = connection_id
+        if display_name is not UNDEFINED:
+            body["displayName"] = display_name
+        if email is not UNDEFINED:
+            body["email"] = email
+        if email_verified is not UNDEFINED:
+            body["emailVerified"] = email_verified
+        if phone_number is not UNDEFINED:
+            body["phoneNumber"] = phone_number
+        if phone_number_verified is not UNDEFINED:
+            body["phoneNumberVerified"] = phone_number_verified
+        if currency_code is not UNDEFINED:
+            body["currencyCode"] = currency_code
+        if address is not UNDEFINED:
+            body["address"] = address
+        if disabled is not UNDEFINED:
+            body["disabled"] = disabled
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(adminv1.User.__json_decode__)
+
     def disconnect(
         self,
         user_id: str,
@@ -444,7 +522,7 @@ class Users:
         delete_external_account: Optional[bool] = None,
     ) -> adminv1.User:
         """
-        Disconnect specified user from external account.
+        Disconnect a user from an external account.
 
         This will delete all the data associated with the connected account, including
         payment methods, invoices, and subscriptions.
@@ -486,10 +564,9 @@ class Users:
         user_id: str,
     ) -> adminv1.User:
         """
-        Import user from external identity provider if they don't already
-        exist.
+        Import a user from a user provider.
 
-        If the user already exists in UserHub, this is a no-op.
+        If the user already exists, this is a no-op.
 
         :param user_id:
             The identifier of the user.
@@ -548,7 +625,7 @@ class Users:
         organization_id: Optional[str] = None,
     ) -> adminv1.CreatePortalSessionResponse:
         """
-        Create Portal session.
+        Create a Portal session.
 
         :param user_id:
             The user ID.
@@ -572,8 +649,6 @@ class Users:
 
             Examples:
             * `/{accountId}` - the billing dashboard
-            * `/{accountId}/checkout` - start a checkout
-            * `/{accountId}/checkout/<some-plan-id>` - start a checkout with a specified plan
             * `/{accountId}/cancel` - cancel current plan
             * `/{accountId}/members` - manage organization members
             * `/{accountId}/invite` - invite a user to an organization
@@ -639,7 +714,7 @@ class AsyncUsers:
         view: Optional[str] = None,
     ) -> adminv1.ListUsersResponse:
         """
-        Lists users.
+        List users.
 
         :param display_name:
             Filter the results by display name.
@@ -671,13 +746,6 @@ class AsyncUsers:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `displayName asc`
-            - `email asc`
-            - `signupTime desc`
-            - `createTime desc`
-            - `deleteTime desc`
         :param show_deleted:
             Whether to show deleted users.
         :param view:
@@ -726,7 +794,7 @@ class AsyncUsers:
         disabled: Optional[bool] = None,
     ) -> adminv1.User:
         """
-        Creates a new user.
+        Create a user.
 
         :param unique_id:
             The client defined unique identifier of the user account.
@@ -812,7 +880,7 @@ class AsyncUsers:
         user_id: str,
     ) -> adminv1.User:
         """
-        Retrieves specified user.
+        Get a user.
 
         :param user_id:
             The identifier of the user.
@@ -847,7 +915,7 @@ class AsyncUsers:
         allow_missing: Optional[bool] = None,
     ) -> adminv1.User:
         """
-        Updates specified user.
+        Update a user.
 
         :param user_id:
             The identifier of the user.
@@ -945,7 +1013,12 @@ class AsyncUsers:
         user_id: str,
     ) -> adminv1.User:
         """
-        Marks specified user for deletion.
+        Delete a user.
+
+        This marks the user for deletion and can be restored during
+        a grace period.
+
+        To immediately delete a user, you must also call purge user.
 
         :param user_id:
             The identifier of the user.
@@ -964,7 +1037,7 @@ class AsyncUsers:
         user_id: str,
     ) -> adminv1.User:
         """
-        Un-marks specified user for deletion.
+        Restore a user.
 
         :param user_id:
             The identifier of the user.
@@ -987,7 +1060,7 @@ class AsyncUsers:
         user_id: str,
     ) -> adminv1.PurgeUserResponse:
         """
-        Hard delete the specified user.
+        Purge a deleted user.
 
         The user must be marked for deletion before it can be purged.
 
@@ -1015,7 +1088,7 @@ class AsyncUsers:
         external_id: Optional[str] = None,
     ) -> adminv1.User:
         """
-        Connect specified user to external account.
+        Connect a user to an external account.
 
         :param user_id:
             The user identifier.
@@ -1045,6 +1118,86 @@ class AsyncUsers:
 
         return res.decode_body(adminv1.User.__json_decode__)
 
+    async def update_connection(
+        self,
+        user_id: str,
+        *,
+        connection_id: str,
+        display_name: Union[Optional[str], Undefined] = UNDEFINED,
+        email: Union[Optional[str], Undefined] = UNDEFINED,
+        email_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        phone_number: Union[Optional[str], Undefined] = UNDEFINED,
+        phone_number_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        currency_code: Union[Optional[str], Undefined] = UNDEFINED,
+        address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
+        disabled: Union[Optional[bool], Undefined] = UNDEFINED,
+    ) -> adminv1.User:
+        """
+        Update a user's external account.
+
+        :param user_id:
+            The identifier of the user.
+        :param connection_id:
+            The system-assigned identifier for the connection of the external account.
+        :param display_name:
+            The human-readable display name of the external account.
+
+            The maximum length is 200 characters.
+
+            This might be further restricted by the external provider.
+        :param email:
+            The email address of the external account.
+
+            The maximum length is 320 characters.
+
+            This might be further restricted by the external provider.
+        :param email_verified:
+            Whether the external account's email address has been verified.
+        :param phone_number:
+            The E164 phone number for the external account (e.g. `+12125550123`).
+        :param phone_number_verified:
+            Whether the external account's phone number has been verified.
+        :param currency_code:
+            The default ISO-4217 currency code for the external account (e.g. `USD`).
+        :param address:
+            The billing address for the external account.
+        :param disabled:
+            Whether the external account is disabled.
+        """
+        req = Request(
+            "admin.users.updateConnection",
+            "PATCH",
+            f"/admin/v1/users/{util.quote_path(user_id)}:updateConnection",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if connection_id:
+            body["connectionId"] = connection_id
+        if display_name is not UNDEFINED:
+            body["displayName"] = display_name
+        if email is not UNDEFINED:
+            body["email"] = email
+        if email_verified is not UNDEFINED:
+            body["emailVerified"] = email_verified
+        if phone_number is not UNDEFINED:
+            body["phoneNumber"] = phone_number
+        if phone_number_verified is not UNDEFINED:
+            body["phoneNumberVerified"] = phone_number_verified
+        if currency_code is not UNDEFINED:
+            body["currencyCode"] = currency_code
+        if address is not UNDEFINED:
+            body["address"] = address
+        if disabled is not UNDEFINED:
+            body["disabled"] = disabled
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(adminv1.User.__json_decode__)
+
     async def disconnect(
         self,
         user_id: str,
@@ -1053,7 +1206,7 @@ class AsyncUsers:
         delete_external_account: Optional[bool] = None,
     ) -> adminv1.User:
         """
-        Disconnect specified user from external account.
+        Disconnect a user from an external account.
 
         This will delete all the data associated with the connected account, including
         payment methods, invoices, and subscriptions.
@@ -1095,10 +1248,9 @@ class AsyncUsers:
         user_id: str,
     ) -> adminv1.User:
         """
-        Import user from external identity provider if they don't already
-        exist.
+        Import a user from a user provider.
 
-        If the user already exists in UserHub, this is a no-op.
+        If the user already exists, this is a no-op.
 
         :param user_id:
             The identifier of the user.
@@ -1157,7 +1309,7 @@ class AsyncUsers:
         organization_id: Optional[str] = None,
     ) -> adminv1.CreatePortalSessionResponse:
         """
-        Create Portal session.
+        Create a Portal session.
 
         :param user_id:
             The user ID.
@@ -1181,8 +1333,6 @@ class AsyncUsers:
 
             Examples:
             * `/{accountId}` - the billing dashboard
-            * `/{accountId}/checkout` - start a checkout
-            * `/{accountId}/checkout/<some-plan-id>` - start a checkout with a specified plan
             * `/{accountId}/cancel` - cancel current plan
             * `/{accountId}/members` - manage organization members
             * `/{accountId}/invite` - invite a user to an organization

@@ -19,7 +19,7 @@ class Session:
         self,
     ) -> userv1.Session:
         """
-        Get the current session details.
+        Get details about the current session.
         """
         req = Request("user.session.get", "GET", "/user/v1/session")
         req.set_idempotent(True)
@@ -34,7 +34,7 @@ class Session:
         token: str,
     ) -> userv1.ExchangeSessionTokenResponse:
         """
-        Exchange an ID token from your IdP for an access token.
+        Exchange an ID token from an IdP for an access token.
 
         :param token:
             The IdP ID token which is used to authenticated the user.
@@ -62,7 +62,7 @@ class Session:
         success_url: Optional[str] = None,
     ) -> userv1.CreatePortalSessionResponse:
         """
-        Create Portal session.
+        Create a new Portal session.
 
         :param organization_id:
             The identifier of the organization.
@@ -134,7 +134,7 @@ class AsyncSession:
         self,
     ) -> userv1.Session:
         """
-        Get the current session details.
+        Get details about the current session.
         """
         req = Request("user.session.get", "GET", "/user/v1/session")
         req.set_idempotent(True)
@@ -149,7 +149,7 @@ class AsyncSession:
         token: str,
     ) -> userv1.ExchangeSessionTokenResponse:
         """
-        Exchange an ID token from your IdP for an access token.
+        Exchange an ID token from an IdP for an access token.
 
         :param token:
             The IdP ID token which is used to authenticated the user.
@@ -177,7 +177,7 @@ class AsyncSession:
         success_url: Optional[str] = None,
     ) -> userv1.CreatePortalSessionResponse:
         """
-        Create Portal session.
+        Create a new Portal session.
 
         :param organization_id:
             The identifier of the organization.

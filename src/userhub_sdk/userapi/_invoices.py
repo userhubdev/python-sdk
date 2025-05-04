@@ -1,6 +1,6 @@
 # Code generated. DO NOT EDIT.
 
-from typing import Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk import userv1
 from userhub_sdk._internal import util
@@ -25,7 +25,7 @@ class Invoices:
         order_by: Optional[str] = None,
     ) -> userv1.ListInvoicesResponse:
         """
-        Lists invoices.
+        List invoices.
 
         :param organization_id:
             Show results for specified organization.
@@ -46,10 +46,6 @@ class Invoices:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `createTime asc`
-            - `createTime desc`
         """
         req = Request("user.invoices.list", "GET", "/user/v1/invoices")
         req.set_idempotent(True)
@@ -72,7 +68,7 @@ class Invoices:
         invoice_id: str,
     ) -> userv1.Invoice:
         """
-        Retrieves specified invoice.
+        Get an invoice.
 
         :param invoice_id:
             The identifier of the invoice.
@@ -83,6 +79,29 @@ class Invoices:
             f"/user/v1/invoices/{util.quote_path(invoice_id)}",
         )
         req.set_idempotent(True)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(userv1.Invoice.__json_decode__)
+
+    def pay(
+        self,
+        invoice_id: str,
+    ) -> userv1.Invoice:
+        """
+        Pay an invoice.
+
+        :param invoice_id:
+            The identifier of the invoice.
+        """
+        req = Request(
+            "user.invoices.pay",
+            "POST",
+            f"/user/v1/invoices/{util.quote_path(invoice_id)}:pay",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
 
         res = self._transport.execute(req)
 
@@ -106,7 +125,7 @@ class AsyncInvoices:
         order_by: Optional[str] = None,
     ) -> userv1.ListInvoicesResponse:
         """
-        Lists invoices.
+        List invoices.
 
         :param organization_id:
             Show results for specified organization.
@@ -127,10 +146,6 @@ class AsyncInvoices:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `createTime asc`
-            - `createTime desc`
         """
         req = Request("user.invoices.list", "GET", "/user/v1/invoices")
         req.set_idempotent(True)
@@ -153,7 +168,7 @@ class AsyncInvoices:
         invoice_id: str,
     ) -> userv1.Invoice:
         """
-        Retrieves specified invoice.
+        Get an invoice.
 
         :param invoice_id:
             The identifier of the invoice.
@@ -164,6 +179,29 @@ class AsyncInvoices:
             f"/user/v1/invoices/{util.quote_path(invoice_id)}",
         )
         req.set_idempotent(True)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(userv1.Invoice.__json_decode__)
+
+    async def pay(
+        self,
+        invoice_id: str,
+    ) -> userv1.Invoice:
+        """
+        Pay an invoice.
+
+        :param invoice_id:
+            The identifier of the invoice.
+        """
+        req = Request(
+            "user.invoices.pay",
+            "POST",
+            f"/user/v1/invoices/{util.quote_path(invoice_id)}:pay",
+        )
+        body: Dict[str, Any] = {}
+
+        req.set_body(body)
 
         res = await self._transport.execute(req)
 

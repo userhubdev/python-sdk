@@ -44,16 +44,16 @@ class Flow:
     #:
     #: This is only populated on create.
     secret: Optional[str] = None
+    #: The join organization flow type specific data.
+    join_organization: Optional[JoinOrganizationFlow] = None
+    #: The signup flow type specific data
+    signup: Optional[SignupFlow] = None
     #: The flow view.
     view: str = ""
     #: The creation time of the flow.
     create_time: datetime.datetime = constants.EMPTY_DATETIME
     #: The last update time of the flow.
     update_time: datetime.datetime = constants.EMPTY_DATETIME
-    #: The join organization flow type specific data.
-    join_organization: Optional[JoinOrganizationFlow] = None
-    #: The signup flow type specific data
-    signup: Optional[SignupFlow] = None
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -91,6 +91,14 @@ class Flow:
         if self.secret is not None:
             data["secret"] = self.secret
 
+        if self.join_organization is not None:
+            data["joinOrganization"] = JoinOrganizationFlow.__json_encode__(
+                self.join_organization
+            )
+
+        if self.signup is not None:
+            data["signup"] = SignupFlow.__json_encode__(self.signup)
+
         if self.view is not None:
             data["view"] = self.view
 
@@ -99,14 +107,6 @@ class Flow:
 
         if self.update_time is not None:
             data["updateTime"] = util.encode_datetime(self.update_time)
-
-        if self.join_organization is not None:
-            data["joinOrganization"] = JoinOrganizationFlow.__json_encode__(
-                self.join_organization
-            )
-
-        if self.signup is not None:
-            data["signup"] = SignupFlow.__json_encode__(self.signup)
 
         return data
 
@@ -150,6 +150,14 @@ class Flow:
         if data.get("secret") is not None:
             kwargs["secret"] = data["secret"]
 
+        if data.get("joinOrganization") is not None:
+            kwargs["join_organization"] = JoinOrganizationFlow.__json_decode__(
+                data["joinOrganization"]
+            )
+
+        if data.get("signup") is not None:
+            kwargs["signup"] = SignupFlow.__json_decode__(data["signup"])
+
         if data.get("view") is not None:
             kwargs["view"] = data["view"]
 
@@ -158,13 +166,5 @@ class Flow:
 
         if data.get("updateTime") is not None:
             kwargs["update_time"] = util.decode_datetime(data["updateTime"])
-
-        if data.get("joinOrganization") is not None:
-            kwargs["join_organization"] = JoinOrganizationFlow.__json_decode__(
-                data["joinOrganization"]
-            )
-
-        if data.get("signup") is not None:
-            kwargs["signup"] = SignupFlow.__json_decode__(data["signup"])
 
         return Flow(**kwargs)

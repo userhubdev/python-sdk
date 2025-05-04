@@ -30,7 +30,7 @@ class Organizations:
         view: Optional[str] = None,
     ) -> adminv1.ListOrganizationsResponse:
         """
-        Lists organizations.
+        List organizations.
 
         :param display_name:
             Filter the results by display name.
@@ -62,13 +62,6 @@ class Organizations:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `displayName asc`
-            - `email asc`
-            - `signupTime desc`
-            - `createTime desc`
-            - `deleteTime desc`
         :param show_deleted:
             Whether to show deleted organizations.
         :param view:
@@ -117,7 +110,7 @@ class Organizations:
         disabled: Optional[bool] = None,
     ) -> adminv1.Organization:
         """
-        Creates a new organization.
+        Create an organization.
 
         :param unique_id:
             The client defined unique identifier of the organization account.
@@ -203,7 +196,7 @@ class Organizations:
         organization_id: str,
     ) -> adminv1.Organization:
         """
-        Retrieves specified organization.
+        Get an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -240,7 +233,7 @@ class Organizations:
         allow_missing: Optional[bool] = None,
     ) -> adminv1.Organization:
         """
-        Updates specified organization.
+        Update an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -340,7 +333,13 @@ class Organizations:
         organization_id: str,
     ) -> adminv1.Organization:
         """
-        Marks specified organization for deletion.
+        Delete an organization.
+
+        This marks the organization for deletion and can be restored during
+        a grace period.
+
+        To immediately delete an organization, you must also call purge
+        organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -361,7 +360,7 @@ class Organizations:
         organization_id: str,
     ) -> adminv1.Organization:
         """
-        Un-marks specified organization for deletion.
+        Restore an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -386,7 +385,7 @@ class Organizations:
         organization_id: str,
     ) -> adminv1.PurgeOrganizationResponse:
         """
-        Hard delete the specified organization.
+        Purge a deleted organization.
 
         The organization must be marked for deletion before it can be purged.
 
@@ -414,7 +413,7 @@ class Organizations:
         external_id: Optional[str] = None,
     ) -> adminv1.Organization:
         """
-        Connect specified organization to external account.
+        Connect an organization to an external account.
 
         :param organization_id:
             The organization identifier.
@@ -444,6 +443,86 @@ class Organizations:
 
         return res.decode_body(adminv1.Organization.__json_decode__)
 
+    def update_connection(
+        self,
+        organization_id: str,
+        *,
+        connection_id: str,
+        display_name: Union[Optional[str], Undefined] = UNDEFINED,
+        email: Union[Optional[str], Undefined] = UNDEFINED,
+        email_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        phone_number: Union[Optional[str], Undefined] = UNDEFINED,
+        phone_number_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        currency_code: Union[Optional[str], Undefined] = UNDEFINED,
+        address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
+        disabled: Union[Optional[bool], Undefined] = UNDEFINED,
+    ) -> adminv1.Organization:
+        """
+        Update an organization's external account.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param connection_id:
+            The system-assigned identifier for the connection of the external account.
+        :param display_name:
+            The human-readable display name of the external account.
+
+            The maximum length is 200 characters.
+
+            This might be further restricted by the external provider.
+        :param email:
+            The email address of the external account.
+
+            The maximum length is 320 characters.
+
+            This might be further restricted by the external provider.
+        :param email_verified:
+            Whether the external account's email address has been verified.
+        :param phone_number:
+            The E164 phone number for the external account (e.g. `+12125550123`).
+        :param phone_number_verified:
+            Whether the external account's phone number has been verified.
+        :param currency_code:
+            The default ISO-4217 currency code for the external account (e.g. `USD`).
+        :param address:
+            The billing address for the external account.
+        :param disabled:
+            Whether the external account is disabled.
+        """
+        req = Request(
+            "admin.organizations.updateConnection",
+            "PATCH",
+            f"/admin/v1/organizations/{util.quote_path(organization_id)}:updateConnection",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if connection_id:
+            body["connectionId"] = connection_id
+        if display_name is not UNDEFINED:
+            body["displayName"] = display_name
+        if email is not UNDEFINED:
+            body["email"] = email
+        if email_verified is not UNDEFINED:
+            body["emailVerified"] = email_verified
+        if phone_number is not UNDEFINED:
+            body["phoneNumber"] = phone_number
+        if phone_number_verified is not UNDEFINED:
+            body["phoneNumberVerified"] = phone_number_verified
+        if currency_code is not UNDEFINED:
+            body["currencyCode"] = currency_code
+        if address is not UNDEFINED:
+            body["address"] = address
+        if disabled is not UNDEFINED:
+            body["disabled"] = disabled
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(adminv1.Organization.__json_decode__)
+
     def disconnect(
         self,
         organization_id: str,
@@ -452,7 +531,7 @@ class Organizations:
         delete_external_account: Optional[bool] = None,
     ) -> adminv1.Organization:
         """
-        Disconnect specified organization from external account.
+        Disconnect an organization from an external account.
 
         This will delete all the data associated with the connected account, including
         payment methods, invoices, and subscriptions.
@@ -501,7 +580,7 @@ class Organizations:
         order_by: Optional[str] = None,
     ) -> adminv1.ListMembersResponse:
         """
-        Lists organization members.
+        List organization members.
 
         :param organization_id:
             The identifier of the organization.
@@ -537,11 +616,6 @@ class Organizations:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `displayName asc`
-            - `email asc`
-            - `createTime desc`
         """
         req = Request(
             "admin.organizations.listMembers",
@@ -575,7 +649,7 @@ class Organizations:
         role_id: Optional[str] = None,
     ) -> adminv1.Member:
         """
-        Creates a new organization member.
+        Create an organization member.
 
         :param organization_id:
             The identifier of the organization.
@@ -608,7 +682,7 @@ class Organizations:
         user_id: str,
     ) -> adminv1.Member:
         """
-        Retrieves specified organization member.
+        Get an organization member.
 
         :param organization_id:
             The identifier of the organization.
@@ -635,7 +709,7 @@ class Organizations:
         allow_missing: Optional[bool] = None,
     ) -> adminv1.Member:
         """
-        Updates specified organization member.
+        Update an organization member.
 
         :param organization_id:
             The identifier of the organization.
@@ -672,7 +746,7 @@ class Organizations:
         user_id: str,
     ) -> apiv1.EmptyResponse:
         """
-        Deletes specified organization member.
+        Delete an organization member.
 
         :param organization_id:
             The identifier of the organization.
@@ -709,7 +783,7 @@ class AsyncOrganizations:
         view: Optional[str] = None,
     ) -> adminv1.ListOrganizationsResponse:
         """
-        Lists organizations.
+        List organizations.
 
         :param display_name:
             Filter the results by display name.
@@ -741,13 +815,6 @@ class AsyncOrganizations:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `displayName asc`
-            - `email asc`
-            - `signupTime desc`
-            - `createTime desc`
-            - `deleteTime desc`
         :param show_deleted:
             Whether to show deleted organizations.
         :param view:
@@ -796,7 +863,7 @@ class AsyncOrganizations:
         disabled: Optional[bool] = None,
     ) -> adminv1.Organization:
         """
-        Creates a new organization.
+        Create an organization.
 
         :param unique_id:
             The client defined unique identifier of the organization account.
@@ -882,7 +949,7 @@ class AsyncOrganizations:
         organization_id: str,
     ) -> adminv1.Organization:
         """
-        Retrieves specified organization.
+        Get an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -919,7 +986,7 @@ class AsyncOrganizations:
         allow_missing: Optional[bool] = None,
     ) -> adminv1.Organization:
         """
-        Updates specified organization.
+        Update an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -1019,7 +1086,13 @@ class AsyncOrganizations:
         organization_id: str,
     ) -> adminv1.Organization:
         """
-        Marks specified organization for deletion.
+        Delete an organization.
+
+        This marks the organization for deletion and can be restored during
+        a grace period.
+
+        To immediately delete an organization, you must also call purge
+        organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -1040,7 +1113,7 @@ class AsyncOrganizations:
         organization_id: str,
     ) -> adminv1.Organization:
         """
-        Un-marks specified organization for deletion.
+        Restore an organization.
 
         :param organization_id:
             The identifier of the organization.
@@ -1065,7 +1138,7 @@ class AsyncOrganizations:
         organization_id: str,
     ) -> adminv1.PurgeOrganizationResponse:
         """
-        Hard delete the specified organization.
+        Purge a deleted organization.
 
         The organization must be marked for deletion before it can be purged.
 
@@ -1093,7 +1166,7 @@ class AsyncOrganizations:
         external_id: Optional[str] = None,
     ) -> adminv1.Organization:
         """
-        Connect specified organization to external account.
+        Connect an organization to an external account.
 
         :param organization_id:
             The organization identifier.
@@ -1123,6 +1196,86 @@ class AsyncOrganizations:
 
         return res.decode_body(adminv1.Organization.__json_decode__)
 
+    async def update_connection(
+        self,
+        organization_id: str,
+        *,
+        connection_id: str,
+        display_name: Union[Optional[str], Undefined] = UNDEFINED,
+        email: Union[Optional[str], Undefined] = UNDEFINED,
+        email_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        phone_number: Union[Optional[str], Undefined] = UNDEFINED,
+        phone_number_verified: Union[Optional[bool], Undefined] = UNDEFINED,
+        currency_code: Union[Optional[str], Undefined] = UNDEFINED,
+        address: Union[Optional[commonv1.Address], Undefined] = UNDEFINED,
+        disabled: Union[Optional[bool], Undefined] = UNDEFINED,
+    ) -> adminv1.Organization:
+        """
+        Update an organization's external account.
+
+        :param organization_id:
+            The identifier of the organization.
+        :param connection_id:
+            The system-assigned identifier for the connection of the external account.
+        :param display_name:
+            The human-readable display name of the external account.
+
+            The maximum length is 200 characters.
+
+            This might be further restricted by the external provider.
+        :param email:
+            The email address of the external account.
+
+            The maximum length is 320 characters.
+
+            This might be further restricted by the external provider.
+        :param email_verified:
+            Whether the external account's email address has been verified.
+        :param phone_number:
+            The E164 phone number for the external account (e.g. `+12125550123`).
+        :param phone_number_verified:
+            Whether the external account's phone number has been verified.
+        :param currency_code:
+            The default ISO-4217 currency code for the external account (e.g. `USD`).
+        :param address:
+            The billing address for the external account.
+        :param disabled:
+            Whether the external account is disabled.
+        """
+        req = Request(
+            "admin.organizations.updateConnection",
+            "PATCH",
+            f"/admin/v1/organizations/{util.quote_path(organization_id)}:updateConnection",
+        )
+        req.set_idempotent(True)
+
+        body: Dict[str, Any] = {}
+
+        if connection_id:
+            body["connectionId"] = connection_id
+        if display_name is not UNDEFINED:
+            body["displayName"] = display_name
+        if email is not UNDEFINED:
+            body["email"] = email
+        if email_verified is not UNDEFINED:
+            body["emailVerified"] = email_verified
+        if phone_number is not UNDEFINED:
+            body["phoneNumber"] = phone_number
+        if phone_number_verified is not UNDEFINED:
+            body["phoneNumberVerified"] = phone_number_verified
+        if currency_code is not UNDEFINED:
+            body["currencyCode"] = currency_code
+        if address is not UNDEFINED:
+            body["address"] = address
+        if disabled is not UNDEFINED:
+            body["disabled"] = disabled
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(adminv1.Organization.__json_decode__)
+
     async def disconnect(
         self,
         organization_id: str,
@@ -1131,7 +1284,7 @@ class AsyncOrganizations:
         delete_external_account: Optional[bool] = None,
     ) -> adminv1.Organization:
         """
-        Disconnect specified organization from external account.
+        Disconnect an organization from an external account.
 
         This will delete all the data associated with the connected account, including
         payment methods, invoices, and subscriptions.
@@ -1180,7 +1333,7 @@ class AsyncOrganizations:
         order_by: Optional[str] = None,
     ) -> adminv1.ListMembersResponse:
         """
-        Lists organization members.
+        List organization members.
 
         :param organization_id:
             The identifier of the organization.
@@ -1216,11 +1369,6 @@ class AsyncOrganizations:
             the call that provided the page token.
         :param order_by:
             A comma-separated list of fields to order by.
-
-            Supports:
-            - `displayName asc`
-            - `email asc`
-            - `createTime desc`
         """
         req = Request(
             "admin.organizations.listMembers",
@@ -1254,7 +1402,7 @@ class AsyncOrganizations:
         role_id: Optional[str] = None,
     ) -> adminv1.Member:
         """
-        Creates a new organization member.
+        Create an organization member.
 
         :param organization_id:
             The identifier of the organization.
@@ -1287,7 +1435,7 @@ class AsyncOrganizations:
         user_id: str,
     ) -> adminv1.Member:
         """
-        Retrieves specified organization member.
+        Get an organization member.
 
         :param organization_id:
             The identifier of the organization.
@@ -1314,7 +1462,7 @@ class AsyncOrganizations:
         allow_missing: Optional[bool] = None,
     ) -> adminv1.Member:
         """
-        Updates specified organization member.
+        Update an organization member.
 
         :param organization_id:
             The identifier of the organization.
@@ -1351,7 +1499,7 @@ class AsyncOrganizations:
         user_id: str,
     ) -> apiv1.EmptyResponse:
         """
-        Deletes specified organization member.
+        Delete an organization member.
 
         :param organization_id:
             The identifier of the organization.
