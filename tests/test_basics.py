@@ -74,12 +74,12 @@ def test_model():
 
 @pytest.fixture
 def admin_api(httpserver: HTTPServer) -> AdminApi:
-    return AdminApi("sk_test", base_url=httpserver.url_for(""))
+    return AdminApi("userhub_admin_test", base_url=httpserver.url_for(""))
 
 
 @pytest.fixture
 def async_admin_api(httpserver: HTTPServer) -> AsyncAdminApi:
-    return AsyncAdminApi("sk_test", base_url=httpserver.url_for(""))
+    return AsyncAdminApi("userhub_admin_test", base_url=httpserver.url_for(""))
 
 
 @pytest.mark.asyncio
@@ -94,7 +94,7 @@ async def test_api_get(
             method="GET",
             headers={
                 "UserHub-Api-Version": constants.API_VERSION,
-                "Authorization": "Bearer sk_test",
+                "Authorization": "Bearer userhub_admin_test",
             },
         ).respond_with_json(
             {
@@ -124,7 +124,7 @@ async def test_api_post(
             method="POST",
             headers={
                 "UserHub-Api-Version": constants.API_VERSION,
-                "Authorization": "Bearer sk_test",
+                "Authorization": "Bearer userhub_admin_test",
             },
             json={"displayName": "Jane Doe"},
         ).respond_with_json(
@@ -146,7 +146,7 @@ async def test_api_post(
         httpserver.expect_request(
             uri="/admin/v1/users",
             method="POST",
-            headers={"Authorization": "Bearer sk_test"},
+            headers={"Authorization": "Bearer userhub_admin_test"},
             json={},
         ).respond_with_json({"id": "usr_1"})
 
@@ -171,7 +171,7 @@ async def test_api_patch(
             method="PATCH",
             headers={
                 "UserHub-Api-Version": constants.API_VERSION,
-                "Authorization": "Bearer sk_test",
+                "Authorization": "Bearer userhub_admin_test",
             },
             json={"displayName": "Jane Doe"},
         ).respond_with_json(
@@ -194,7 +194,7 @@ async def test_api_patch(
             method="PATCH",
             headers={
                 "UserHub-Api-Version": constants.API_VERSION,
-                "Authorization": "Bearer sk_test",
+                "Authorization": "Bearer userhub_admin_test",
             },
             json={"displayName": ""},
         ).respond_with_json({"id": "usr_1"})
@@ -220,7 +220,7 @@ async def test_api_delete(
             method="DELETE",
             headers={
                 "UserHub-Api-Version": constants.API_VERSION,
-                "Authorization": "Bearer sk_test",
+                "Authorization": "Bearer userhub_admin_test",
             },
         ).respond_with_json({"id": "usr_1"})
 
@@ -245,7 +245,7 @@ async def test_api_error(
             method="GET",
             headers={
                 "UserHub-Api-Version": constants.API_VERSION,
-                "Authorization": "Bearer sk_test",
+                "Authorization": "Bearer userhub_admin_test",
             },
         ).respond_with_json(
             {
@@ -286,7 +286,7 @@ async def test_api_rate_limited(
                 method="GET",
                 headers={
                     "UserHub-Api-Version": constants.API_VERSION,
-                    "Authorization": "Bearer sk_test",
+                    "Authorization": "Bearer userhub_admin_test",
                 },
             ).respond_with_data(
                 response_data="API call rate limited",
