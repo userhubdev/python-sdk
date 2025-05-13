@@ -5,9 +5,9 @@ from typing import Any, Dict
 
 
 @dataclasses.dataclass
-class ReportUserActionResponse:
+class ReportUserEventResponse:
     """
-    Response message for ReportUserAction.
+    Response message for ReportUserEvent.
     """
 
     def __json_encode__(self) -> Dict[str, Any]:
@@ -16,10 +16,10 @@ class ReportUserActionResponse:
         return data
 
     @staticmethod
-    def __json_decode__(data: Dict[str, Any]) -> "ReportUserActionResponse":
+    def __json_decode__(data: Dict[str, Any]) -> "ReportUserEventResponse":
         if data is None:
             data = {}
 
         kwargs: Dict[str, Any] = {}
 
-        return ReportUserActionResponse(**kwargs)
+        return ReportUserEventResponse(**kwargs)
