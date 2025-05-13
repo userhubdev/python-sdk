@@ -67,6 +67,7 @@ from ._product import Product
 from ._product_connection import ProductConnection
 from ._purge_organization_response import PurgeOrganizationResponse
 from ._purge_user_response import PurgeUserResponse
+from ._report_user_action_response import ReportUserActionResponse
 from ._role import Role
 from ._signing_secret import SigningSecret
 from ._signup_flow import SignupFlow
@@ -149,6 +150,7 @@ __all__ = [
     "ProductConnection",
     "PurgeOrganizationResponse",
     "PurgeUserResponse",
+    "ReportUserActionResponse",
     "Role",
     "SigningSecret",
     "SignupFlow",

@@ -1,7 +1,7 @@
 # Code generated. DO NOT EDIT.
 
 import dataclasses
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from userhub_sdk import commonv1
 
@@ -25,8 +25,6 @@ class PostmarkConnection:
     from_: Optional[commonv1.Email] = None
     #: The reply to email address.
     reply_to: Optional[commonv1.Email] = None
-    #: The allowed email list.
-    allowed_emails: List[str] = dataclasses.field(default_factory=list)
 
     def __json_encode__(self) -> Dict[str, Any]:
         data: Dict[str, Any] = {}
@@ -42,9 +40,6 @@ class PostmarkConnection:
 
         if self.reply_to is not None:
             data["replyTo"] = commonv1.Email.__json_encode__(self.reply_to)
-
-        if self.allowed_emails is not None:
-            data["allowedEmails"] = self.allowed_emails
 
         return data
 
@@ -66,8 +61,5 @@ class PostmarkConnection:
 
         if data.get("replyTo") is not None:
             kwargs["reply_to"] = commonv1.Email.__json_decode__(data["replyTo"])
-
-        if data.get("allowedEmails") is not None:
-            kwargs["allowed_emails"] = data["allowedEmails"]
 
         return PostmarkConnection(**kwargs)

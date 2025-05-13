@@ -573,7 +573,7 @@ class Users:
 
             This must be in the format `<externalId>@<connectionId>` where
             `externalId` is the identity provider user identifier and
-            and `connectionId` is the User Provider connection identifier.
+            and `connectionId` is the User provider connection identifier.
         """
         req = Request(
             "admin.users.importAccount",
@@ -589,6 +589,53 @@ class Users:
         res = self._transport.execute(req)
 
         return res.decode_body(adminv1.User.__json_decode__)
+
+    def report_action(
+        self,
+        user_id: str,
+        *,
+        action: str,
+        wait: Optional[bool] = None,
+    ) -> adminv1.ReportUserActionResponse:
+        """
+        Report a user action.
+
+        If the `<externalId>@<connectionId>` user identifier syntax is
+        used and the user doesn't exist, they will be imported.
+
+        By default, the action is processed asynchronously.
+
+        :param user_id:
+            The identifier of the user.
+
+            This can be in the format `<externalId>@<connectionId>` where
+            `externalId` is the identity provider user identifier and
+            and `connectionId` is the User provider connection identifier.
+        :param action:
+            The type of action.
+        :param wait:
+            Process the user action synchronously.
+
+            Otherwise the action is processed in the background and errors
+            won't be returned.
+        """
+        req = Request(
+            "admin.users.reportAction",
+            "POST",
+            f"/admin/v1/users/{util.quote_path(user_id)}:reportAction",
+        )
+        body: Dict[str, Any] = {}
+
+        if action:
+            body["action"] = action
+        if wait:
+            body["wait"] = wait
+
+        req.set_body(body)
+
+        res = self._transport.execute(req)
+
+        return res.decode_body(adminv1.ReportUserActionResponse.__json_decode__)
 
     def create_api_session(
         self,
@@ -631,7 +678,7 @@ class Users:
             The user ID.
 
             In addition to supporting the UserHub user ID,
-            you can also pass in the User Provider external identifier in the
+            you can also pass in the User provider external identifier in the
             format `<externalId>@<connectionId>` and if the user doesn't
             exist in UserHub they will automatically be imported.
         :param portal_url:
@@ -1257,7 +1304,7 @@ class AsyncUsers:
 
             This must be in the format `<externalId>@<connectionId>` where
             `externalId` is the identity provider user identifier and
-            and `connectionId` is the User Provider connection identifier.
+            and `connectionId` is the User provider connection identifier.
         """
         req = Request(
             "admin.users.importAccount",
@@ -1273,6 +1320,53 @@ class AsyncUsers:
         res = await self._transport.execute(req)
 
         return res.decode_body(adminv1.User.__json_decode__)
+
+    async def report_action(
+        self,
+        user_id: str,
+        *,
+        action: str,
+        wait: Optional[bool] = None,
+    ) -> adminv1.ReportUserActionResponse:
+        """
+        Report a user action.
+
+        If the `<externalId>@<connectionId>` user identifier syntax is
+        used and the user doesn't exist, they will be imported.
+
+        By default, the action is processed asynchronously.
+
+        :param user_id:
+            The identifier of the user.
+
+            This can be in the format `<externalId>@<connectionId>` where
+            `externalId` is the identity provider user identifier and
+            and `connectionId` is the User provider connection identifier.
+        :param action:
+            The type of action.
+        :param wait:
+            Process the user action synchronously.
+
+            Otherwise the action is processed in the background and errors
+            won't be returned.
+        """
+        req = Request(
+            "admin.users.reportAction",
+            "POST",
+            f"/admin/v1/users/{util.quote_path(user_id)}:reportAction",
+        )
+        body: Dict[str, Any] = {}
+
+        if action:
+            body["action"] = action
+        if wait:
+            body["wait"] = wait
+
+        req.set_body(body)
+
+        res = await self._transport.execute(req)
+
+        return res.decode_body(adminv1.ReportUserActionResponse.__json_decode__)
 
     async def create_api_session(
         self,
@@ -1315,7 +1409,7 @@ class AsyncUsers:
             The user ID.
 
             In addition to supporting the UserHub user ID,
-            you can also pass in the User Provider external identifier in the
+            you can also pass in the User provider external identifier in the
             format `<externalId>@<connectionId>` and if the user doesn't
             exist in UserHub they will automatically be imported.
         :param portal_url:
