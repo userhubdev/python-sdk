@@ -5,9 +5,9 @@ from typing import Any, Dict
 
 
 @dataclasses.dataclass
-class BuiltinEmailConnection:
+class ReportUserActionResponse:
     """
-    The builtin email specific connection data.
+    Response message for ReportUserAction.
     """
 
     def __json_encode__(self) -> Dict[str, Any]:
@@ -16,10 +16,10 @@ class BuiltinEmailConnection:
         return data
 
     @staticmethod
-    def __json_decode__(data: Dict[str, Any]) -> "BuiltinEmailConnection":
+    def __json_decode__(data: Dict[str, Any]) -> "ReportUserActionResponse":
         if data is None:
             data = {}
 
         kwargs: Dict[str, Any] = {}
 
-        return BuiltinEmailConnection(**kwargs)
+        return ReportUserActionResponse(**kwargs)
