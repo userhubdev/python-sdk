@@ -5,8 +5,8 @@ import sys
 
 API_BASE_URL = "https://api.userhub.com"
 API_VERSION = "2025-05-01"
-USER_AGENT = "UserHub-Python/0.8.1"
-VERSION = "0.8.1"
+USER_AGENT = "UserHub-Python/0.8.2"
+VERSION = "0.8.2"
 
 AUTH_HEADER = "Authorization"
 API_KEY_HEADER = "UserHub-Api-Key"

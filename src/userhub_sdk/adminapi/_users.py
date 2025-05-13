@@ -590,20 +590,20 @@ class Users:
 
         return res.decode_body(adminv1.User.__json_decode__)
 
-    def report_action(
+    def report_event(
         self,
         user_id: str,
         *,
-        action: str,
+        type: Optional[str] = None,
         wait: Optional[bool] = None,
-    ) -> adminv1.ReportUserActionResponse:
+    ) -> adminv1.ReportUserEventResponse:
         """
-        Report a user action.
+        Report a user event.
 
         If the `<externalId>@<connectionId>` user identifier syntax is
         used and the user doesn't exist, they will be imported.
 
-        By default, the action is processed asynchronously.
+        By default, the event is processed asynchronously.
 
         :param user_id:
             The identifier of the user.
@@ -611,8 +611,10 @@ class Users:
             This can be in the format `<externalId>@<connectionId>` where
             `externalId` is the identity provider user identifier and
             and `connectionId` is the User provider connection identifier.
-        :param action:
-            The type of action.
+        :param type:
+            The event type.
+
+            If not specified, this defaults to `CHANGED`.
         :param wait:
             Process the user action synchronously.
 
@@ -620,14 +622,14 @@ class Users:
             won't be returned.
         """
         req = Request(
-            "admin.users.reportAction",
+            "admin.users.reportEvent",
             "POST",
-            f"/admin/v1/users/{util.quote_path(user_id)}:reportAction",
+            f"/admin/v1/users/{util.quote_path(user_id)}:event",
         )
         body: Dict[str, Any] = {}
 
-        if action:
-            body["action"] = action
+        if type:
+            body["type"] = type
         if wait:
             body["wait"] = wait
 
@@ -635,7 +637,7 @@ class Users:
 
         res = self._transport.execute(req)
 
-        return res.decode_body(adminv1.ReportUserActionResponse.__json_decode__)
+        return res.decode_body(adminv1.ReportUserEventResponse.__json_decode__)
 
     def create_api_session(
         self,
@@ -1321,20 +1323,20 @@ class AsyncUsers:
 
         return res.decode_body(adminv1.User.__json_decode__)
 
-    async def report_action(
+    async def report_event(
         self,
         user_id: str,
         *,
-        action: str,
+        type: Optional[str] = None,
         wait: Optional[bool] = None,
-    ) -> adminv1.ReportUserActionResponse:
+    ) -> adminv1.ReportUserEventResponse:
         """
-        Report a user action.
+        Report a user event.
 
         If the `<externalId>@<connectionId>` user identifier syntax is
         used and the user doesn't exist, they will be imported.
 
-        By default, the action is processed asynchronously.
+        By default, the event is processed asynchronously.
 
         :param user_id:
             The identifier of the user.
@@ -1342,8 +1344,10 @@ class AsyncUsers:
             This can be in the format `<externalId>@<connectionId>` where
             `externalId` is the identity provider user identifier and
             and `connectionId` is the User provider connection identifier.
-        :param action:
-            The type of action.
+        :param type:
+            The event type.
+
+            If not specified, this defaults to `CHANGED`.
         :param wait:
             Process the user action synchronously.
 
@@ -1351,14 +1355,14 @@ class AsyncUsers:
             won't be returned.
         """
         req = Request(
-            "admin.users.reportAction",
+            "admin.users.reportEvent",
             "POST",
-            f"/admin/v1/users/{util.quote_path(user_id)}:reportAction",
+            f"/admin/v1/users/{util.quote_path(user_id)}:event",
         )
         body: Dict[str, Any] = {}
 
-        if action:
-            body["action"] = action
+        if type:
+            body["type"] = type
         if wait:
             body["wait"] = wait
 
@@ -1366,7 +1370,7 @@ class AsyncUsers:
 
         res = await self._transport.execute(req)
 
-        return res.decode_body(adminv1.ReportUserActionResponse.__json_decode__)
+        return res.decode_body(adminv1.ReportUserEventResponse.__json_decode__)
 
     async def create_api_session(
         self,
